@@ -10,7 +10,7 @@ import { Route, Redirect } from 'react-router-dom'
  */
 
 const PrivateRoute = ({ component: Component, exact: is_exact, path }) => {
-  let token = localStorage.getItem("token")
+  let token = localStorage.getItem("token") || true // TEMP set to true
 
   if (is_exact) {
     return (
