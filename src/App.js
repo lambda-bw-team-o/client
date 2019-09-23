@@ -12,8 +12,8 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route exact path='/' component={Landing} />
-        <Route exact path='/login' render={Login} />
-        <Route exact path='/registration' render={Registration} />
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/registration' component={Registration} />
         <PrivateRoute exact path='/game' component={Game} />
         <Redirect to='/game' />
       </Switch>
