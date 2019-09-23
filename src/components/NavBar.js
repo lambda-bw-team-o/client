@@ -29,7 +29,7 @@ const NavBar = () => {
 
   return (
     <NavbarStyle>
-      <NavbarBrand href="#">
+      <NavbarBrand href="/">
         <img src="/logo192.png" width="60px" height="60px" alt="Logo"></img>
       </NavbarBrand>
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import NavBar from '../components/NavBar.js';
+import Container from '../styles/Container';
 
 const Registration = () => {
   const [credentials, setCredentials] = useState({    
@@ -13,7 +14,7 @@ const Registration = () => {
 
 
   return (
-    <div>
+    <Container>
       <NavBar />
 
       <h1>Logins
@@ -33,7 +34,7 @@ const Registration = () => {
         <button type="submit">Login</button>
        
       </form>
-    </div>
+    </Container>
   )
 }
   

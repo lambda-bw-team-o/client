@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import NavBar from '../components/NavBar.js';
 import styled from "styled-components";
+import Container from '../styles/Container';
 
 function Login() {
   const [credentials, setCredentials] = useState({    
@@ -17,7 +18,7 @@ function Login() {
 
 
   return (
-    <div>
+    <Container>
       <NavBar />
 
       <h1>Logins
@@ -38,7 +39,7 @@ function Login() {
         {/* <Link to="/register"><button>Register</button></Link>
         */}
       </form>
-    </div>
+    </Container>
   )
 }
 
