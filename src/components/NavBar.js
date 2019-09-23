@@ -6,7 +6,7 @@ const NavbarStyle = styled.nav`
   display: flex;
   justify-content: space-between;
   padding: .5rem 1rem;
-  background-color: #f8f9fa;
+  border: 5px solid #000;
 `
 
 const NavbarBrand = styled.a`
@@ -29,7 +29,9 @@ const NavBar = () => {
 
   return (
     <NavbarStyle>
-      <NavbarBrand href="#">Team-O</NavbarBrand>
+      <NavbarBrand href="#">
+        <img src="/logo192.png" width="60px" height="60px" alt="Logo"></img>
+      </NavbarBrand>
 
       {(loggedIn) ? '' :
         <NavbarList>
