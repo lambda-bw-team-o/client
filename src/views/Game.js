@@ -1,8 +1,12 @@
 import React from 'react';
+import NavBar from '../components/NavBar.js';
 
 const Game = () => {
   return (
-    <h1>Game</h1>
+    <>
+      <NavBar />
+      <h1>Game</h1>
+    </>
   )
 }
 

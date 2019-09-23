@@ -14,11 +14,11 @@ const PrivateRoute = ({ component: Component, exact: is_exact, path }) => {
 
   if (is_exact) {
     return (
-      <Route exact path={path} render={props => (token) ? <Component {...props} /> : <Redirect to="/auth" />} />
+      <Route exact path={path} render={props => (token) ? <Component {...props} /> : <Redirect to="/login" />} />
     )
   } else {
     return (
-      <Route path={path} render={props => (token) ? <Component {...props} /> : <Redirect to="/auth" />} />
+      <Route path={path} render={props => (token) ? <Component {...props} /> : <Redirect to="/login" />} />
     )
   }
 }
