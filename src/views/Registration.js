@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import NavBar from '../components/NavBar.js';
 import styled from "styled-components";
 import axios from 'axios';
 
-const Registration = () => {
-  const [credentials, setCredentials] = useState({    
-    username: '',
-    password: '',
-  })
 
 
-  
+
 
 const Form = styled.div`
  width: 300px;
@@ -149,26 +144,29 @@ const Form = styled.div`
 
   `;
 
-  const handleChange = name => event => {
-    setCredentials({ ...credentials, [event.target.name]: event.target.value });
-  };
+
+const Registration = () => {
+  const [credentials, setCredentials] = useState({    
+    username: '',
+    password: '',
+  })
 
 
+
+  
+const handleChange = name => event => {
+  setCredentials({ ...credentials, [name]: event.target.value });
+};
 
   const handleSubmit = () => {
     let parcel = credentials;
-    // if (parcel.specialization.length > 0) {
-    //    parcel.specialization = JSON.stringify(parcel.specialization);
-    // }
-    // if (parcel.language.length > 0) {
-    //     parcel.language = JSON.stringify(parcel.language);
-    // }
+  
     axios
         .post('https://lambda-mud-test.herokuapp.com/api/registration', parcel)
         .then(res => {
             console.log(res)
             localStorage.setItem("jwt", res.data.token);
-            this.props.history.push('/login')
+            this.props.history.push('/game')
         })
         .catch(error => {
 
@@ -184,11 +182,11 @@ const Form = styled.div`
           <Form autocomplete='off' >
           <div class='control'>
             <h1 style={{color:"white"}}>
-              Sign Up
+              Register
             </h1>
           </div>
           <div class='control block-cube block-input'>
-            <input name='username' placeholder='Username' type='text'/>
+            <input name='username'   required id="username" value={credentials.username} onChange={handleChange("username")} type="text"/>
             <div class='bg-top'>
               <div class='bg-inner'></div>
             </div>
@@ -200,7 +198,7 @@ const Form = styled.div`
             </div>
           </div>
           <div class='control block-cube block-input'>
-            <input name='password' placeholder='Password' type='password'/>
+            <input name='password'  required id="password"  value={credentials.password} onChange={handleChange("password")} type='password'/>
             <div class='bg-top'>
               <div class='bg-inner'></div>
             </div>

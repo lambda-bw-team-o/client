@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
 import NavBar from '../components/NavBar.js';
 import styled from "styled-components";
+import axios from 'axios';
 
-function Login() {
-  const [credentials, setCredentials] = useState({    
-    username: '',
-    password: '',
-  })
-
-
-  
-
-  const Form = styled.div`
+const Form = styled.div`
  width: 300px;
   padding: 64px 15px 24px;
   margin: 0 auto;
@@ -147,10 +139,39 @@ function Login() {
 }
 
   `;
+function Login() {
+  const [credentials, setCredentials] = useState({    
+    username: '',
+    password: '',
+  })
+
+
+  
+
+  
 
   const handleChange = name => event => {
-    setCredentials({ ...credentials, [event.target.name]: event.target.value });
+    setCredentials({ ...credentials, [name]: event.target.value });
   };
+  
+
+  const handleSubmit = () => {
+    let parcel = credentials;
+  
+    axios
+        .post('https://lambda-mud-test.herokuapp.com/api/login', parcel)
+        .then(res => {
+            console.log(res)
+            localStorage.setItem("jwt", res.data.token);
+            this.props.history.push('/game')
+        })
+        .catch(error => {
+
+            console.error(error);
+        })
+
+      }
+       
 
 
   return (
@@ -163,7 +184,7 @@ function Login() {
             </h1>
           </div>
           <div class='control block-cube block-input'>
-            <input name='username' placeholder='Username' type='text'/>
+            <input name='username' placeholder='Username' value={credentials.username} onChange={handleChange("username")} type='text'/>
             <div class='bg-top'>
               <div class='bg-inner'></div>
             </div>
@@ -175,7 +196,7 @@ function Login() {
             </div>
           </div>
           <div class='control block-cube block-input'>
-            <input name='password' placeholder='Password' type='password'/>
+            <input name='password' placeholder='Password' value={credentials.password} onChange={handleChange("password")} type='password'/>
             <div class='bg-top'>
               <div class='bg-inner'></div>
             </div>
@@ -186,7 +207,7 @@ function Login() {
               <div class='bg-inner'></div>
             </div>
           </div>
-          <button class='btn block-cube block-cube-hover' type='button'>
+          <button  onClick={handleSubmit} class='btn block-cube block-cube-hover' type='button'>
             <div class='bg-top'>
               <div class='bg-inner'></div>
             </div>
