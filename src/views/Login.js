@@ -159,9 +159,6 @@ function Login(props) {
   
     axios.post('https://team-o.herokuapp.com/api/login/', parcel)
       .then(res => {
-
-
-        console.log(res)
         localStorage.setItem("token", res.data.key);
         props.history.push('/game')
       })
@@ -174,7 +171,7 @@ function Login(props) {
     
     <>
         <NavBar/>
-          <Form autocomplete="off" >
+          <Form  autocomplete="off" >
           <div className='control'>
             <h1 style={{color:"white"}}>
               Sign In
