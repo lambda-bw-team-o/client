@@ -17,7 +17,9 @@ const Game = () => {
         </Row>
 
         <Row>
-          <Column><Map /></Column>
+          <Column>
+            <Map />
+          </Column>
         </Row>
 
         <Row>

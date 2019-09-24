@@ -12,6 +12,7 @@ function Map() {
       for (let j = 0; j < 10; j++) {
         images[i].push(<img src={FloorTile} width="10px" height="10px" alt="Game Tile" style={{ margin: '10px' }}></img>)
       }
+      images[i].push(<br/>)
     }
 
     setTiles(images)
