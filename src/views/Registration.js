@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import NavBar from '../components/NavBar.js';
 import styled from "styled-components";
+import { Link } from 'react-router-dom'
 import axios from 'axios';
 
 
@@ -240,6 +241,11 @@ const handleChange = name => event => {
               Sign Up
             </div>
             </button>
+            <Link to="/login" lassName='btn block-cube block-cube-hover' type='button'>
+            <div className='text' style={{color:"white"}}>
+              Already have an Account Login
+            </div>
+            </Link>
           </Form>
   )
 }

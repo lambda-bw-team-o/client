@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import NavBar from '../components/NavBar.js';
 import styled from "styled-components";
+import { Link } from 'react-router-dom'
 import axios from 'axios';
 
 const Form = styled.form`
@@ -172,6 +173,7 @@ function Login(props) {
 
       }
        
+  
 
 
   return (
@@ -182,6 +184,7 @@ function Login(props) {
             <h1 style={{color:"white"}}>
               Sign In
             </h1>
+            
           </div>
           <div className='control block-cube block-input'>
             <input  autocomplete="off" placeholder='Username' value={credentials.username} onChange={handleChange("username")} type='text'/>
@@ -221,6 +224,13 @@ function Login(props) {
               Log In
             </div>
             </button>
+            <div>
+            <Link to="/registration" lassName='btn block-cube block-cube-hover' type='button'>
+            <div className='text' style={{color:"white"}}>
+              Dont have Account Register
+            </div>
+            </Link>
+            </div>
           </Form>
   )
 }
