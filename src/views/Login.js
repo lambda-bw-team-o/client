@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import NavBar from '../components/NavBar.js';
 import styled from "styled-components";
 import { Link } from 'react-router-dom'
 import axios from 'axios';
@@ -155,83 +154,77 @@ function Login(props) {
     setCredentials({ ...credentials, [name]: event.target.value });
   };
   
-
   const handleSubmit = () => {
     let parcel = credentials;
   
-    axios
-        .post('https://team-o.herokuapp.com/api/login/', parcel)
-        .then(res => {
-            console.log(res)
-            localStorage.setItem("token", res.data.key);
-            this.props.history.push('/game')
-        })
-        .catch(error => {
-
-            console.error(error);
-        })
-
-      }
-       
-  
-
+    axios.post('https://team-o.herokuapp.com/api/login/', parcel)
+      .then(res => {
+        console.log(res)
+        localStorage.setItem("token", res.data.key);
+        this.props.history.push('/game')
+      })
+      .catch(error => {
+        console.error(error);
+      })
+  }
 
   return (
+    <Form autocomplete="off">
+      <div className='control'>
+        <h1 style={{color:"white"}}>
+          Sign In
+        </h1>            
+      </div>
 
- 
-          <Form autocomplete="off" >
-          <div className='control'>
-            <h1 style={{color:"white"}}>
-              Sign In
-            </h1>
-            
+      <div className='control block-cube block-input'>
+        <input  autocomplete="off" placeholder='Username' value={credentials.username} onChange={handleChange("username")} type='text'/>
+        <div className='bg-top'>
+          <div className='bg-inner'></div>
+        </div>
+        <div className='bg-right'>
+          <div className='bg-inner'></div>
+        </div>
+        <div className='bg'>
+          <div className='bg-inner'></div>
+        </div>
+      </div>
+
+      <div className='control block-cube block-input'>
+        <input autocomplete="off"  name='password' placeholder='Password' value={credentials.password} onChange={handleChange("password")} type='password'/>
+        <div className='bg-top'>
+          <div className='bg-inner'></div>
+        </div>
+        <div className='bg-right'>
+          <div className='bg-inner'></div>
+        </div>
+        <div className='bg'>
+          <div className='bg-inner'></div>
+        </div>
+      </div>
+
+      <button  onClick={handleSubmit} className='btn block-cube block-cube-hover' type='button'>
+        <div className='bg-top'>
+          <div className='bg-inner'></div>
+        </div>
+        <div className='bg-right'>
+          <div className='bg-inner'></div>
+        </div>
+        <div className='bg'>
+          <div className='bg-inner'></div>
+        </div>
+        <div className='text'>
+          Log In
+        </div>
+      </button>
+
+      <div>
+        <Link to="/registration" lassName='btn block-cube block-cube-hover' type='button'>
+          <div className='text' style={{color:"white"}}>
+            Dont have Account Register
           </div>
-          <div className='control block-cube block-input'>
-            <input  autocomplete="off" placeholder='Username' value={credentials.username} onChange={handleChange("username")} type='text'/>
-            <div className='bg-top'>
-              <div className='bg-inner'></div>
-            </div>
-            <div className='bg-right'>
-              <div className='bg-inner'></div>
-            </div>
-            <div className='bg'>
-              <div className='bg-inner'></div>
-            </div>
-          </div>
-          <div className='control block-cube block-input'>
-            <input autocomplete="off"  name='password' placeholder='Password' value={credentials.password} onChange={handleChange("password")} type='password'/>
-            <div className='bg-top'>
-              <div className='bg-inner'></div>
-            </div>
-            <div className='bg-right'>
-              <div className='bg-inner'></div>
-            </div>
-            <div className='bg'>
-              <div className='bg-inner'></div>
-            </div>
-          </div>
-          <button  onClick={handleSubmit} className='btn block-cube block-cube-hover' type='button'>
-            <div className='bg-top'>
-              <div className='bg-inner'></div>
-            </div>
-            <div className='bg-right'>
-              <div className='bg-inner'></div>
-            </div>
-            <div className='bg'>
-              <div className='bg-inner'></div>
-            </div>
-            <div className='text'>
-              Log In
-            </div>
-            </button>
-            <div>
-            <Link to="/registration" lassName='btn block-cube block-cube-hover' type='button'>
-            <div className='text' style={{color:"white"}}>
-              Dont have Account Register
-            </div>
-            </Link>
-            </div>
-          </Form>
+        </Link>
+      </div>
+    </Form>
   )
 }
 
