@@ -28,7 +28,7 @@ flex-direction:row;
 
 
 const NavBar = () => {
-  const [loggedIn, setLoggedIn] = useState(true)
+  const [loggedIn, setLoggedIn] = useState(false)
 
   useEffect(() => {
     let token = localStorage.getItem("token")
@@ -38,7 +38,7 @@ const NavBar = () => {
 
   const logOut = () => {
   localStorage.removeItem("token");
-  setLoggedIn(false)
+  if(token) setLoggedIn(false)
   console.log("loggedout")
   }
 
