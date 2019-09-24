@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import NavBar from '../components/NavBar.js';
 import styled from "styled-components";
 import { Link } from 'react-router-dom'
 import axios from 'axios';
