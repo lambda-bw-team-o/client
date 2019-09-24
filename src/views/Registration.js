@@ -14,7 +14,7 @@ const Form = styled.div`
   .control {
     margin: 0 0 24px;
     input {
-      width: 100%;
+      width: 89%;
       padding: 14px 16px;
       border: 0;
       background: transparent;
@@ -160,12 +160,15 @@ const handleChange = name => event => {
   setCredentials({ ...credentials, [name]: event.target.value });
 };
 
+
+
+
   const handleSubmit = () => {
     let parcel = credentials;
     console.log(parcel)
   
     axios
-        .post('https://lambda-mud-test.herokuapp.com/api/registration/', parcel)
+        .post('https://team-o.herokuapp.com/api/registration/', parcel)
         .then(res => {
             console.log(res)
             localStorage.setItem("token", res.data.key);
@@ -181,7 +184,6 @@ const handleChange = name => event => {
 
   return (
 
- 
           <Form  >
           <div className='control'>
             <h1 style={{color:"white"}}>
@@ -201,7 +203,7 @@ const handleChange = name => event => {
             </div>
           </div>
           <div className='control block-cube block-input'>
-            <input name='password1'  placeholder="password" required id="password"  value={credentials.password} onChange={handleChange("password1")} type='password'/>
+            <input  autocomplete="off" name='password1'  placeholder="password" required id="password"  value={credentials.password} onChange={handleChange("password1")} type='password'/>
             <div className='bg-top'>
               <div className='bg-inner'></div>
             </div>
@@ -213,7 +215,7 @@ const handleChange = name => event => {
             </div>
           </div>
           <div className='control block-cube block-input'>
-            <input name='password2'  placeholder="password-verification" required id="password"  value={credentials.password} onChange={handleChange("password2")} type='password'/>
+            <input autocomplete="off" name='password2'  placeholder="password-verification" required id="password"  value={credentials.password} onChange={handleChange("password2")} type='password' />
             <div className='bg-top'>
               <div className='bg-inner'></div>
             </div>

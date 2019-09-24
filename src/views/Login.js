@@ -3,14 +3,14 @@ import NavBar from '../components/NavBar.js';
 import styled from "styled-components";
 import axios from 'axios';
 
-const Form = styled.div`
+const Form = styled.form`
  width: 300px;
   padding: 64px 15px 24px;
   margin: 0 auto;
   .control {
     margin: 0 0 24px;
     input {
-      width: 100%;
+      width: 89%;
       padding: 14px 16px;
       border: 0;
       background: transparent;
@@ -139,7 +139,7 @@ const Form = styled.div`
 }
 
   `;
-function Login() {
+function Login(props) {
   const [credentials, setCredentials] = useState({    
     username: '',
     password: '',
@@ -159,7 +159,7 @@ function Login() {
     let parcel = credentials;
   
     axios
-        .post('https://lambda-mud-test.herokuapp.com/api/login/', parcel)
+        .post('https://team-o.herokuapp.com/api/login/', parcel)
         .then(res => {
             console.log(res)
             localStorage.setItem("token", res.data.key);
@@ -177,7 +177,7 @@ function Login() {
   return (
 
  
-          <Form >
+          <Form autocomplete="off" >
           <div className='control'>
             <h1 style={{color:"white"}}>
               Sign In
@@ -196,7 +196,7 @@ function Login() {
             </div>
           </div>
           <div className='control block-cube block-input'>
-            <input name='password' placeholder='Password' value={credentials.password} onChange={handleChange("password")} type='password'/>
+            <input autocomplete="off"  name='password' placeholder='Password' value={credentials.password} onChange={handleChange("password")} type='password'/>
             <div className='bg-top'>
               <div className='bg-inner'></div>
             </div>
