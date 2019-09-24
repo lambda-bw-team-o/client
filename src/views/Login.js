@@ -177,14 +177,14 @@ function Login() {
   return (
 
  
-          <Form autocomplete='off'>
+          <Form >
           <div className='control'>
             <h1 style={{color:"white"}}>
               Sign In
             </h1>
           </div>
           <div className='control block-cube block-input'>
-            <input name='username' placeholder='Username' value={credentials.username} onChange={handleChange("username")} type='text'/>
+            <input  autocomplete="off" placeholder='Username' value={credentials.username} onChange={handleChange("username")} type='text'/>
             <div className='bg-top'>
               <div className='bg-inner'></div>
             </div>

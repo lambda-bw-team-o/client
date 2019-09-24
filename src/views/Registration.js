@@ -49,7 +49,7 @@ const Form = styled.div`
     position: absolute;
     height: 10px;
     background: rgb(2,0,36);
-    background: blue;
+    background: gold;
     bottom: 100%;
     left: 5px;
     right: -5px;
@@ -66,12 +66,12 @@ const Form = styled.div`
     right: 0;
     bottom: 0;
     background: rgb(2,0,36);
-    background: blue;
+    background: gold;
   }
   .bg-right {
     position: absolute;
     background: rgb(2,0,36);
-    background: blue;
+    background: gold;
     top: -5px;
     z-index: 0;
     bottom: 5px;
@@ -182,14 +182,14 @@ const handleChange = name => event => {
   return (
 
  
-          <Form autocomplete='off' >
+          <Form  >
           <div className='control'>
             <h1 style={{color:"white"}}>
               Register
             </h1>
           </div>
           <div className='control block-cube block-input'>
-            <input name='username'  placeholder="username" required id="username" value={credentials.username} onChange={handleChange("username")} type="text"/>
+            <input autocomplete="off" name='username'  placeholder="username" required id="username" value={credentials.username} onChange={handleChange("username")} type="text"/>
             <div className='bg-top'>
               <div className='bg-inner'></div>
             </div>
