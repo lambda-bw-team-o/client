@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-import { Link } from 'react-router-dom';
+import NavBar from '../components/NavBar';
+
+import { Link } from 'react-router-dom'
+
 import axios from 'axios';
 
 const Form = styled.div`
@@ -153,7 +156,7 @@ const Registration = (props) => {
 
   const handleSubmit = () => {
     let parcel = credentials;
-  
+    console.log(credentials)
     axios.post('https://team-o.herokuapp.com/api/registration/', parcel)
       .then(res => {
         console.log(res)
@@ -166,7 +169,7 @@ const Registration = (props) => {
   }
        
   return (
-    <Form>
+     <Form>
       <div className='control'>
         <h1 style={{color:"white"}}>
           Register
@@ -174,7 +177,7 @@ const Registration = (props) => {
       </div>
 
       <div className='control block-cube block-input'>
-        <input autoComplete="off" name='username'  placeholder="username" required id="username" value={credentials.username} onChange={handleChange("username")} type="text"/>
+        <input autocomplete="off" name='username'  placeholder="username" required id="username" value={credentials.username} onChange={handleChange("username")} type="text"/>
         <div className='bg-top'>
           <div className='bg-inner'></div>
         </div>
@@ -187,7 +190,7 @@ const Registration = (props) => {
       </div>
 
       <div className='control block-cube block-input'>
-        <input  autoComplete="off" name='password1'  placeholder="password" required id="password1"  value={credentials.password} onChange={handleChange("password1")} type='password'/>
+        <input  autocomplete="off" name='password1'  placeholder="password" required id="password"  value={credentials.password} onChange={handleChange("password1")} type='password'/>
         <div className='bg-top'>
           <div className='bg-inner'></div>
         </div>
@@ -200,7 +203,7 @@ const Registration = (props) => {
       </div>
 
       <div className='control block-cube block-input'>
-        <input autoComplete="off" name='password2'  placeholder="password-verification" required id="password2"  value={credentials.password} onChange={handleChange("password2")} type='password' />
+        <input autocomplete="off" name='password2'  placeholder="password-verification" required id="password"  value={credentials.password} onChange={handleChange("password2")} type='password' />
         <div className='bg-top'>
           <div className='bg-inner'></div>
         </div>
@@ -227,7 +230,7 @@ const Registration = (props) => {
         </div>
       </button>
 
-      <Link to="/login" className='btn block-cube block-cube-hover' type='button'>
+      <Link to="/login" lassName='btn block-cube block-cube-hover' type='button'>
         <div className='text' style={{color:"white"}}>
           Already have an Account Login
         </div>
