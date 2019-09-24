@@ -159,10 +159,10 @@ function Login() {
     let parcel = credentials;
   
     axios
-        .post('https://lambda-mud-test.herokuapp.com/api/login', parcel)
+        .post('https://lambda-mud-test.herokuapp.com/api/login/', parcel)
         .then(res => {
             console.log(res)
-            localStorage.setItem("jwt", res.data.token);
+            localStorage.setItem("token", res.data.key);
             this.props.history.push('/game')
         })
         .catch(error => {
@@ -178,46 +178,46 @@ function Login() {
 
  
           <Form autocomplete='off'>
-          <div class='control'>
+          <div className='control'>
             <h1 style={{color:"white"}}>
               Sign In
             </h1>
           </div>
-          <div class='control block-cube block-input'>
+          <div className='control block-cube block-input'>
             <input name='username' placeholder='Username' value={credentials.username} onChange={handleChange("username")} type='text'/>
-            <div class='bg-top'>
-              <div class='bg-inner'></div>
+            <div className='bg-top'>
+              <div className='bg-inner'></div>
             </div>
-            <div class='bg-right'>
-              <div class='bg-inner'></div>
+            <div className='bg-right'>
+              <div className='bg-inner'></div>
             </div>
-            <div class='bg'>
-              <div class='bg-inner'></div>
+            <div className='bg'>
+              <div className='bg-inner'></div>
             </div>
           </div>
-          <div class='control block-cube block-input'>
+          <div className='control block-cube block-input'>
             <input name='password' placeholder='Password' value={credentials.password} onChange={handleChange("password")} type='password'/>
-            <div class='bg-top'>
-              <div class='bg-inner'></div>
+            <div className='bg-top'>
+              <div className='bg-inner'></div>
             </div>
-            <div class='bg-right'>
-              <div class='bg-inner'></div>
+            <div className='bg-right'>
+              <div className='bg-inner'></div>
             </div>
-            <div class='bg'>
-              <div class='bg-inner'></div>
+            <div className='bg'>
+              <div className='bg-inner'></div>
             </div>
           </div>
-          <button  onClick={handleSubmit} class='btn block-cube block-cube-hover' type='button'>
-            <div class='bg-top'>
-              <div class='bg-inner'></div>
+          <button  onClick={handleSubmit} className='btn block-cube block-cube-hover' type='button'>
+            <div className='bg-top'>
+              <div className='bg-inner'></div>
             </div>
-            <div class='bg-right'>
-              <div class='bg-inner'></div>
+            <div className='bg-right'>
+              <div className='bg-inner'></div>
             </div>
-            <div class='bg'>
-              <div class='bg-inner'></div>
+            <div className='bg'>
+              <div className='bg-inner'></div>
             </div>
-            <div class='text'>
+            <div className='text'>
               Log In
             </div>
             </button>

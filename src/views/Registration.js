@@ -148,7 +148,9 @@ const Form = styled.div`
 const Registration = () => {
   const [credentials, setCredentials] = useState({    
     username: '',
-    password: '',
+    password1: '',
+    password2:''
+
   })
 
 
@@ -160,12 +162,13 @@ const handleChange = name => event => {
 
   const handleSubmit = () => {
     let parcel = credentials;
+    console.log(parcel)
   
     axios
-        .post('https://lambda-mud-test.herokuapp.com/api/registration', parcel)
+        .post('https://lambda-mud-test.herokuapp.com/api/registration/', parcel)
         .then(res => {
             console.log(res)
-            localStorage.setItem("jwt", res.data.token);
+            localStorage.setItem("token", res.data.key);
             this.props.history.push('/game')
         })
         .catch(error => {
@@ -180,46 +183,58 @@ const handleChange = name => event => {
 
  
           <Form autocomplete='off' >
-          <div class='control'>
+          <div className='control'>
             <h1 style={{color:"white"}}>
               Register
             </h1>
           </div>
-          <div class='control block-cube block-input'>
-            <input name='username'   required id="username" value={credentials.username} onChange={handleChange("username")} type="text"/>
-            <div class='bg-top'>
-              <div class='bg-inner'></div>
+          <div className='control block-cube block-input'>
+            <input name='username'  placeholder="username" required id="username" value={credentials.username} onChange={handleChange("username")} type="text"/>
+            <div className='bg-top'>
+              <div className='bg-inner'></div>
             </div>
-            <div class='bg-right'>
-              <div class='bg-inner'></div>
+            <div className='bg-right'>
+              <div className='bg-inner'></div>
             </div>
-            <div class='bg'>
-              <div class='bg-inner'></div>
-            </div>
-          </div>
-          <div class='control block-cube block-input'>
-            <input name='password'  required id="password"  value={credentials.password} onChange={handleChange("password")} type='password'/>
-            <div class='bg-top'>
-              <div class='bg-inner'></div>
-            </div>
-            <div class='bg-right'>
-              <div class='bg-inner'></div>
-            </div>
-            <div class='bg'>
-              <div class='bg-inner'></div>
+            <div className='bg'>
+              <div className='bg-inner'></div>
             </div>
           </div>
-          <button  onClick={handleSubmit} class='btn block-cube block-cube-hover' type='button'>
-            <div class='bg-top'>
-              <div class='bg-inner'></div>
+          <div className='control block-cube block-input'>
+            <input name='password1'  placeholder="password" required id="password"  value={credentials.password} onChange={handleChange("password1")} type='password'/>
+            <div className='bg-top'>
+              <div className='bg-inner'></div>
             </div>
-            <div class='bg-right'>
-              <div class='bg-inner'></div>
+            <div className='bg-right'>
+              <div className='bg-inner'></div>
             </div>
-            <div class='bg'>
-              <div class='bg-inner'></div>
+            <div className='bg'>
+              <div className='bg-inner'></div>
             </div>
-            <div class='text'>
+          </div>
+          <div className='control block-cube block-input'>
+            <input name='password2'  placeholder="password-verification" required id="password"  value={credentials.password} onChange={handleChange("password2")} type='password'/>
+            <div className='bg-top'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg-right'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg'>
+              <div className='bg-inner'></div>
+            </div>
+          </div>
+          <button  onClick={handleSubmit} className='btn block-cube block-cube-hover' type='button'>
+            <div className='bg-top'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg-right'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='text'>
               Sign Up
             </div>
             </button>
