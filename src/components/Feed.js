@@ -3,7 +3,9 @@ import React from 'react';
 function Feed() {
   return (
     <div>
-      <h3>Feed</h3>
+      <div style={{ backgroundColor: '#333', height: '200px'}}>
+        <h3 style={{ marginTop: '0px', paddingTop: '5px', paddingLeft: '5px' }}>Feed</h3>
+      </div>
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import FloorTile from '../assets/health.png';
+import SpaceImage from '../assets/potw1934a.jpg';
 
 function Map() {
   const [tiles, setTiles] = useState([[]])
@@ -10,7 +11,7 @@ function Map() {
     for (let i = 0; i < 10; i++) {
       images[i] = []
       for (let j = 0; j < 10; j++) {
-        images[i].push(<img src={FloorTile} width="10px" height="10px" alt="Game Tile" style={{ margin: '10px' }}></img>)
+        images[i].push(<img src={FloorTile} width="25px" height="25px" alt="Game Tile" style={{ margin: '10px' }}></img>)
       }
       images[i].push(<br/>)
     }
@@ -19,9 +20,9 @@ function Map() {
   }, [])
 
   return (
-    <>
+    <div style={{ backgroundImage: `url(${SpaceImage})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center'}}>
       {tiles}
-    </>
+    </div>
   )
 }
 
