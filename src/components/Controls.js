@@ -16,16 +16,16 @@ function Controls() {
     window.onkeydown = (e) => {
       const key = e.keyCode ? e.keyCode : e.which;
       
-      if (key == 37) {
+      if (key === 37) {
         // Move Left
         setPressLeft(true)
-      } else if (key == 38) {
+      } else if (key === 38) {
         // Move Up
         setPressUp(true)
-      } else if (key == 39) {
+      } else if (key === 39) {
         // Move Right
         setPressRight(true)
-      } else if (key == 40) {
+      } else if (key === 40) {
         // Move Down
         setPressDown(true)
       }
@@ -34,16 +34,16 @@ function Controls() {
     window.onkeyup = (e) => {
       const key = e.keyCode ? e.keyCode : e.which;
       
-      if (key == 37) {
+      if (key === 37) {
         // Move Left
         setPressLeft(false)
-      } else if (key == 38) {
+      } else if (key === 38) {
         // Move Up
         setPressUp(false)
-      } else if (key == 39) {
+      } else if (key === 39) {
         // Move Right
         setPressRight(false)
-      } else if (key == 40) {
+      } else if (key === 40) {
         // Move Down
         setPressDown(false)
       }
