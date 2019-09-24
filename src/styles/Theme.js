@@ -6,6 +6,10 @@ const Theme = styled.div`
   padding: 5px;
   color: #FFF;
 
+  *, ::after, ::before {
+    box-sizing: border-box;
+  }
+
   a {
     color: #0000FF;
   }

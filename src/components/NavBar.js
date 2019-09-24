@@ -30,13 +30,13 @@ const NavBar = () => {
   return (
     <NavbarStyle>
       <NavbarBrand href="/">
-        <img src="/logo192.png" width="60px" height="60px" alt="Logo"></img>
+        <img src="/logo192.png" width="80px" height="80px" alt="Logo"></img>
       </NavbarBrand>
 
       {(loggedIn) ? '' :
         <NavbarList>
           <li><NavLink to="/login">Login</NavLink></li>
-          <li><NavLink to="/registration">Registration</NavLink></li>
+          <li><NavLink to="/register">Register</NavLink></li>
         </NavbarList>
       }
     </NavbarStyle>
