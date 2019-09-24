@@ -227,7 +227,7 @@ const Registration = () => {
         </div>
       </button>
 
-      <Link to="/login" lassName='btn block-cube block-cube-hover' type='button'>
+      <Link to="/login" className='btn block-cube block-cube-hover' type='button'>
         <div className='text' style={{color:"white"}}>
           Already have an Account Login
         </div>
