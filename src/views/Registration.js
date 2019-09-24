@@ -156,7 +156,7 @@ const Registration = (props) => {
 
   const handleSubmit = () => {
     let parcel = credentials;
-  
+    console.log(credentials)
     axios.post('https://team-o.herokuapp.com/api/registration/', parcel)
       .then(res => {
         console.log(res)
@@ -170,7 +170,7 @@ const Registration = (props) => {
        
   return (
     <>
-  <NavBar />
+        <NavBar />
           <Form  >
           <div className='control'>
             <h1 style={{color:"white"}}>
@@ -190,7 +190,7 @@ const Registration = (props) => {
             </div>
           </div>
           <div className='control block-cube block-input'>
-            <input  autocomplete="off" name='password1'  placeholder="password" required id="password"  value={credentials.password} onChange={handleChange("password1")} type='password'/>
+            <input  autocomplete="off" name='password1'  placeholder="password" required id="password"  value={credentials.password1} onChange={handleChange("password1")} type='password'/>
             <div className='bg-top'>
               <div className='bg-inner'></div>
             </div>
@@ -202,7 +202,7 @@ const Registration = (props) => {
             </div>
           </div>
           <div className='control block-cube block-input'>
-            <input autocomplete="off" name='password2'  placeholder="password-verification" required id="password"  value={credentials.password} onChange={handleChange("password2")} type='password' />
+            <input autocomplete="off" name='password2'  placeholder="password-verification" required id="password"  value={credentials.password2} onChange={handleChange("password2")} type='password' />
             <div className='bg-top'>
               <div className='bg-inner'></div>
             </div>

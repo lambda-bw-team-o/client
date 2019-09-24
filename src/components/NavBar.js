@@ -11,13 +11,18 @@ color:gold;
 justify-content: space-between;
 padding:0 30px;
 align-items:center;
+.activeNavButton{
+  border-bottom: 3px gold solid;
+
+
+}
 .nav-block{
 display:flex;
 flex-direction:row;
 .nav-link{
   color:white;
   text-decoration:none;
-  padding: 0 20px;
+  margin: 0 20px;
 &.nav-link:hover{
   color:yellow;
 }
@@ -50,15 +55,15 @@ const NavBar = () => {
       {(loggedIn) ? 
       
         <ul className="nav-block">
-          <NavLink className="nav-link" to="/game">Game</NavLink>
-            <NavLink className="nav-link" >About</NavLink>
+          <NavLink activeClassName="activeNavButton" className="nav-link" to="/game">Game</NavLink>
+            <NavLink  activeClassName="activeNavButton" className="nav-link" >About</NavLink>
             <NavLink className="nav-link"  onClick={logOut} to="/">Logout</NavLink>
         </ul>
        :
         <ul className="nav-block">
-        <NavLink className="nav-link" >About</NavLink>
-          <NavLink className="nav-link" to="/login">Login</NavLink>
-          <NavLink className="nav-link"  to="/register">Registration</NavLink>
+        <NavLink activeClassName="activeNavButton" className="nav-link" >About</NavLink>
+          <NavLink activeClassName="activeNavButton" className="nav-link" to="/login">Login</NavLink>
+          <NavLink activeClassName="activeNavButton" className="nav-link"  to="/register">Registration</NavLink>
         </ul>
       }
     </Nav>
