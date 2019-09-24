@@ -6,7 +6,7 @@ const NavbarStyle = styled.nav`
   display: flex;
   justify-content: space-between;
   padding: .5rem 1rem;
-  border: 5px solid #000;
+  border: 5px solid #909090;
 `
 
 const NavbarBrand = styled.a`
