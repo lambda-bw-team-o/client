@@ -267,7 +267,7 @@ const Registration = (props) => {
             <div>
             {(credentials.password1 !== credentials.password2) ? <p className="checker" style={{color:"white"}}>{passwordParams.passwordsDontMatch}</p>: ""}
             <p className="checker" style={{color:"white"}}>{passwordParams.passwordNotUnique}</p>
-            <Link to="/login" style={{color:"white",textDecoration:"none",padding:"30px"}} lassName='btn block-cube block-cube-hover' type='button'>
+            <Link  to="/login" style={{color:"white",textDecoration:"none",padding:"30px"}} lassName='btn block-cube block-cube-hover' type='button'>
             <div className='text'>
              Already have an account? Login
             </div>
