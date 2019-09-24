@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-import { Link } from 'react-router-dom';
+import NavBar from '../components/NavBar';
+
+import { Link } from 'react-router-dom'
+
 import axios from 'axios';
 
 const Form = styled.div`
@@ -139,7 +142,7 @@ const Form = styled.div`
 }
 `;
 
-const Registration = () => {
+const Registration = (props) => {
   const [credentials, setCredentials] = useState({    
     username: '',
     password1: '',
@@ -153,12 +156,12 @@ const Registration = () => {
 
   const handleSubmit = () => {
     let parcel = credentials;
-  
+    console.log(credentials)
     axios.post('https://team-o.herokuapp.com/api/registration/', parcel)
       .then(res => {
         console.log(res)
         localStorage.setItem("token", res.data.key);
-        this.props.history.push('/game')
+        props.history.push('/game')
       })
       .catch(error => {
         console.error(error);
@@ -166,73 +169,76 @@ const Registration = () => {
   }
        
   return (
-    <Form>
-      <div className='control'>
-        <h1 style={{color:"white"}}>
-          Register
-        </h1>
-      </div>
+    <>
+        <NavBar />
+          <Form  >
+          <div className='control'>
+            <h1 style={{color:"white"}}>
+              Register
+            </h1>
+          </div>
+          <div className='control block-cube block-input'>
+            <input autocomplete="off" name='username'  placeholder="username" required id="username" value={credentials.username} onChange={handleChange("username")} type="text"/>
+            <div className='bg-top'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg-right'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg'>
+              <div className='bg-inner'></div>
+            </div>
+          </div>
+          <div className='control block-cube block-input'>
+            <input  autocomplete="off" name='password1'  placeholder="password" required id="password"  value={credentials.password1} onChange={handleChange("password1")} type='password'/>
+            <div className='bg-top'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg-right'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg'>
+              <div className='bg-inner'></div>
+            </div>
+          </div>
+          <div className='control block-cube block-input'>
+            <input autocomplete="off" name='password2'  placeholder="password-verification" required id="password"  value={credentials.password2} onChange={handleChange("password2")} type='password' />
+            <div className='bg-top'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg-right'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg'>
+              <div className='bg-inner'></div>
+            </div>
 
-      <div className='control block-cube block-input'>
-        <input autocomplete="off" name='username'  placeholder="username" required id="username" value={credentials.username} onChange={handleChange("username")} type="text"/>
-        <div className='bg-top'>
-          <div className='bg-inner'></div>
-        </div>
-        <div className='bg-right'>
-          <div className='bg-inner'></div>
-        </div>
-        <div className='bg'>
-          <div className='bg-inner'></div>
-        </div>
-      </div>
-
-      <div className='control block-cube block-input'>
-        <input  autocomplete="off" name='password1'  placeholder="password" required id="password"  value={credentials.password} onChange={handleChange("password1")} type='password'/>
-        <div className='bg-top'>
-          <div className='bg-inner'></div>
-        </div>
-        <div className='bg-right'>
-          <div className='bg-inner'></div>
-        </div>
-        <div className='bg'>
-          <div className='bg-inner'></div>
-        </div>
-      </div>
-
-      <div className='control block-cube block-input'>
-        <input autocomplete="off" name='password2'  placeholder="password-verification" required id="password"  value={credentials.password} onChange={handleChange("password2")} type='password' />
-        <div className='bg-top'>
-          <div className='bg-inner'></div>
-        </div>
-        <div className='bg-right'>
-          <div className='bg-inner'></div>
-        </div>
-        <div className='bg'>
-          <div className='bg-inner'></div>
-        </div>
-      </div>
-
-      <button  onClick={handleSubmit} className='btn block-cube block-cube-hover' type='button'>
-        <div className='bg-top'>
-          <div className='bg-inner'></div>
-        </div>
-        <div className='bg-right'>
-          <div className='bg-inner'></div>
-        </div>
-        <div className='bg'>
-          <div className='bg-inner'></div>
-        </div>
-        <div className='text'>
-          Sign Up
-        </div>
-      </button>
-
-      <Link to="/login" lassName='btn block-cube block-cube-hover' type='button'>
-        <div className='text' style={{color:"white"}}>
-          Already have an Account Login
-        </div>
-      </Link>
-    </Form>
+          </div>
+          <div style={{display:"flex",flexDirection:"column",textAlign:"center"}}>
+          <button  onClick={handleSubmit} className='btn block-cube block-cube-hover' type='button'>
+            <div className='bg-top'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg-right'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='text'>
+              Register
+            </div>
+            </button>
+            <div>
+            <Link to="/login" style={{color:"white",textDecoration:"none",padding:"30px"}} lassName='btn block-cube block-cube-hover' type='button'>
+            <div className='text'>
+             Already have an account Login
+            </div>
+            </Link>
+            </div>
+          </div>
+          </Form>
+      </>
   )
 }
   
