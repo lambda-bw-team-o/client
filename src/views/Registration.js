@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react';
 import NavBar from '../components/NavBar.js';
 import styled from "styled-components";
 import { Link } from 'react-router-dom'
+
 import axios from 'axios';
 
 
@@ -184,7 +185,8 @@ const handleChange = name => event => {
        
 
   return (
-
+    <>
+  <NavBar />
           <Form  >
           <div className='control'>
             <h1 style={{color:"white"}}>
@@ -247,6 +249,7 @@ const handleChange = name => event => {
             </div>
             </Link>
           </Form>
+      </>
   )
 }
 

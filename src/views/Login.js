@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import NavBar from '../components/NavBar.js';
 import styled from "styled-components";
 import { Link } from 'react-router-dom'
+
 import axios from 'axios';
 
 const Form = styled.form`
@@ -177,8 +178,8 @@ function Login(props) {
 
 
   return (
-
- 
+<>
+        <NavBar/>
           <Form autocomplete="off" >
           <div className='control'>
             <h1 style={{color:"white"}}>
@@ -232,6 +233,8 @@ function Login(props) {
             </Link>
             </div>
           </Form>
+
+  </>
   )
 }
 
