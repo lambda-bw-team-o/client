@@ -10,6 +10,7 @@ const Form = styled.form`
  width: 300px;
   padding: 64px 15px 24px;
   margin: 0 auto;
+  
   .control {
     margin: 0 0 24px;
     input {
@@ -219,9 +220,9 @@ function Login(props) {
             </div>
             </button>
             <div>
-            <Link to="/register" style={{color:"white",textDecoration:"none",padding:"30px"}} lassName='btn block-cube block-cube-hover' type='button'>
+            <Link  to="/register" style={{color:"white",textDecoration:"none",padding:"30px"}} lassName='btn block-cube block-cube-hover' type='button'>
             <div className='text'>
-              Dont have Account Register
+              Don't have Account? Register
             </div>
             </Link>
             </div>

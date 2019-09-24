@@ -10,6 +10,12 @@ const Form = styled.div`
  width: 300px;
   padding: 64px 15px 24px;
   margin: 0 auto;
+  .checker{
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 10px;
+    text-align:center;
+  }
   .control {
     margin: 0 0 24px;
     input {
@@ -142,12 +148,18 @@ const Form = styled.div`
 }
 `;
 
+
 const Registration = (props) => {
   const [credentials, setCredentials] = useState({    
     username: '',
     password1: '',
-    password2: ''
+    password2:''
 
+  })
+  const[passwordParams, setPasswordParams]= useState({
+    passwordTooShort:"",
+    passwordNotUnique:"",
+    passwordsDontMatch:"",
   })
 
   const handleChange = name => event => {
@@ -156,86 +168,115 @@ const Registration = (props) => {
 
   const handleSubmit = () => {
     let parcel = credentials;
-    console.log(credentials)
-    axios.post('https://team-o.herokuapp.com/api/registration/', parcel)
+    console.log(parcel.password1.length)
+    if(parcel.password1 === parcel.password2 && 
+      parcel.password1.length >= 8 && 
+      parcel.password2.length >= 8
+      
+      ){
+      axios.post('https://team-o.herokuapp.com/api/registration/', parcel)
       .then(res => {
         console.log(res)
         localStorage.setItem("token", res.data.key);
         props.history.push('/game')
       })
       .catch(error => {
-        console.error(error);
+        setPasswordParams({
+          passwordNotUnique:"Try something a little harder to guess.",
       })
+      })
+    }else if (parcel.password1.length < 8 || parcel.password2.length < 8){
+      setPasswordParams({
+        passwordTooShort:"Err password too short! needs to be at least 8 characters",
+    })
+    }
+    else if (parcel.password1 !== parcel.password2){
+      setPasswordParams({
+        passwordsDontMatch:"Passwords Dont Match",
+    })
+    }
+
   }
        
   return (
-     <Form>
-      <div className='control'>
-        <h1 style={{color:"white"}}>
-          Register
-        </h1>
-      </div>
-
-      <div className='control block-cube block-input'>
-        <input autocomplete="off" name='username'  placeholder="username" required id="username" value={credentials.username} onChange={handleChange("username")} type="text"/>
-        <div className='bg-top'>
-          <div className='bg-inner'></div>
-        </div>
-        <div className='bg-right'>
-          <div className='bg-inner'></div>
-        </div>
-        <div className='bg'>
-          <div className='bg-inner'></div>
-        </div>
-      </div>
-
-      <div className='control block-cube block-input'>
-        <input  autocomplete="off" name='password1'  placeholder="password" required id="password"  value={credentials.password} onChange={handleChange("password1")} type='password'/>
-        <div className='bg-top'>
-          <div className='bg-inner'></div>
-        </div>
-        <div className='bg-right'>
-          <div className='bg-inner'></div>
-        </div>
-        <div className='bg'>
-          <div className='bg-inner'></div>
-        </div>
-      </div>
-
-      <div className='control block-cube block-input'>
-        <input autocomplete="off" name='password2'  placeholder="password-verification" required id="password"  value={credentials.password} onChange={handleChange("password2")} type='password' />
-        <div className='bg-top'>
-          <div className='bg-inner'></div>
-        </div>
-        <div className='bg-right'>
-          <div className='bg-inner'></div>
-        </div>
-        <div className='bg'>
-          <div className='bg-inner'></div>
-        </div>
-      </div>
-
-      <button  onClick={handleSubmit} className='btn block-cube block-cube-hover' type='button'>
-        <div className='bg-top'>
-          <div className='bg-inner'></div>
-        </div>
-        <div className='bg-right'>
-          <div className='bg-inner'></div>
-        </div>
-        <div className='bg'>
-          <div className='bg-inner'></div>
-        </div>
-        <div className='text'>
-          Sign Up
-        </div>
-      </button>
-
-      <Link to="/login" lassName='btn block-cube block-cube-hover' type='button'>
-        <div className='text' style={{color:"white"}}>
-          Already have an Account Login
-        </div>
-      </Link>
-    </Form>
+    <>
+        <NavBar />
+          <Form  >
+          <div className='control'>
+            <h1 style={{color:"white"}}>
+              Register
+            </h1>
+          </div>
+          <div className='control block-cube block-input'>
+            <input autocomplete="off" name='username'  placeholder="username" required id="username" value={credentials.username} onChange={handleChange("username")} type="text"/>
+            <div className='bg-top'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg-right'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg'>
+              <div className='bg-inner'></div>
+            </div>
+          </div>
+          <div className='control block-cube block-input'>
+            <input  autocomplete="off" name='password1'  placeholder="password" required id="password"  value={credentials.password1} onChange={handleChange("password1")} type='password'/>
+            <div className='bg-top'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg-right'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg'>
+              <div className='bg-inner'></div>
+            </div>
+          </div>
+          <div  style={{marginBottom:"20px"}} >
+          {(credentials.password1.length >= 8) ? "":<p className="checker" style={{color:"white"}}>{passwordParams.passwordTooShort}</p>}
+          </div>
+          <div className='control block-cube block-input'>
+            <input autocomplete="off" name='password2'  placeholder="password-verification" required id="password"  value={credentials.password2} onChange={handleChange("password2")} type='password' />
+            <div className='bg-top'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg-right'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg'>
+              <div className='bg-inner'></div>
+            </div>
+          </div>
+          <div  style={{marginBottom:"20px"}} >
+          {(credentials.password2.length >= 8) ? "":<p className="checker" style={{color:"white"}}>{passwordParams.passwordTooShort}</p>}
+          </div>
+          <div style={{display:"flex",flexDirection:"column",textAlign:"center"}}>
+          <button  onClick={handleSubmit} className='btn block-cube block-cube-hover' type='button'>
+            <div className='bg-top'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg-right'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='text'>
+              Register
+            </div>
+            </button>
+            <div>
+            {(credentials.password1 !== credentials.password2) ? <p className="checker" style={{color:"white"}}>{passwordParams.passwordsDontMatch}</p>: ""}
+            <p className="checker" style={{color:"white"}}>{passwordParams.passwordNotUnique}</p>
+            <Link  to="/login" style={{color:"white",textDecoration:"none",padding:"30px"}} lassName='btn block-cube block-cube-hover' type='button'>
+            <div className='text'>
+             Already have an account? Login
+            </div>
+            </Link>
+            </div>
+          </div>
+          
+          </Form>
+      </>
   )
 }
   
