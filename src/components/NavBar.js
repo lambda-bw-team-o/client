@@ -28,21 +28,28 @@ flex-direction:row;
 
 
 const NavBar = () => {
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(true)
 
   useEffect(() => {
     let token = localStorage.getItem("token")
     if (token) setLoggedIn(true)
   }, [])
 
+
+  const logOut = () => {
+  localStorage.removeItem("token");
+  setLoggedIn(false)
+  console.log("loggedout")
+  }
+
   return (
     <Nav>
-      <Link to="/" style={{textDecoration:"none",color:"gold"}}><h1 >Team-O</h1></Link>
+      <Link to="/" style={{textDecoration:"none",color:"gold"}}><h1>Team-O</h1></Link>
       {(loggedIn) ? 
       
         <ul className="nav-block">
             <NavLink className="nav-link" >About</NavLink>
-            <NavLink className="nav-link" to="/">Logout</NavLink>
+            <NavLink className="nav-link"  onClick={logOut} to="/">Logout</NavLink>
             
         </ul>
       
@@ -51,7 +58,7 @@ const NavBar = () => {
         <ul className="nav-block">
         <NavLink className="nav-link" >About</NavLink>
           <NavLink className="nav-link" to="/login">Login</NavLink>
-          <NavLink className="nav-link" to="/registration">Registration</NavLink>
+          <NavLink className="nav-link"  to="/registration">Registration</NavLink>
         </ul>
       }
     </Nav>
