@@ -1,13 +1,10 @@
-import React, { useState,useEffect } from 'react';
-import NavBar from '../components/NavBar.js';
+import React, { useState } from 'react';
 import styled from "styled-components";
+import NavBar from '../components/NavBar';
+
 import { Link } from 'react-router-dom'
 
 import axios from 'axios';
-
-
-
-
 
 const Form = styled.div`
  width: 300px;
@@ -143,11 +140,9 @@ const Form = styled.div`
     }
   }
 }
+`;
 
-  `;
-
-
-const Registration = () => {
+const Registration = (props) => {
   const [credentials, setCredentials] = useState({    
     username: '',
     password1: '',
@@ -155,35 +150,24 @@ const Registration = () => {
 
   })
 
-
-
-  
-const handleChange = name => event => {
-  setCredentials({ ...credentials, [name]: event.target.value });
-};
-
-
-
+  const handleChange = name => event => {
+    setCredentials({ ...credentials, [name]: event.target.value });
+  };
 
   const handleSubmit = () => {
     let parcel = credentials;
-    console.log(parcel)
   
-    axios
-        .post('https://team-o.herokuapp.com/api/registration/', parcel)
-        .then(res => {
-            console.log(res)
-            localStorage.setItem("token", res.data.key);
-            this.props.history.push('/game')
-        })
-        .catch(error => {
-
-            console.error(error);
-        })
-
-      }
+    axios.post('https://team-o.herokuapp.com/api/registration/', parcel)
+      .then(res => {
+        console.log(res)
+        localStorage.setItem("token", res.data.key);
+        props.history.push('/game')
+      })
+      .catch(error => {
+        console.error(error);
+      })
+  }
        
-
   return (
     <>
   <NavBar />
@@ -228,7 +212,9 @@ const handleChange = name => event => {
             <div className='bg'>
               <div className='bg-inner'></div>
             </div>
+
           </div>
+          <div style={{display:"flex",flexDirection:"column",textAlign:"center"}}>
           <button  onClick={handleSubmit} className='btn block-cube block-cube-hover' type='button'>
             <div className='bg-top'>
               <div className='bg-inner'></div>
@@ -240,18 +226,20 @@ const handleChange = name => event => {
               <div className='bg-inner'></div>
             </div>
             <div className='text'>
-              Sign Up
+              Register
             </div>
             </button>
-            <Link to="/login" lassName='btn block-cube block-cube-hover' type='button'>
-            <div className='text' style={{color:"white"}}>
-              Already have an Account Login
+            <div>
+            <Link to="/login" style={{color:"white",textDecoration:"none",padding:"30px"}} lassName='btn block-cube block-cube-hover' type='button'>
+            <div className='text'>
+             Already have an account Login
             </div>
             </Link>
+            </div>
+          </div>
           </Form>
       </>
   )
 }
-
   
 export default Registration;

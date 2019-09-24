@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import NavBar from '../components/NavBar.js';
 import styled from "styled-components";
+import NavBar from '../components/NavBar';
+
 import { Link } from 'react-router-dom'
 
 import axios from 'axios';
@@ -149,36 +150,29 @@ function Login(props) {
 
 
   
-
-  
-
   const handleChange = name => event => {
     setCredentials({ ...credentials, [name]: event.target.value });
   };
   
-
   const handleSubmit = () => {
     let parcel = credentials;
   
-    axios
-        .post('https://team-o.herokuapp.com/api/login/', parcel)
-        .then(res => {
-            console.log(res)
-            localStorage.setItem("token", res.data.key);
-            this.props.history.push('/game')
-        })
-        .catch(error => {
+    axios.post('https://team-o.herokuapp.com/api/login/', parcel)
+      .then(res => {
 
-            console.error(error);
-        })
 
-      }
-       
-  
-
+        console.log(res)
+        localStorage.setItem("token", res.data.key);
+        props.history.push('/game')
+      })
+      .catch(error => {
+        console.error(error);
+      })
+  }
 
   return (
-<>
+    
+    <>
         <NavBar/>
           <Form autocomplete="off" >
           <div className='control'>
@@ -211,6 +205,8 @@ function Login(props) {
               <div className='bg-inner'></div>
             </div>
           </div>
+
+          <div style={{display:"flex",flexDirection:"column",textAlign:"center"}}>
           <button  onClick={handleSubmit} className='btn block-cube block-cube-hover' type='button'>
             <div className='bg-top'>
               <div className='bg-inner'></div>
@@ -226,11 +222,13 @@ function Login(props) {
             </div>
             </button>
             <div>
-            <Link to="/registration" lassName='btn block-cube block-cube-hover' type='button'>
-            <div className='text' style={{color:"white"}}>
+            <Link to="/register" style={{color:"white",textDecoration:"none",padding:"30px"}} lassName='btn block-cube block-cube-hover' type='button'>
+            <div className='text'>
               Dont have Account Register
             </div>
             </Link>
+            </div>
+
             </div>
           </Form>
 

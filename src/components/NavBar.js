@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink,Link } from 'react-router-dom';
+import { NavLink,Link,Redirect } from 'react-router-dom';
 import styled from "styled-components";
 
 
@@ -10,6 +10,7 @@ flex-direction:row-gap;
 color:gold;
 justify-content: space-between;
 padding:0 30px;
+align-items:center;
 .nav-block{
 display:flex;
 flex-direction:row;
@@ -37,6 +38,7 @@ const NavBar = () => {
 
 
   const logOut = () => {
+  let token = localStorage.getItem("token")
   localStorage.removeItem("token");
   if(token) setLoggedIn(false)
   console.log("loggedout")
@@ -48,17 +50,15 @@ const NavBar = () => {
       {(loggedIn) ? 
       
         <ul className="nav-block">
+          <NavLink className="nav-link" to="/game">Game</NavLink>
             <NavLink className="nav-link" >About</NavLink>
             <NavLink className="nav-link"  onClick={logOut} to="/">Logout</NavLink>
-            
         </ul>
-      
        :
-
         <ul className="nav-block">
         <NavLink className="nav-link" >About</NavLink>
           <NavLink className="nav-link" to="/login">Login</NavLink>
-          <NavLink className="nav-link"  to="/registration">Registration</NavLink>
+          <NavLink className="nav-link"  to="/register">Registration</NavLink>
         </ul>
       }
     </Nav>
