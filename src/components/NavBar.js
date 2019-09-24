@@ -1,23 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
+import { NavLink,Link,Redirect } from 'react-router-dom';
+import styled from "styled-components";
 
-const NavbarStyle = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  padding: .5rem 1rem;
-  border: 5px solid #909090;
+
+
+const Nav = styled.nav`
+display:flex;
+flex-direction:row-gap;
+color:gold;
+justify-content: space-between;
+padding:0 30px;
+align-items:center;
+.activeNavButton{
+  border-bottom: 3px gold solid;
+
+
+}
+.nav-block{
+display:flex;
+flex-direction:row;
+.nav-link{
+  color:white;
+  text-decoration:none;
+  margin: 0 20px;
+&.nav-link:hover{
+  color:yellow;
+}
+}
+}
+
 `
 
-const NavbarBrand = styled.a`
-  text-decoration: none;
-  color: inherit;
-  font-size: 1.25rem;
-`
 
-const NavbarList = styled.ul`
-  list-style: none;
-`
 
 const NavBar = () => {
   const [loggedIn, setLoggedIn] = useState(false)
@@ -27,20 +41,33 @@ const NavBar = () => {
     if (token) setLoggedIn(true)
   }, [])
 
+
+  const logOut = () => {
+  let token = localStorage.getItem("token")
+  localStorage.removeItem("token");
+  if(token) setLoggedIn(false)
+  console.log("loggedout")
+  }
+
   return (
-    <NavbarStyle>
-      <NavbarBrand href="/">
-        <img src="/logo192.png" width="80px" height="80px" alt="Logo"></img>
-      </NavbarBrand>
-
-      {(loggedIn) ? '' :
-        <NavbarList>
-          <li><NavLink to="/login">Login</NavLink></li>
-          <li><NavLink to="/register">Register</NavLink></li>
-        </NavbarList>
+    <Nav>
+      <Link to="/" style={{textDecoration:"none",color:"gold"}}><h1>Team-O</h1></Link>
+      {(loggedIn) ? 
+      
+        <ul className="nav-block">
+          <NavLink activeClassName="activeNavButton" className="nav-link" to="/game">Game</NavLink>
+            <NavLink  activeClassName="activeNavButton" className="nav-link" >About</NavLink>
+            <NavLink className="nav-link"  onClick={logOut} to="/">Logout</NavLink>
+        </ul>
+       :
+        <ul className="nav-block">
+        <NavLink activeClassName="activeNavButton" className="nav-link" >About</NavLink>
+          <NavLink activeClassName="activeNavButton" className="nav-link" to="/login">Login</NavLink>
+          <NavLink activeClassName="activeNavButton" className="nav-link"  to="/register">Registration</NavLink>
+        </ul>
       }
-    </NavbarStyle>
-  )
-}
-
-export default NavBar;
+    </Nav>
+    )
+  }
+  
+  export default NavBar;

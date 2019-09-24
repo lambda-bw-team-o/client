@@ -7,9 +7,12 @@ import Container from '../styles/Container';
 import Theme from '../styles/Theme';
 import Row from '../styles/Row';
 import Column from '../styles/Column';
+import NavBar from '../components/NavBar';
 
 const Game = () => {
   return (
+    <>
+    <NavBar/>
     <Theme>
       <Container>
         <Row>
@@ -28,6 +31,7 @@ const Game = () => {
         </Row>
       </Container>
     </Theme>
+    </>
   )
 }
 
