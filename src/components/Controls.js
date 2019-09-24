@@ -47,13 +47,46 @@ function Controls() {
       }
     }
   }, [])
+  
+  const handleLeftArrow = () => {
+    setPressLeft(true)
+    setTimeout(() => {
+      setPressLeft(false)
+    }, 100)
+  }
+  const handleUpArrow = () => {
+    setPressUp(true)
+    setTimeout(() => {
+      setPressUp(false)
+    }, 100)
+  }
+  const handleRightArrow = () => {
+    setPressRight(true)
+    setTimeout(() => {
+      setPressRight(false)
+    }, 100)
+  }
+  const handleDownArrow = () => {
+    setPressDown(true)
+    setTimeout(() => {
+      setPressDown(false)
+    }, 100)
+  }
 
   return (
     <div>
-      <img src={UpArrowKey} width="80px" height="80px" alt="Game Tile" style={{ margin: '10px', backgroundColor: pressUp === true ? 'red' : 'inherit' }}></img>
-      <img src={DownArrowKey} width="80px" height="80px" alt="Game Tile" style={{ margin: '10px', backgroundColor: pressDown === true ? 'red' : 'inherit' }}></img>
-      <img src={LeftArrowKey} width="80px" height="80px" alt="Game Tile" style={{ margin: '10px', backgroundColor: pressLeft === true ? 'red' : 'inherit' }}></img>
-      <img src={RightArrowKey} width="80px" height="80px" alt="Game Tile" style={{ margin: '10px', backgroundColor: pressRight === true ? 'red' : 'inherit' }}></img>
+      <img src={UpArrowKey} width="80px" height="80px" alt="Game Tile"
+           onClick={handleUpArrow}
+           style={{ margin: '10px', backgroundColor: pressUp === true ? 'red' : 'inherit' }}></img>
+      <img src={DownArrowKey} width="80px" height="80px" alt="Game Tile" 
+          onClick={handleDownArrow}
+           style={{ margin: '10px', backgroundColor: pressDown === true ? 'red' : 'inherit' }}></img>
+      <img src={LeftArrowKey} width="80px" height="80px" alt="Game Tile" 
+           onClick={handleLeftArrow}
+           style={{ margin: '10px', backgroundColor: pressLeft === true ? 'red' : 'inherit' }}></img>
+      <img src={RightArrowKey} width="80px" height="80px" alt="Game Tile" 
+           onClick={handleRightArrow}
+           style={{ margin: '10px', backgroundColor: pressRight === true ? 'red' : 'inherit' }}></img>
     </div>
   )
 }
