@@ -139,11 +139,11 @@ const Form = styled.div`
 }
 `;
 
-const Registration = () => {
+const Registration = (props) => {
   const [credentials, setCredentials] = useState({    
     username: '',
     password1: '',
-    password2:''
+    password2: ''
 
   })
 
@@ -158,7 +158,7 @@ const Registration = () => {
       .then(res => {
         console.log(res)
         localStorage.setItem("token", res.data.key);
-        this.props.history.push('/game')
+        props.history.push('/game')
       })
       .catch(error => {
         console.error(error);
@@ -174,7 +174,7 @@ const Registration = () => {
       </div>
 
       <div className='control block-cube block-input'>
-        <input autocomplete="off" name='username'  placeholder="username" required id="username" value={credentials.username} onChange={handleChange("username")} type="text"/>
+        <input autoComplete="off" name='username'  placeholder="username" required id="username" value={credentials.username} onChange={handleChange("username")} type="text"/>
         <div className='bg-top'>
           <div className='bg-inner'></div>
         </div>
@@ -187,7 +187,7 @@ const Registration = () => {
       </div>
 
       <div className='control block-cube block-input'>
-        <input  autocomplete="off" name='password1'  placeholder="password" required id="password"  value={credentials.password} onChange={handleChange("password1")} type='password'/>
+        <input  autoComplete="off" name='password1'  placeholder="password" required id="password1"  value={credentials.password} onChange={handleChange("password1")} type='password'/>
         <div className='bg-top'>
           <div className='bg-inner'></div>
         </div>
@@ -200,7 +200,7 @@ const Registration = () => {
       </div>
 
       <div className='control block-cube block-input'>
-        <input autocomplete="off" name='password2'  placeholder="password-verification" required id="password"  value={credentials.password} onChange={handleChange("password2")} type='password' />
+        <input autoComplete="off" name='password2'  placeholder="password-verification" required id="password2"  value={credentials.password} onChange={handleChange("password2")} type='password' />
         <div className='bg-top'>
           <div className='bg-inner'></div>
         </div>
