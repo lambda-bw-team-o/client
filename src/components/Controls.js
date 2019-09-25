@@ -15,6 +15,7 @@ function Controls(props) {
   const [pressUp, setPressUp] = useState(false)
   const [pressRight, setPressRight] = useState(false)
   const [pressDown, setPressDown] = useState(false)
+  const switchBackground = props.switchBackground
 
   useEffect(() => {
     window.onkeydown = (e) => {
@@ -41,19 +42,19 @@ function Controls(props) {
       if (key === 37) {
         // Move Left
         setPressLeft(false)
-        props.switchBackground()
+        switchBackground()
       } else if (key === 38) {
         // Move Up
         setPressUp(false)
-        props.switchBackground()
+        switchBackground()
       } else if (key === 39) {
         // Move Right
         setPressRight(false)
-        props.switchBackground()
+        switchBackground()
       } else if (key === 40) {
         // Move Down
         setPressDown(false)
-        props.switchBackground()
+        switchBackground()
       }
     }
   }, [])

@@ -28,7 +28,6 @@ function Map(props) {
         <Column width={0.5}><BlankSquare blank={true}></BlankSquare></Column>
         <Column width={0.5}><GridSquare heading={true}>1</GridSquare></Column>
         <Column width={0.5}><GridSquare heading={true}>2</GridSquare></Column>
-        <Column width={0.5}><GridSquare heading={true}>2</GridSquare></Column>
         <Column width={0.5}><GridSquare heading={true}>3</GridSquare></Column>
         <Column width={0.5}><GridSquare heading={true}>4</GridSquare></Column>
         <Column width={0.5}><GridSquare heading={true}>5</GridSquare></Column>
@@ -41,7 +40,6 @@ function Map(props) {
 
       <Row style={{ justifyContent: 'center' }}>
         <Column width={0.5}><GridSquare heading={true}>A</GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
@@ -66,12 +64,10 @@ function Map(props) {
         <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
       </Row>
 
       <Row style={{ justifyContent: 'center' }}>
         <Column width={0.5}><GridSquare heading={true}>C</GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
@@ -96,12 +92,10 @@ function Map(props) {
         <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
       </Row>
 
       <Row style={{ justifyContent: 'center' }}>
         <Column width={0.5}><GridSquare heading={true}>E</GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
@@ -126,12 +120,10 @@ function Map(props) {
         <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
       </Row>
 
       <Row style={{ justifyContent: 'center' }}>
         <Column width={0.5}><GridSquare heading={true}>G</GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
@@ -156,7 +148,6 @@ function Map(props) {
         <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
       </Row>
 
       <Row style={{ justifyContent: 'center' }}>
@@ -171,27 +162,10 @@ function Map(props) {
         <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-      </Row>
-
-      <Row style={{ justifyContent: 'center' }}>
-        <Column width={0.5}><GridSquare heading={true}>J</GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
       </Row>
 
       <Row style={{ justifyContent: 'center', paddingBottom: '15px' }}>
-        <Column width={0.5}><GridSquare heading={true}>K</GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
+        <Column width={0.5}><GridSquare heading={true}>J</GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
         <Column width={0.5}><GridSquare></GridSquare></Column>
