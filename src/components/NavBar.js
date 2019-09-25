@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink,Link,Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from "styled-components";
 
 
