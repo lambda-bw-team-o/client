@@ -10,7 +10,7 @@ import DownArrowKeyClicked from '../assets/images/interface/down-arrow-key-click
 import LeftArrowKeyClicked from '../assets/images/interface/left-arrow-key-clicked.png';
 import RightArrowKeyClicked from '../assets/images/interface/right-arrow-key-clicked.png';
 
-function Controls() {
+function Controls(props) {
   const [pressLeft, setPressLeft] = useState(false)
   const [pressUp, setPressUp] = useState(false)
   const [pressRight, setPressRight] = useState(false)
@@ -41,44 +41,56 @@ function Controls() {
       if (key === 37) {
         // Move Left
         setPressLeft(false)
+        switchBackground()
       } else if (key === 38) {
         // Move Up
         setPressUp(false)
+        switchBackground()
       } else if (key === 39) {
         // Move Right
         setPressRight(false)
+        switchBackground()
       } else if (key === 40) {
         // Move Down
         setPressDown(false)
+        switchBackground()
       }
     }
   }, [])
-  
+
+  const switchBackground = () => {
+    props.setBackgroundIndex(props.backgroundIndex + 1)
+  }
+
   const handleLeftArrow = () => {
     setPressLeft(true)
+    switchBackground()
     setTimeout(() => {
       setPressLeft(false)
     }, 100)
   }
   const handleUpArrow = () => {
     setPressUp(true)
+    switchBackground()
     setTimeout(() => {
       setPressUp(false)
     }, 100)
   }
   const handleRightArrow = () => {
     setPressRight(true)
+    switchBackground()
     setTimeout(() => {
       setPressRight(false)
     }, 100)
   }
   const handleDownArrow = () => {
     setPressDown(true)
+    switchBackground()
     setTimeout(() => {
       setPressDown(false)
     }, 100)
   }
-
+  
   return (
     <>
       <Row>

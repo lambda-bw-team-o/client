@@ -11,8 +11,11 @@ import NavBar from '../components/NavBar';
 import Arrival from '../assets/audio/arrival-audio.mp3';
 
 const Game = () => {
+  const [backgroundIndex, setBackgroundIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const audioRef = useRef(null)
+
+  console.log(`backgroundIndex: ${backgroundIndex}`)
 
   function toggleMusic() {
     if (audioRef.current.paused) {
@@ -36,13 +39,13 @@ const Game = () => {
 
           <Row>
             <Column>
-              <Map />
+              <Map backgroundIndex={backgroundIndex} />
             </Column>
           </Row>
 
           <Row>
             <Column width={6}><Feed /></Column>
-            <Column width={6}><Controls /></Column>
+            <Column width={6}><Controls setBackgroundIndex={setBackgroundIndex} backgroundIndex={backgroundIndex} /></Column>
           </Row>
         </Container>
       </Theme>

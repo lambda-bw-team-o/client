@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import FloorTile from '../assets/images/interface/health.png';
 import SpaceImage from '../assets/images/backgrounds/0.jpg';
 
-function Map() {
+function Map(props) {
   const [tiles, setTiles] = useState([[]])
 
   useEffect(() => {
@@ -19,8 +19,12 @@ function Map() {
     setTiles(images)
   }, [])
 
+  useEffect(() => {
+    // Listen for background changes.
+  }, [props.backgroundImageIndex])
+
   return (
-    <div style={{ backgroundImage: `url(${SpaceImage})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center'}}>
+    <div style={{ backgroundImage: `url(${require(`../assets/images/backgrounds/${props.backgroundIndex}.jpg`)})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center'}}>
       {tiles}
     </div>
   )
