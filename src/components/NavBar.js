@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink,Link,Redirect } from 'react-router-dom';
+import { NavLink, Link, Redirect } from 'react-router-dom';
 import styled from "styled-components";
-
-
 
 const Nav = styled.nav`
 display:flex;
@@ -11,27 +9,25 @@ color:gold;
 justify-content: space-between;
 padding:0 30px;
 align-items:center;
-.activeNavButton{
+
+.activeNavButton {
   border-bottom: 3px gold solid;
-
-
-}
-.nav-block{
-display:flex;
-flex-direction:row;
-.nav-link{
-  color:white;
-  text-decoration:none;
-  margin: 0 20px;
-&.nav-link:hover{
-  color:yellow;
-}
-}
 }
 
+.nav-block {
+  display:flex;
+  flex-direction:row;
+
+  .nav-link{
+    color:white;
+    text-decoration:none;
+    margin: 0 20px;
+    &.nav-link:hover {
+      color:yellow;
+    }
+  }
+}
 `
-
-
 
 const NavBar = () => {
   const [loggedIn, setLoggedIn] = useState(false)
@@ -41,19 +37,16 @@ const NavBar = () => {
     if (token) setLoggedIn(true)
   }, [])
 
-
   const logOut = () => {
-  let token = localStorage.getItem("token")
-  localStorage.removeItem("token");
-  if(token) setLoggedIn(false)
-  console.log("loggedout")
+    let token = localStorage.getItem("token")
+    localStorage.removeItem("token");
+    if (token) setLoggedIn(false)
   }
 
   return (
     <Nav>
       <Link to="/" style={{textDecoration:"none",color:"gold"}}><h1>Team-O</h1></Link>
-      {(loggedIn) ? 
-      
+      {(loggedIn) ?
         <ul className="nav-block">
           <NavLink activeClassName="activeNavButton" className="nav-link" to="/game">Game</NavLink>
             <NavLink  activeClassName="activeNavButton" className="nav-link" >About</NavLink>
@@ -67,7 +60,7 @@ const NavBar = () => {
         </ul>
       }
     </Nav>
-    )
-  }
+  )
+}
   
-  export default NavBar;
+export default NavBar;
