@@ -166,31 +166,30 @@ const Registration = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let parcel = credentials;
-    console.log('handleSubmit')
 
-    // if (parcel.password1 === parcel.password2 && 
-    //     parcel.password1.length >= 8 && 
-    //     parcel.password2.length >= 8) {
+    if (parcel.password1 === parcel.password2 && 
+        parcel.password1.length >= 8 && 
+        parcel.password2.length >= 8) {
 
-    //   axios.post('https://team-o.herokuapp.com/api/registration/', parcel)
-    //     .then(res => {
-    //       localStorage.setItem("token", res.data.key);
-    //       props.history.push('/game')
-    //     })
-    //     .catch(error => {
-    //       setPasswordParams({
-    //         passwordNotUnique:"Try something a little harder to guess.",
-    //       })
-    //     })
-    // } else if (parcel.password1.length < 8 || parcel.password2.length < 8) {
-    //   setPasswordParams({
-    //     passwordTooShort:"Err password too short! needs to be at least 8 characters",
-    //   })
-    // } else if (parcel.password1 !== parcel.password2) {
-    //   setPasswordParams({
-    //     passwordsDontMatch:"Passwords Dont Match",
-    //   })
-    // }
+      axios.post('https://team-o.herokuapp.com/api/registration/', parcel)
+        .then(res => {
+          localStorage.setItem("token", res.data.key);
+          props.history.push('/game')
+        })
+        .catch(error => {
+          setPasswordParams({
+            passwordNotUnique:"Try something a little harder to guess.",
+          })
+        })
+    } else if (parcel.password1.length < 8 || parcel.password2.length < 8) {
+      setPasswordParams({
+        passwordTooShort:"Err password too short! needs to be at least 8 characters",
+      })
+    } else if (parcel.password1 !== parcel.password2) {
+      setPasswordParams({
+        passwordsDontMatch:"Passwords Dont Match",
+      })
+    }
   }
        
   return (
