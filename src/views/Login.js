@@ -153,8 +153,9 @@ function Login(props) {
   
   const handleSubmit = (e) => {
     e.preventDefault();
+    let parcel = credentials;
 
-    axios.post('https://team-o.herokuapp.com/api/login/', credentials)
+    axios.post('https://team-o.herokuapp.com/api/login/', parcel)
       .then(res => {
         localStorage.setItem('token', res.data.key);
         props.history.push('/game');
