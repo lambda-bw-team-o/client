@@ -91,11 +91,15 @@
   text-align:center;
   background-color:#212121;
   color:white;
+  text-decoration:none;
+  padding:10px;
   font-size:20px;
-  z-index:5;
+  z-index:500;
+  border: 3px solid white;
 }
 .go:hover{
   color:gold;
+  border: 3px solid gold;
 }
 
 

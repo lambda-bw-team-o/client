@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from '../components/NavBar';
-import LandingPage from '../assets/landing-pic.jpg';
+import { Link } from 'react-router-dom';
 import '../App.css';
 
 const Landing = () => {
@@ -19,9 +19,11 @@ const Landing = () => {
             justifyContent: "center",
               alignTtems: "center",
               marginTop:"203px"}}>
-              <button className="go">
+             
+              <Link className="go" to="/login">
                           EXPLORE
-              </button>
+                  </Link>
+
             </div> 
 
           </div>
