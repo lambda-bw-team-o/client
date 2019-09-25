@@ -38,7 +38,10 @@ const Game = () => {
   }, [])
 
   function switchBackground() {
-    setBackgroundIndex(backgroundIndex + 1)
+    let index =  backgroundIndex + 1
+    if (index > 114) index = 0
+    if (index < 0) index = 114
+    setBackgroundIndex(index)
   }
 
   function toggleMusic() {
