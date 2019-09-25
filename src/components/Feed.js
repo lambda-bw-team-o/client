@@ -1,12 +1,18 @@
 import React from 'react';
+import Row from '../styles/Row';
+import Column from '../styles/Column';
 
-function Feed() {
+function Feed(props) {
   return (
-    <div>
-      <div style={{ backgroundColor: '#333', height: '200px'}}>
-        <h3 style={{ marginTop: '0px', paddingTop: '5px', paddingLeft: '5px' }}>Feed</h3>
-      </div>
-    </div>
+    <Row>
+      <Column style={{ backgroundColor: '#333', height: '200px', paddingTop: '5px', paddingLeft: '5px' }}>
+        <h3 style={{ marginTop: '0px' }}>Feed</h3>
+
+        {props.playerName ? <p>All systems ready captain {props.playerName}!</p> : ''}
+        {props.playerRoomTitle ? <p>Our current location is {props.playerRoomTitle}</p> : ''}
+        {props.playerRoomDescription ? <p>{props.playerRoomDescription}</p> : ''}
+      </Column>
+    </Row>
   )
 }
 

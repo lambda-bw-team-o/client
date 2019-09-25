@@ -41,51 +41,47 @@ function Controls(props) {
       if (key === 37) {
         // Move Left
         setPressLeft(false)
-        switchBackground()
+        props.switchBackground()
       } else if (key === 38) {
         // Move Up
         setPressUp(false)
-        switchBackground()
+        props.switchBackground()
       } else if (key === 39) {
         // Move Right
         setPressRight(false)
-        switchBackground()
+        props.switchBackground()
       } else if (key === 40) {
         // Move Down
         setPressDown(false)
-        switchBackground()
+        props.switchBackground()
       }
     }
   }, [])
 
-  const switchBackground = () => {
-    props.setBackgroundIndex(props.backgroundIndex + 1)
-  }
-
   const handleLeftArrow = () => {
     setPressLeft(true)
-    switchBackground()
+    props.switchBackground()
     setTimeout(() => {
       setPressLeft(false)
     }, 100)
   }
   const handleUpArrow = () => {
     setPressUp(true)
-    switchBackground()
+    props.switchBackground()
     setTimeout(() => {
       setPressUp(false)
     }, 100)
   }
   const handleRightArrow = () => {
     setPressRight(true)
-    switchBackground()
+    props.switchBackground()
     setTimeout(() => {
       setPressRight(false)
     }, 100)
   }
   const handleDownArrow = () => {
     setPressDown(true)
-    switchBackground()
+    props.switchBackground()
     setTimeout(() => {
       setPressDown(false)
     }, 100)
