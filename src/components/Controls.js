@@ -57,7 +57,7 @@ function Controls(props) {
         switchBackground()
       }
     }
-  }, [])
+  }, [switchBackground])
 
   const handleLeftArrow = () => {
     setPressLeft(true)

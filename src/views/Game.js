@@ -53,8 +53,6 @@ const Game = () => {
 
   return (
     <>
-      <NavBar/>
-
       <Theme>
         <Container>
           <Row>
