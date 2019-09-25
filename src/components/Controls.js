@@ -5,6 +5,10 @@ import UpArrowKey from '../assets/images/interface/up-arrow-key.png';
 import DownArrowKey from '../assets/images/interface/down-arrow-key.png';
 import LeftArrowKey from '../assets/images/interface/left-arrow-key.png';
 import RightArrowKey from '../assets/images/interface/right-arrow-key.png';
+import UpArrowKeyClicked from '../assets/images/interface/up-arrow-key-clicked.png';
+import DownArrowKeyClicked from '../assets/images/interface/down-arrow-key-clicked.png';
+import LeftArrowKeyClicked from '../assets/images/interface/left-arrow-key-clicked.png';
+import RightArrowKeyClicked from '../assets/images/interface/right-arrow-key-clicked.png';
 
 function Controls() {
   const [pressLeft, setPressLeft] = useState(false)
@@ -80,27 +84,27 @@ function Controls() {
       <Row>
         <Column width={4}></Column>
         <Column width={4}>
-          <img src={UpArrowKey} width="80px" height="80px" alt="Game Tile"
-              onClick={handleUpArrow}
-              style={{ margin: '10px', backgroundColor: pressUp === true ? 'red' : 'inherit' }}></img>
+          <img src={pressUp ? UpArrowKeyClicked : UpArrowKey} width="80px" height="80px" alt="Game Tile"
+               onClick={handleUpArrow}
+               style={{ margin: '10px' }}></img>
         </Column>
         <Column width={4}></Column>
       </Row>
       <Row>
         <Column width={4}>
-          <img src={LeftArrowKey} width="80px" height="80px" alt="Game Tile" 
-              onClick={handleLeftArrow}
-              style={{ margin: '10px', backgroundColor: pressLeft === true ? 'red' : 'inherit' }}></img>
+          <img src={pressLeft ? LeftArrowKeyClicked : LeftArrowKey} width="80px" height="80px" alt="Game Tile" 
+               onClick={handleLeftArrow}
+               style={{ margin: '10px' }}></img>
         </Column>
         <Column width={4}>
-          <img src={DownArrowKey} width="80px" height="80px" alt="Game Tile"
-            onClick={handleDownArrow}
-            style={{ margin: '10px', backgroundColor: pressDown === true ? 'red' : 'inherit' }}></img>
+          <img src={pressDown ? DownArrowKeyClicked : DownArrowKey} width="80px" height="80px" alt="Game Tile"
+               onClick={handleDownArrow}
+               style={{ margin: '10px' }}></img>
         </Column>
         <Column width={4}>
-          <img src={RightArrowKey} width="80px" height="80px" alt="Game Tile" 
-              onClick={handleRightArrow}
-              style={{ margin: '10px', backgroundColor: pressRight === true ? 'red' : 'inherit' }}></img>
+          <img src={pressRight ? RightArrowKeyClicked : RightArrowKey} width="80px" height="80px" alt="Game Tile" 
+               onClick={handleRightArrow}
+               style={{ margin: '10px' }}></img>
         </Column>
       </Row>
     </>
