@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
-import styled from "styled-components";
 
-
+import { NavLink, Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Nav = styled.nav`
 display:flex;
@@ -10,8 +9,10 @@ flex-direction: row-gap;
 color:gold;
 justify-content: space-around;
 align-items:center;
-.activeNavButton{
+
+.activeNavButton {
   border-bottom: 3px gold solid;
+}
 
 }
 .nav-block{
@@ -30,7 +31,6 @@ justify-content:space-around;
 
 `
 
-
 const NavBar = () => {
   const [loggedIn, setLoggedIn] = useState(false)
 
@@ -39,18 +39,17 @@ const NavBar = () => {
     if (token) setLoggedIn(true)
   }, [])
 
-
   const logOut = () => {
-  let token = localStorage.getItem("token")
-  localStorage.removeItem("token");
-  if(token) setLoggedIn(false)
-  console.log("loggedout")
+    let token = localStorage.getItem("token")
+    localStorage.removeItem("token");
+    if (token) setLoggedIn(false)
   }
 
   return (
     <Nav>
-      {(loggedIn) ? 
-      
+
+      <Link to="/" style={{textDecoration:"none",color:"gold"}}><h1>Team-O</h1></Link>
+      {(loggedIn) ?
         <ul className="nav-block">
           <NavLink exact  activeClassName="activeNavButton" className="nav-link" to= "/" style={{marginLeft:"-16px"}} >Home</NavLink>
           <NavLink activeClassName="activeNavButton" className="nav-link" to="/game">Game</NavLink>
@@ -67,7 +66,7 @@ const NavBar = () => {
         </ul>
       }
     </Nav>
-    )
-  }
+  )
+}
   
-  export default NavBar;
+export default NavBar;
