@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 import NavBar from '../components/NavBar';
-
 import { Link } from 'react-router-dom'
-
 import axios from 'axios';
 
 const Form = styled.form`
@@ -148,8 +146,6 @@ function Login(props) {
     username: '',
     password: '',
   })
-
-
   
   const handleChange = name => event => {
     setCredentials({ ...credentials, [name]: event.target.value });

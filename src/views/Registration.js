@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import styled from "styled-components";
-import NavBar from '../components/NavBar';
-
+import styled from 'styled-components';
 import { Link } from 'react-router-dom'
-
 import axios from 'axios';
 
 const Form = styled.div`
