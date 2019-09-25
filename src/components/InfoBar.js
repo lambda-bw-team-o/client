@@ -10,7 +10,7 @@ function InfoBar(props) {
   let healthIndicator = []
 
   for (let i = 0; i < health; i++) {
-    healthIndicator.push(<img src={Heart} width="60px" height="60px" alt="Health" style={{ margin: '10px' }}></img>)
+    healthIndicator.push(<img key={i} src={Heart} width="60px" height="60px" alt="Health" style={{ margin: '10px' }}></img>)
   }
 
   return (
