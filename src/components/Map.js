@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import FloorTile from '../assets/images/health.png';
-import SpaceImage from '../assets/images/potw1934a.jpg';
+import FloorTile from '../assets/images/interface/health.png';
+import SpaceImage from '../assets/images/backgrounds/potw1934a.jpg';
 
 function Map() {
   const [tiles, setTiles] = useState([[]])

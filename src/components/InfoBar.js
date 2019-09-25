@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Heart from '../assets/images/health.png';
+import Heart from '../assets/images/interface/health.png';
 
 function InfoBar() {
   const [health, setHealth] = useState(5)

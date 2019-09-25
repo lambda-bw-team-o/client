@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Row from '../styles/Row';
 import Column from '../styles/Column';
-import UpArrowKey from '../assets/images/up-arrow-key.png';
-import DownArrowKey from '../assets/images/down-arrow-key.png';
-import LeftArrowKey from '../assets/images/left-arrow-key.png';
-import RightArrowKey from '../assets/images/right-arrow-key.png';
+import UpArrowKey from '../assets/images/interface/up-arrow-key.png';
+import DownArrowKey from '../assets/images/interface/down-arrow-key.png';
+import LeftArrowKey from '../assets/images/interface/left-arrow-key.png';
+import RightArrowKey from '../assets/images/interface/right-arrow-key.png';
 
 function Controls() {
   const [pressLeft, setPressLeft] = useState(false)
