@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import styled from "styled-components";
 import NavBar from '../components/NavBar';
 import { Link } from 'react-router-dom'
@@ -146,7 +146,12 @@ function Login(props) {
     username: '',
     password: '',
   })
-  
+
+  useEffect(() => {
+    let token = localStorage.getItem('token');
+    if (token) props.history.push('/game');
+  }, [])
+
   const handleChange = name => event => {
     setCredentials({ ...credentials, [name]: event.target.value });
   };
