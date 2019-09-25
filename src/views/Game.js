@@ -23,18 +23,18 @@ const Game = () => {
   useEffect(() => {
     const token = localStorage.getItem("token")
 
-    setPlayerName('fooosicle')
-    setPlayerRoomTitle('Outside Cave Entrance')
-    setPlayerRoomDescription('North of you, the cave mount beckons')
+    setPlayerName('Andy')
+    setPlayerRoomTitle('Alsa 178')
+    setPlayerRoomDescription('An uninhabited planet. A species of dog is indigenous to this planet.')
     setRoomPlayers(["arronm", "Taz", "joe"])
 
-    axios.get('https://team-o.herokuapp.com/api/adv/init', { headers: { "Authorization": `Bearer ${token}` } })
-      .then(res => {
-        console.log('init', res)
-      })
-      .catch(error => {
-        console.error('init', error);
-      })
+    // axios.get('https://team-o.herokuapp.com/api/adv/init', { headers: { "Authorization": `Bearer ${token}` } })
+    //   .then(res => {
+    //     console.log('init', res)
+    //   })
+    //   .catch(error => {
+    //     console.error('init', error);
+    //   })
   }, [])
 
   function switchBackground() {
