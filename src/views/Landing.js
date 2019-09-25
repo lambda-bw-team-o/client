@@ -1,21 +1,34 @@
 import React from 'react';
 import NavBar from '../components/NavBar';
-import Container from '../styles/Container';
-import Theme from '../styles/Theme';
+import LandingPage from '../assets/landing-pic.jpg';
+import '../App.css';
 
 const Landing = () => {
   return (
-    <Theme>
-      <Container>
-        <NavBar />
+    <>
+      <div className="body">
 
-        <h1>Team-O</h1>
+      <div className="leftHalf" ></div>
 
-        <h1>
-          Landing Coming Soon
-        </h1>
-      </Container>
-    </Theme>
+      <div className="rightHalf"></div>
+          
+          <div>
+            <NavBar />
+
+            <div style={{ display: "flex",
+            justifyContent: "center",
+              alignTtems: "center",
+              marginTop:"203px"}}>
+              <button className="go">
+                          EXPLORE
+              </button>
+            </div> 
+
+          </div>
+      </div>
+
+
+</>
   )
 }
 
