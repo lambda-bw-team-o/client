@@ -6,19 +6,18 @@ import styled from "styled-components";
 
 const Nav = styled.nav`
 display:flex;
-flex-direction:row-gap;
+flex-direction: row-gap;
 color:gold;
-justify-content: space-between;
-padding:0 30px;
+justify-content: space-around;
 align-items:center;
 .activeNavButton{
   border-bottom: 3px gold solid;
-
 
 }
 .nav-block{
 display:flex;
 flex-direction:row;
+justify-content:space-around;
 .nav-link{
   color:white;
   text-decoration:none;
@@ -30,7 +29,6 @@ flex-direction:row;
 }
 
 `
-
 
 
 const NavBar = () => {
@@ -51,19 +49,21 @@ const NavBar = () => {
 
   return (
     <Nav>
-      <Link to="/" style={{textDecoration:"none",color:"gold"}}><h1>Team-O</h1></Link>
       {(loggedIn) ? 
       
         <ul className="nav-block">
+          <NavLink exact  activeClassName="activeNavButton" className="nav-link" to= "/" style={{marginLeft:"-16px"}} >Home</NavLink>
           <NavLink activeClassName="activeNavButton" className="nav-link" to="/game">Game</NavLink>
-            <NavLink  activeClassName="activeNavButton" className="nav-link" >About</NavLink>
-            <NavLink className="nav-link"  onClick={logOut} to="/">Logout</NavLink>
+          <NavLink  activeClassName="activeNavButton" className="nav-link" to="/about">About</NavLink>
+          <NavLink className="nav-link"  onClick={logOut} to="/">Logout</NavLink>
         </ul>
        :
         <ul className="nav-block">
-        <NavLink activeClassName="activeNavButton" className="nav-link" >About</NavLink>
+          <NavLink exact activeClassName="activeNavButton" className="nav-link" to="/" style={{marginLeft:"-16px"}} >Home</NavLink>
+          <NavLink activeClassName="activeNavButton" className="nav-link"  to="/about">About</NavLink>
+          <NavLink activeClassName="activeNavButton" className="nav-link"  to="/register">Signup</NavLink>
           <NavLink activeClassName="activeNavButton" className="nav-link" to="/login">Login</NavLink>
-          <NavLink activeClassName="activeNavButton" className="nav-link"  to="/register">Registration</NavLink>
+          
         </ul>
       }
     </Nav>
