@@ -86,7 +86,9 @@ const Game = (props) => {
                   playerRoomDescription={playerRoomDescription} 
                   roomPlayers={roomPlayers} />
           </Column>
-          <Column width={6}><Controls switchBackground={switchBackground} setPlayerCoord={setPlayerCoord} playerCoord={playerCoord} /></Column>
+          <Column width={6}>
+            <Controls switchBackground={switchBackground} setPlayerCoord={setPlayerCoord} playerCoord={playerCoord} />
+          </Column>
         </Row>
       </Container>
 
