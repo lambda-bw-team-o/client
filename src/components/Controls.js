@@ -9,6 +9,7 @@ import UpArrowKeyClicked from '../assets/images/interface/up-arrow-key-clicked.p
 import DownArrowKeyClicked from '../assets/images/interface/down-arrow-key-clicked.png';
 import LeftArrowKeyClicked from '../assets/images/interface/left-arrow-key-clicked.png';
 import RightArrowKeyClicked from '../assets/images/interface/right-arrow-key-clicked.png';
+import axios from 'axios';
 
 function Controls(props) {
   const [pressLeft, setPressLeft] = useState(false)
@@ -16,6 +17,7 @@ function Controls(props) {
   const [pressRight, setPressRight] = useState(false)
   const [pressDown, setPressDown] = useState(false)
   const switchBackground = props.switchBackground
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
     window.onkeydown = (e) => {
@@ -42,18 +44,42 @@ function Controls(props) {
       if (key === 37) {
         // Move Left
         setPressLeft(false)
+        // axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 'w' }, { headers: { "Authorization": `Bearer ${token}` } })
+        //   .then((res) => {
+        //     console.log('res', res)
+        //   }).catch((err) => {
+        //     console.error(err)
+        //   })
         switchBackground()
       } else if (key === 38) {
         // Move Up
         setPressUp(false)
+        // axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 'n' }, { headers: { "Authorization": `Bearer ${token}` } })
+        //   .then((res) => {
+        //     console.log('res', res)
+        //   }).catch((err) => {
+        //     console.error(err)
+        //   })
         switchBackground()
       } else if (key === 39) {
         // Move Right
         setPressRight(false)
+        // axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 'e' }, { headers: { "Authorization": `Bearer ${token}` } })
+        //   .then((res) => {
+        //     console.log('res', res)
+        //   }).catch((err) => {
+        //     console.error(err)
+        //   })
         switchBackground()
       } else if (key === 40) {
         // Move Down
         setPressDown(false)
+        // axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 's' }, { headers: { "Authorization": `Bearer ${token}` } })
+        //   .then((res) => {
+        //     console.log('res', res)
+        //   }).catch((err) => {
+        //     console.error(err)
+        //   })
         switchBackground()
       }
     }
@@ -61,13 +87,27 @@ function Controls(props) {
 
   const handleLeftArrow = () => {
     setPressLeft(true)
+    // axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 'w' }, { headers: { "Authorization": `Bearer ${token}` } })
+    //   .then((res) => {
+    //     console.log('res', res)
+    //   }).catch((err) => {
+    //     console.error(err)
+    //   })
     props.switchBackground()
     setTimeout(() => {
       setPressLeft(false)
     }, 100)
   }
+  // Access to XMLHttpRequest at 'https://team-o.herokuapp.com/api/adv/move' from origin 'http://localhost:3000' has been blocked by CORS policy: 
+  // No 'Access-Control-Allow-Origin' header is present on the requested resource.
   const handleUpArrow = () => {
     setPressUp(true)
+    // axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 'n' }, { headers: { "Authorization": `Bearer ${token}` } })
+    //   .then((res) => {
+    //     console.log('res', res)
+    //   }).catch((err) => {
+    //     console.error(err)
+    //   })
     props.switchBackground()
     setTimeout(() => {
       setPressUp(false)
@@ -75,6 +115,12 @@ function Controls(props) {
   }
   const handleRightArrow = () => {
     setPressRight(true)
+    // axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 'e' }, { headers: { "Authorization": `Bearer ${token}` } })
+    //   .then((res) => {
+    //     console.log('res', res)
+    //   }).catch((err) => {
+    //     console.error(err)
+    //   })
     props.switchBackground()
     setTimeout(() => {
       setPressRight(false)
@@ -82,6 +128,12 @@ function Controls(props) {
   }
   const handleDownArrow = () => {
     setPressDown(true)
+    // axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 's' }, { headers: { "Authorization": `Bearer ${token}` } })
+    //   .then((res) => {
+    //     console.log('res', res)
+    //   }).catch((err) => {
+    //     console.error(err)
+    //   })
     props.switchBackground()
     setTimeout(() => {
       setPressDown(false)

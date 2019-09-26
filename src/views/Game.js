@@ -56,7 +56,7 @@ const Game = (props) => {
   }
 
   function handleSignout() {
-    const yes = window.confirm('Are you sure you want to resign?')
+    const yes = window.confirm('Are you sure you want to quit?')
     if (yes) {
       localStorage.removeItem("token")
       props.history.push('/login')

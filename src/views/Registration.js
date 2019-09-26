@@ -178,6 +178,8 @@ const Registration = (props) => {
 
       axios.post('https://team-o.herokuapp.com/api/registration/', parcel)
         .then(res => {
+          console.log('REGISTER', res)
+          localStorage.setItem("register", JSON.stringify(res))
           localStorage.setItem("token", res.data.key);
           props.history.push('/game')
         })
@@ -223,7 +225,7 @@ const Registration = (props) => {
           </div>
 
           <div className='control block-cube block-input'>
-            <input  autocomplete="off" name='password1'  placeholder="password" required id="password"  value={credentials.password1} onChange={handleChange("password1")} type='password'/>
+            <input  autocomplete="off" name='password1'  placeholder="password" required id="password1"  value={credentials.password1} onChange={handleChange("password1")} type='password'/>
             <div className='bg-top'>
               <div className='bg-inner'></div>
             </div>
@@ -240,7 +242,7 @@ const Registration = (props) => {
           </div>
 
           <div className='control block-cube block-input'>
-            <input autocomplete="off" name='password2'  placeholder="password-verification" required id="password"  value={credentials.password2} onChange={handleChange("password2")} type='password' />
+            <input autocomplete="off" name='password2'  placeholder="password-verification" required id="password2"  value={credentials.password2} onChange={handleChange("password2")} type='password' />
             <div className='bg-top'>
               <div className='bg-inner'></div>
             </div>
