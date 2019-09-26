@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NavBar from '../components/NavBar';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'
-import axios from '../helpers/axiosWithAuth';
+import axios from 'axios';
 
 const FormStyle = styled.div`
  width: 300px;
@@ -158,7 +158,6 @@ const FormStyle = styled.div`
 const Registration = (props) => {
   const [credentials, setCredentials] = useState({    
     username: '',
-    email: '',
     password1: '',
     password2: '',
   })
@@ -185,7 +184,7 @@ const Registration = (props) => {
         parcel.password1.length >= 8 && 
         parcel.password2.length >= 8) {
 
-      axios().post('https://team-o.herokuapp.com/api/registration/', parcel)
+      axios.post('https://team-o.herokuapp.com/api/registration/', parcel)
         .then(res => {
           localStorage.setItem("register", JSON.stringify(res))
           localStorage.setItem("token", res.data.key);
@@ -221,19 +220,6 @@ const Registration = (props) => {
 
           <div className='control block-cube block-input'>
             <input autoComplete="off" name='username'  placeholder="username" required id="username" value={credentials.username} onChange={handleChange("username")} type="text"/>
-            <div className='bg-top'>
-              <div className='bg-inner'></div>
-            </div>
-            <div className='bg-right'>
-              <div className='bg-inner'></div>
-            </div>
-            <div className='bg'>
-              <div className='bg-inner'></div>
-            </div>
-          </div>
-
-          <div className='control block-cube block-input'>
-            <input autoComplete="off" name='email'  placeholder="email" required id="email" value={credentials.email} onChange={handleChange("email")} type="email"/>
             <div className='bg-top'>
               <div className='bg-inner'></div>
             </div>
