@@ -116,7 +116,7 @@ const About = (props) => {
   useEffect(() => {
     let token = localStorage.getItem('token');
     if (token) props.history.push('/game');
-  }, [])
+  }, [props.history])
   
   return (
     <Row>

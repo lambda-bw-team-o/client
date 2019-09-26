@@ -162,7 +162,7 @@ const Registration = (props) => {
   useEffect(() => {
     let token = localStorage.getItem('token');
     if (token) props.history.push('/game');
-  }, [])
+  }, [props.history])
 
   const handleChange = name => event => {
     setCredentials({ ...credentials, [name]: event.target.value });
