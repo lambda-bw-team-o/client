@@ -9,6 +9,7 @@ import Row from '../styles/Row';
 import Column from '../styles/Column';
 import NavBar from '../components/NavBar';
 import Arrival from '../assets/audio/arrival-audio.mp3';
+import subsbcribeToChannel from '../helpers/Pusher';
 import axios from 'axios';
 
 const Game = (props) => {
@@ -19,6 +20,7 @@ const Game = (props) => {
   const [playerRoomDescription, setPlayerRoomDescription] = useState(null)
   const [roomPlayers, setRoomPlayers] = useState(null)
   const [playerCoord, setPlayerCoord] = useState([11,11])
+  const [channel, setChannel] = useState(null)
   const audioRef = useRef(null)
 
   useEffect(() => {
@@ -41,6 +43,8 @@ const Game = (props) => {
     setPlayerRoomTitle(fakeInitData.title)
     setPlayerRoomDescription(fakeInitData.description)
     setRoomPlayers(fakeInitData.players)
+
+    setChannel(subsbcribeToChannel(`p-channel-${fakeInitData.uuid}`))
   }, [])
 
   function switchBackground() {
