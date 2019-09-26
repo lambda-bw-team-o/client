@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import styled from "styled-components";
 import NavBar from '../components/NavBar';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 
-const Form = styled.form`
+const FormStyle = styled.div`
  width: 300px;
   padding: 64px 15px 24px;
   margin: 0 auto;
@@ -151,8 +151,7 @@ const Form = styled.form`
     }
   }
 }
-
-  `;
+`;
 function Login(props) {
   const [credentials, setCredentials] = useState({    
     username: '',
@@ -163,17 +162,25 @@ function Login(props) {
    userOrPassWrong:""
   })
 
+  useEffect(() => {
+    let token = localStorage.getItem('token');
+    if (token) props.history.push('/game');
+  }, [props.history])
+
   const handleChange = name => event => {
     setCredentials({ ...credentials, [name]: event.target.value });
   };
   
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     let parcel = credentials;
-  
+
     axios.post('https://team-o.herokuapp.com/api/login/', parcel)
       .then(res => {
-        localStorage.setItem("token", res.data.key);
-        props.history.push('/game')
+        console.log('LOGIN', res)
+        localStorage.setItem("login", JSON.stringify(res))
+        localStorage.setItem('token', res.data.key);
+        props.history.push('/game');
       })
       .catch(error => {
        setPasswordParams({userOrPassWrong:"User-Name or password not found."})
@@ -182,28 +189,20 @@ function Login(props) {
 
   return (
     <>
-      <NavBar/>
-      <Form  autocomplete="off" >
+      <NavBar />
+
+      <FormStyle>
+        <form onSubmit={handleSubmit} autoComplete="off">
           <div className='control'>
-            <h1 style={{color:"white"}}>
+            <h1 style={{ color: "white" }}>
               Sign In
             </h1>
-            
           </div>
+
           <div className='control block-cube block-input'>
-            <input  autocomplete="off" placeholder='Username' value={credentials.username} onChange={handleChange("username")} type='text'/>
-            <div className='bg-top'>
-              <div className='bg-inner'></div>
-            </div>
-            <div className='bg-right'>
-              <div className='bg-inner'></div>
-            </div>
-            <div className='bg'>
-              <div className='bg-inner'></div>
-            </div>
-          </div>
-          <div className='control block-cube block-input'>
-            <input autocomplete="off"  name='password' placeholder='Password' value={credentials.password} onChange={handleChange("password")} type='password'/>
+            <input autoComplete="off" placeholder='Username'
+              value={credentials.username} onChange={handleChange("username")} type='text' />
+
             <div className='bg-top'>
               <div className='bg-inner'></div>
             </div>
@@ -215,8 +214,10 @@ function Login(props) {
             </div>
           </div>
 
-          <div style={{display:"flex",flexDirection:"column",textAlign:"center"}}>
-          <button  onClick={handleSubmit} className='btn block-cube block-cube-hover' type='button' style={{ cursor: "pointer"}}>
+          <div className='control block-cube block-input'>
+            <input autoComplete="off" name='password' placeholder='Password'
+              value={credentials.password} onChange={handleChange("password")} type='password' />
+
             <div className='bg-top'>
               <div className='bg-inner'></div>
             </div>
@@ -226,22 +227,34 @@ function Login(props) {
             <div className='bg'>
               <div className='bg-inner'></div>
             </div>
-            <div className='text'>
-              Log In
-            </div>
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column", textAlign: "center" }}>
+            <button className='btn block-cube block-cube-hover' 
+                    type='submit' style={{ cursor: 'pointer' }}>
+              <div className='bg-top'>
+                <div className='bg-inner'></div>
+              </div>
+              <div className='bg-right'>
+                <div className='bg-inner'></div>
+              </div>
+              <div className='bg'>
+                <div className='bg-inner'></div>
+              </div>
+              <div className='text'>
+                Log In
+              </div>
             </button>
-            <div>
-            <p className="checker" style={{color:"white"}}>{passwordParams.userOrPassWrong}</p>
-            <Link  to="/register" style={{color:"white",textDecoration:"none",padding:"30px"}} lassName='btn block-cube block-cube-hover' type='button'>
+          </div>
+
+          <Link to="/register" style={{ color: "white", textDecoration: "none", padding: "30px" }}
+                className='btn block-cube block-cube-hover' type='button'>
             <div className='text'>
               Don't have Account? Register
             </div>
-            </Link>
-            </div>
-
-            </div>
-      </Form>
-
+          </Link>
+        </form>
+      </FormStyle>
     </>
   )
 }

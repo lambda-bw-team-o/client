@@ -1,34 +1,30 @@
 import React, { useState, useEffect } from 'react';
-
 import { NavLink, Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Nav = styled.nav`
-display:flex;
-flex-direction: row-gap;
-color:gold;
-justify-content: space-around;
-align-items:center;
+  display: flex;
+  flex-direction: row-gap;
+  color: gold;
+  justify-content: space-around;
+  align-items: center;
 
-.activeNavButton {
-  border-bottom: 3px gold solid;
-}
-
-}
-.nav-block{
-display:flex;
-flex-direction:row;
-justify-content:space-around;
-.nav-link{
-  color:white;
-  text-decoration:none;
-  margin: 0 20px;
-&.nav-link:hover{
-  color:yellow;
-}
-}
-}
-
+  .activeNavButton {
+    border-bottom: 3px gold solid;
+  }
+  .nav-block {
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+      .nav-link {
+        color:white;
+        text-decoration:none;
+        margin: 0 20px;
+      &.nav-link:hover {
+        color:yellow;
+      }
+    }
+  }
 `
 
 const NavBar = () => {

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from '../components/NavBar';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 
-const Form = styled.div`
+const FormStyle = styled.div`
  width: 300px;
   padding: 64px 15px 24px;
   margin: 0 auto;
@@ -158,40 +158,46 @@ const Form = styled.div`
 const Registration = (props) => {
   const [credentials, setCredentials] = useState({    
     username: '',
+    email: '',
     password1: '',
-    password2:''
+    password2: '',
+  })
+  const [passwordParams, setPasswordParams] = useState({
+    passwordTooShort: '',
+    passwordNotUnique: '',
+    passwordsDontMatch: '',
+  })
 
-  })
-  const[passwordParams, setPasswordParams]= useState({
-    passwordTooShort:"",
-    passwordNotUnique:"",
-    passwordsDontMatch:"",
-  })
+  useEffect(() => {
+    let token = localStorage.getItem('token');
+    if (token) props.history.push('/game');
+  }, [props.history])
 
   const handleChange = name => event => {
     setCredentials({ ...credentials, [name]: event.target.value });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     let parcel = credentials;
-    console.log(parcel.password1.length)
-    if(parcel.password1 === parcel.password2 && 
-      parcel.password1.length >= 8 && 
-      parcel.password2.length >= 8
-      
-      ){
+
+    if (parcel.password1 === parcel.password2 && 
+        parcel.password1.length >= 8 && 
+        parcel.password2.length >= 8) {
+
       axios.post('https://team-o.herokuapp.com/api/registration/', parcel)
-      .then(res => {
-        console.log(res)
-        localStorage.setItem("token", res.data.key);
-        props.history.push('/game')
-      })
-      .catch(error => {
-        setPasswordParams({
-          passwordNotUnique:"Try something a little harder to guess.",
-      })
-      })
-    }else if (parcel.password1.length < 8 || parcel.password2.length < 8){
+        .then(res => {
+          console.log('REGISTER', res)
+          localStorage.setItem("register", JSON.stringify(res))
+          localStorage.setItem("token", res.data.key);
+          props.history.push('/game')
+        })
+        .catch(error => {
+          setPasswordParams({
+            passwordNotUnique:"Try something a little harder to guess.",
+          })
+        })
+    } else if (parcel.password1.length < 8 || parcel.password2.length < 8) {
       setPasswordParams({
         passwordTooShort:"Error password too short! Needs to be at least 8 characters.",
     })
@@ -199,22 +205,23 @@ const Registration = (props) => {
     else if (parcel.password1 !== parcel.password2){
       setPasswordParams({
         passwordsDontMatch:"Passwords Dont Match",
-    })
+      })
     }
-
   }
        
   return (
     <>
       <NavBar />
-        <Form  >
+      <FormStyle>
+        <form onSubmit={handleSubmit}>
           <div className='control'>
             <h1 style={{color:"white"}}>
               Register
             </h1>
           </div>
+
           <div className='control block-cube block-input'>
-            <input autocomplete="off" name='username'  placeholder="username" required id="username" value={credentials.username} onChange={handleChange("username")} type="text"/>
+            <input autoComplete="off" name='username'  placeholder="username" required id="username" value={credentials.username} onChange={handleChange("username")} type="text"/>
             <div className='bg-top'>
               <div className='bg-inner'></div>
             </div>
@@ -225,8 +232,9 @@ const Registration = (props) => {
               <div className='bg-inner'></div>
             </div>
           </div>
+
           <div className='control block-cube block-input'>
-            <input  autocomplete="off" name='password1'  placeholder="password" required id="password"  value={credentials.password1} onChange={handleChange("password1")} type='password'/>
+            <input autoComplete="off" name='email'  placeholder="email" required id="email" value={credentials.email} onChange={handleChange("email")} type="email"/>
             <div className='bg-top'>
               <div className='bg-inner'></div>
             </div>
@@ -237,11 +245,27 @@ const Registration = (props) => {
               <div className='bg-inner'></div>
             </div>
           </div>
+
+          <div className='control block-cube block-input'>
+            <input  autoComplete="off" name='password1'  placeholder="password" required id="password1"  value={credentials.password1} onChange={handleChange("password1")} type='password'/>
+            <div className='bg-top'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg-right'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg'>
+              <div className='bg-inner'></div>
+            </div>
+          </div>
+
           <div  style={{marginBottom:"20px"}} >
-          {(credentials.password1.length >= 8) ? "":<p className="checker" style={{color:"white"}}>{passwordParams.passwordTooShort}</p>}
+            {(credentials.password1.length >= 8) ? "":<p className="checker" style={{color:"white"}}>{passwordParams.passwordTooShort}</p>}
           </div>
+         
+
           <div className='control block-cube block-input'>
-            <input autocomplete="off" name='password2'  placeholder="password-verification" required id="password"  value={credentials.password2} onChange={handleChange("password2")} type='password' />
+            <input autoComplete="off" name='password2'  placeholder="password-verification" required id="password2"  value={credentials.password2} onChange={handleChange("password2")} type='password' />
             <div className='bg-top'>
               <div className='bg-inner'></div>
             </div>
@@ -252,36 +276,40 @@ const Registration = (props) => {
               <div className='bg-inner'></div>
             </div>
           </div>
-          <div  style={{marginBottom:"20px"}} >
-          {(credentials.password2.length >= 8) ? "":<p className="checker" style={{color:"white"}}>{passwordParams.passwordTooShort}</p>}
+
+          <div style={{marginBottom:"20px"}} >
+            {(credentials.password2.length >= 8) ? "":<p className="checker" style={{color: "white"}}>{passwordParams.passwordTooShort}</p>}
           </div>
-          <div style={{display:"flex",flexDirection:"column",textAlign:"center", cursor: "pointer"}}>
-          <button  onClick={handleSubmit} className='btn block-cube block-cube-hover' type='button' style={{ cursor: "pointer"}}>
-            <div className='bg-top'>
-              <div className='bg-inner'></div>
-            </div>
-            <div className='bg-right'>
-              <div className='bg-inner'></div>
-            </div>
-            <div className='bg'>
-              <div className='bg-inner'></div>
-            </div>
-            <div className='text'>
-              Register
-            </div>
+
+          <div style={{display: "flex", flexDirection: "column", textAlign: "center"}}>
+            <button className='btn block-cube block-cube-hover' 
+                    type='submit' style={{ cursor: 'pointer' }}>
+              <div className='bg-top'>
+                <div className='bg-inner'></div>
+              </div>
+              <div className='bg-right'>
+                <div className='bg-inner'></div>
+              </div>
+              <div className='bg'>
+                <div className='bg-inner'></div>
+              </div>
+              <div className='text'>
+                Register
+              </div>
             </button>
-            <div>
-            {(credentials.password1 !== credentials.password2) ? <p className="checker" style={{color:"white"}}>{passwordParams.passwordsDontMatch}</p>: ""}
-            <p className="checker" style={{color:"white"}}>{passwordParams.passwordNotUnique}</p>
-            <Link  to="/login" style={{color:"white",textDecoration:"none",padding:"30px"}} lassName='btn block-cube block-cube-hover' type='button'>
-            <div className='text'>
-             Already have an account? Login
-            </div>
-            </Link>
-            </div>
           </div>
-          
-      </Form>
+
+          {(credentials.password1 !== credentials.password2) ? <p className="checker" style={{color:"white"}}>{passwordParams.passwordsDontMatch}</p>: ""}
+          <p className="checker" style={{color:"white"}}>{passwordParams.passwordNotUnique}</p>
+          <Link  to="/login" style={{color:"white",textDecoration:"none",padding:"30px"}} className='btn block-cube block-cube-hover' type='button'>
+            <div className='text'>
+               Have an account? Login
+            </div>
+          </Link>
+
+        </form>
+       
+      </FormStyle>
     </>
   )
 }

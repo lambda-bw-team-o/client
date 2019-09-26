@@ -3,180 +3,131 @@ import Row from '../styles/Row';
 import Column from '../styles/Column';
 import GridSquare from '../styles/GridSquare';
 import BlankSquare from '../styles/BlankSquare';
-import FloorTile from '../assets/images/interface/health.png';
+import axios from 'axios';
 
 function Map(props) {
-  const [tiles, setTiles] = useState([[]])
+  const [grid, setGrid] = useState([])
 
   useEffect(() => {
-    let images = []
+    const token = localStorage.getItem('token')
+    const storedData = localStorage.getItem('data')
 
-    for (let i = 0; i < 10; i++) {
-      images[i] = []
-      for (let j = 0; j < 10; j++) {
-        images[i].push(<img src={FloorTile} width="25px" height="25px" alt="Game Tile" style={{ margin: '10px' }}></img>)
+    if (storedData) {
+      const data = JSON.parse(storedData)
+
+      const room_matrix = []
+      for (let i = 0; i < data.grid.height; i++) {
+        room_matrix.push(new Array(data.grid.width))
       }
-      images[i].push(<br/>)
-    }
+      const rooms = data.rooms
+      for (let i = 0; i < rooms.length; i++) {
+        room_matrix[rooms[i].x][rooms[i].y] = rooms[i]
+      }
 
-    setTiles(images)
+      let rows = []
+      for (let i = 0; i < data.grid.height + 1; i++) {
+        if (i === 0) {
+          /**
+           * Build top row
+           */
+
+          let columns = []
+          
+          for (let j = 0; j < data.grid.width + 1; j++) {
+            if (j === 0) {
+              columns.push(<Column key={`${i}-${j}`} width={0.5}><BlankSquare blank={true}></BlankSquare></Column>)
+            } else {
+              columns.push(<Column key={`${i}-${j}`} width={0.5}><GridSquare heading={true}>{j}</GridSquare></Column>)
+            }
+          }
+          
+          rows.push(
+            <Row style={{ justifyContent: 'center', paddingTop: '15px' }}>
+              {columns}
+            </Row>
+          )
+        } else if (i === data.grid.height) {
+          /**
+           * Build last row
+           */
+
+          let columns = []
+          
+          for (let j = 0; j < data.grid.width + 1; j++) {
+            if (j === 0) {
+              columns.push(<Column key={`${i}-${j}`} width={0.5}><GridSquare heading={true}>{String.fromCodePoint(65 + i - 1)}</GridSquare></Column>)
+            } else {
+              columns.push(
+                <Column key={`${i}-${j}`} width={0.5}>
+                  <GridSquare>{room_matrix[i-1][j-1] ? room_matrix[i-1][j-1].id : ''}</GridSquare>
+                </Column>
+              )
+            }
+          }
+          
+          rows.push(
+            <Row style={{ justifyContent: 'center', paddingBottom: '15px' }}>
+              {columns}
+            </Row>
+          )
+        } else {
+          /**
+           * Build middle rows
+           */
+          
+          let columns = []
+          
+          for (let j = 0; j < data.grid.width + 1; j++) {
+            if (j === 0) {
+              columns.push(<Column key={`${i}-${j}`} width={0.5}><GridSquare heading={true}>{String.fromCodePoint(65 + i - 1)}</GridSquare></Column>)
+            } else {
+              /**
+               * Display user's current location
+               */
+
+              if (room_matrix[i-1][j-1] && room_matrix[i-1][j-1].id === 1) { // TODO update check to use player reference
+                columns.push(
+                  <Column key={`${i}-${j}`} width={0.5}>
+                    <GridSquare isHere={true}>{room_matrix[i - 1][j - 1] ? room_matrix[i - 1][j - 1].id : ''}</GridSquare>
+                  </Column>
+                )
+              } else {
+                columns.push(
+                  <Column key={`${i}-${j}`} width={0.5}>
+                    <GridSquare>{room_matrix[i - 1][j - 1] ? room_matrix[i - 1][j - 1].id : ''}</GridSquare>
+                  </Column>
+                )
+              }
+            }
+          }
+
+          rows.push(
+            <Row style={{ justifyContent: 'center' }}>
+              {columns}
+            </Row>
+          )
+        }        
+      }
+      setGrid(rows)
+    } else {
+      axios.get('https://team-o.herokuapp.com/api/adv/rooms', { headers: { "Authorization": `Bearer ${token}` } })
+        .then(res => {
+          localStorage.setItem('data', JSON.stringify(res.data))
+        })
+        .catch(error => {
+          console.error(error);
+        })
+    }
   }, [])
 
+  useEffect(() => {
+    console.log(`Move to ${props.playerCoord}`)
+  }, [props.playerCoord])
+
+  // <div style = {{ backgroundImage: `url(${require(`../assets/images/backgrounds/${props.backgroundIndex}.jpg`)})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }
   return (
-    <div style={{ backgroundImage: `url(${require(`../assets/images/backgrounds/${props.backgroundIndex}.jpg`)})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center'}}>
-      <Row style={{ justifyContent: 'center', paddingTop: '15px' }}>
-        <Column width={0.5}><BlankSquare blank={true}></BlankSquare></Column>
-        <Column width={0.5}><GridSquare heading={true}>1</GridSquare></Column>
-        <Column width={0.5}><GridSquare heading={true}>2</GridSquare></Column>
-        <Column width={0.5}><GridSquare heading={true}>3</GridSquare></Column>
-        <Column width={0.5}><GridSquare heading={true}>4</GridSquare></Column>
-        <Column width={0.5}><GridSquare heading={true}>5</GridSquare></Column>
-        <Column width={0.5}><GridSquare heading={true}>6</GridSquare></Column>
-        <Column width={0.5}><GridSquare heading={true}>7</GridSquare></Column>
-        <Column width={0.5}><GridSquare heading={true}>8</GridSquare></Column>
-        <Column width={0.5}><GridSquare heading={true}>9</GridSquare></Column>
-        <Column width={0.5}><GridSquare heading={true}>10</GridSquare></Column>
-      </Row>
-
-      <Row style={{ justifyContent: 'center' }}>
-        <Column width={0.5}><GridSquare heading={true}>A</GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-      </Row>
-
-      <Row style={{ justifyContent: 'center' }}>
-        <Column width={0.5}><GridSquare heading={true}>B</GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-      </Row>
-
-      <Row style={{ justifyContent: 'center' }}>
-        <Column width={0.5}><GridSquare heading={true}>C</GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-      </Row>
-
-      <Row style={{ justifyContent: 'center' }}>
-        <Column width={0.5}><GridSquare heading={true}>D</GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-      </Row>
-
-      <Row style={{ justifyContent: 'center' }}>
-        <Column width={0.5}><GridSquare heading={true}>E</GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-      </Row>
-
-      <Row style={{ justifyContent: 'center' }}>
-        <Column width={0.5}><GridSquare heading={true}>F</GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-      </Row>
-
-      <Row style={{ justifyContent: 'center' }}>
-        <Column width={0.5}><GridSquare heading={true}>G</GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-      </Row>
-
-      <Row style={{ justifyContent: 'center' }}>
-        <Column width={0.5}><GridSquare heading={true}>H</GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-      </Row>
-
-      <Row style={{ justifyContent: 'center' }}>
-        <Column width={0.5}><GridSquare heading={true}>I</GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-      </Row>
-
-      <Row style={{ justifyContent: 'center', paddingBottom: '15px' }}>
-        <Column width={0.5}><GridSquare heading={true}>J</GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-        <Column width={0.5}><GridSquare></GridSquare></Column>
-      </Row>
+    <div>
+      {grid}
     </div>
   )
 }

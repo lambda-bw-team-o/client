@@ -82,6 +82,8 @@
 .go:hover{
   color:gold;
   border: 3px solid gold;
+  box-shadow: 10px 10px 100px black ;
+  transition: box-shadow .3s ease-in-out;
 }
 
 

@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import NavBar from '../components/NavBar';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import Column from '../styles/Column';
 
-const Landing = () => {
+const Landing = (props) => {
+  useEffect(() => {
+    let token = localStorage.getItem('token');
+    if (token) props.history.push('/game');
+  }, [])
+
   return (
     <>
       <div className="body">
