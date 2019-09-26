@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NavBar from '../components/NavBar';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'
-import axios from 'axios';
+import axios from '../helpers/axiosWithAuth';
 
 const FormStyle = styled.div`
  width: 300px;
@@ -177,7 +177,7 @@ const Registration = (props) => {
         parcel.password1.length >= 8 && 
         parcel.password2.length >= 8) {
 
-      axios.post('https://team-o.herokuapp.com/api/registration/', parcel)
+      axios().post('https://team-o.herokuapp.com/api/registration/', parcel)
         .then(res => {
           console.log('REGISTER', res)
           localStorage.setItem("register", JSON.stringify(res))
