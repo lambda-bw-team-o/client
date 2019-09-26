@@ -156,7 +156,7 @@ const About = (props) => {
                 <div className='bg'>
                   <div className='bg-inner'>
                     <h3>Andy Bettisworth</h3>
-                    <h4>Github<a href="google.com"> >></a></h4>
+                    <h4>Github<a href="https://github.com/wurde"> >></a></h4>
                   </div>
                 </div>
               </div>
@@ -176,7 +176,7 @@ const About = (props) => {
                 <div className='bg'>
                   <div className='bg-inner'>
                     <h3>Arron Marshall</h3>
-                    <h4>Github<a href="google.com"> >></a></h4>
+                    <h4>Github<a href="https://github.com/arronm"> >></a></h4>
                   </div>
                 </div>
               </div>
@@ -198,7 +198,7 @@ const About = (props) => {
                 <div className='bg'>
                   <div className='bg-inner'>
                     <h3>Josh Timmons</h3>
-                    <h4>Github<a href="google.com"> >></a></h4>                    
+                    <h4>Github<a href="https://github.com/josh182014"> >></a></h4>                    
                   </div>
                 </div>
               </div>
@@ -218,7 +218,7 @@ const About = (props) => {
                 <div className='bg'>
                   <div className='bg-inner'>
                     <h3>Rogelio Caballero </h3>
-                    <h4>Github<a  href="google.com"> >></a></h4>
+                    <h4>Github<a  href="https://github.com/rogercp"> >></a></h4>
                   </div>
                 </div>
               </div>
@@ -234,5 +234,6 @@ const About = (props) => {
     </Row>
   )
 }
+
   
 export default About;

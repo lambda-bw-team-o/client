@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import NavBar from '../components/NavBar';
 import { Link } from 'react-router-dom';
 import '../App.css';
+import Column from '../styles/Column';
 
 const Landing = (props) => {
   useEffect(() => {
@@ -12,22 +13,19 @@ const Landing = (props) => {
   return (
     <>
       <div className="body">
-        <div className="leftHalf"></div>
-        <div className="rightHalf"></div>
 
-        <div>
-          <NavBar />
+        <NavBar />
 
-          <div style={{ display: "flex",
-                justifyContent: "center",
-                alignTtems: "center",
-                marginTop: "203px" }}>             
-            <Link className="go" to="/login">
+        <div style={{display:"flex",flexDirection:"column", alignItems:"center",justifyContent:"center",height:"80vh"}}>
+              
+          <Link className="go" to="/login">
               EXPLORE
-            </Link>
-          </div> 
-        </div>
+          </Link>
+
+        </div> 
+
       </div>
+     
     </>
   )
 }

@@ -8,6 +8,18 @@ const FormStyle = styled.div`
  width: 300px;
   padding: 64px 15px 24px;
   margin: 0 auto;
+  .checker{
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 10px;
+    text-align:center;
+  }
+  h1{
+    font-weight: bold;
+    font-family: monospace;
+    text-align:center;
+  }
+  }
   
   .control {
     margin: 0 0 24px;
@@ -139,12 +151,15 @@ const FormStyle = styled.div`
     }
   }
 }
-
-  `;
+`;
 function Login(props) {
   const [credentials, setCredentials] = useState({    
     username: '',
     password: '',
+  })
+  
+  const[passwordParams, setPasswordParams]= useState({
+   userOrPassWrong:""
   })
 
   useEffect(() => {
@@ -168,7 +183,7 @@ function Login(props) {
         props.history.push('/game');
       })
       .catch(error => {
-        console.error(error);
+       setPasswordParams({userOrPassWrong:"User-Name or password not found."})
       })
   }
 
