@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react';
 import styled from "styled-components";
 import NavBar from '../components/NavBar';
 import { Link } from 'react-router-dom'
-import axios from '../helpers/axiosWithAuth';
+import axios from 'axios';
 
 const FormStyle = styled.div`
  width: 300px;
@@ -175,9 +175,8 @@ function Login(props) {
     e.preventDefault();
     let parcel = credentials;
 
-    axios().post('https://team-o.herokuapp.com/api/login/', parcel)
+    axios.post('https://team-o.herokuapp.com/api/login/', parcel)
       .then(res => {
-        console.log('LOGIN', res)
         localStorage.setItem("login", JSON.stringify(res))
         localStorage.setItem('token', res.data.key);
         props.history.push('/game');
