@@ -24,15 +24,19 @@ const Game = (props) => {
   useEffect(() => {
     const token = localStorage.getItem("token")
 
-    const fakeInitData = JSON.parse('{"uuid": "649a2994-b84c-4ad0-95f6-92fb0d04634e", "name": "fooosicle", "title": "Stiy", "description": "Stiy is an irradiated planet, with roaring nuclear wind", "players": ["testuser", "wurde", "test1", "arronm", "test2", "test22", "test24", "test26", "test23", "test30", "test50", "joe", "carol", "bob", "jac", "rogeret", "rogino", "foosicle", "dgdfgdfg", "test12345", "sdgsc", "rogerno", "sdfcsedfgwe", "gdsgvcxs", "sdagegxvedr", "Taz"]}')
-    // axios.get('https://team-o.herokuapp.com/api/adv/initialize', { headers: { "Authorization": `Bearer ${token}` } })
-    //   .then(res => {
-    //     console.log('init', res)
-    //   })
-    //   .catch(error => {
-    //     console.error('init', error);
-    //   })
+    // axios.get('https://team-o.herokuapp.com/api/adv/initialize', {
+    //   headers: { "Authorization": `Bearer ${token}`}
+    // }).then(res => {
+    //   console.log('init', res)
+    //   setPlayerName(res.data.name)
+    //   setPlayerRoomTitle(res.data.title)
+    //   setPlayerRoomDescription(res.data.description)
+    //   setRoomPlayers(res.data.players)
+    // }).catch(error => {
+    //   console.error(error);
+    // })
 
+    const fakeInitData = JSON.parse('{"uuid": "649a2994-b84c-4ad0-95f6-92fb0d04634e", "name": "fooosicle", "title": "Stiy", "description": "Stiy is an irradiated planet, with roaring nuclear wind", "players": ["testuser", "wurde", "test1", "arronm", "test2", "test22", "test24", "test26", "test23", "test30", "test50", "joe", "carol", "bob", "jac", "rogeret", "rogino", "foosicle", "dgdfgdfg", "test12345", "sdgsc", "rogerno", "sdfcsedfgwe", "gdsgvcxs", "sdagegxvedr", "Taz"]}')
     setPlayerName(fakeInitData.name)
     setPlayerRoomTitle(fakeInitData.title)
     setPlayerRoomDescription(fakeInitData.description)
