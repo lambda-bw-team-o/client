@@ -18,9 +18,10 @@ function Map(props) {
     } else {
       axios().get('https://team-o.herokuapp.com/api/adv/rooms')
         .then(res => {
-          localStorage.setItem('rooms', JSON.stringify(res.data))
-          const data = JSON.parse(res.data)
-          buildGrid(data)
+          localStorage.setItem('rooms', JSON.stringify(res.data));
+          window.location.reload();
+          // const data = JSON.parse(res.data)
+          // buildGrid(data)
         })
         .catch(error => {
           console.error(error);

@@ -179,7 +179,6 @@ const Registration = (props) => {
 
       axios().post('https://team-o.herokuapp.com/api/registration/', parcel)
         .then(res => {
-          console.log('REGISTER', res)
           localStorage.setItem("register", JSON.stringify(res))
           localStorage.setItem("token", res.data.key);
           props.history.push('/game')

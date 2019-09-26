@@ -162,7 +162,6 @@ function Login(props) {
 
     axios().post('https://team-o.herokuapp.com/api/login/', parcel)
       .then(res => {
-        console.log('LOGIN', res)
         localStorage.setItem("login", JSON.stringify(res))
         localStorage.setItem('token', res.data.key);
         props.history.push('/game');
