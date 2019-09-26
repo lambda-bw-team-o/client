@@ -47,7 +47,6 @@ function Feed(props) {
   return (
     <Row>
       <Column style={{ backgroundColor: '#333', height: '200px' }}>
-        <button onClick={() => addData("Hello")}>Hello</button>
         <DataFeed>
           {data}
           <Type strings={data} speed={40} />

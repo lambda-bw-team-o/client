@@ -1,7 +1,7 @@
 import Pusher from 'pusher-js';
 
-const socket = new Pusher('APP_KEY', {
-  cluster: 'APP_CLUSTER',
+const socket = new Pusher('6d34b01fb0271f6ffac1', {
+  cluster: 'us3',
 });
 
 function subsbcribeToChannel(channel) {
