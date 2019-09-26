@@ -65,33 +65,33 @@ const Game = (props) => {
   }
 
   return (
-    <>
-      <Theme>
-        <Container>
-          <Row>
-            <Column><InfoBar toggleMusic={toggleMusic} isPlaying={isPlaying} handleSignout={handleSignout} /></Column>
-          </Row>
+    <Theme>
+      <Container>
+        <Row>
+          <Column>
+            <InfoBar toggleMusic={toggleMusic} isPlaying={isPlaying} handleSignout={handleSignout} />
+          </Column>
+        </Row>
 
-          <Row>
-            <Column>
-              <Map backgroundIndex={backgroundIndex} playerCoord={playerCoord} />
-            </Column>
-          </Row>
+        <Row>
+          <Column>
+            <Map backgroundIndex={backgroundIndex} playerCoord={playerCoord} />
+          </Column>
+        </Row>
 
-          <Row>
-            <Column width={6}>
-              <Feed playerName={playerName} 
-                    playerRoomTitle={playerRoomTitle}
-                    playerRoomDescription={playerRoomDescription} 
-                    roomPlayers={roomPlayers} />
-            </Column>
-            <Column width={6}><Controls switchBackground={switchBackground} setPlayerCoord={setPlayerCoord} playerCoord={playerCoord} /></Column>
-          </Row>
-        </Container>
-      </Theme>
+        <Row>
+          <Column width={6}>
+            <Feed playerName={playerName} 
+                  playerRoomTitle={playerRoomTitle}
+                  playerRoomDescription={playerRoomDescription} 
+                  roomPlayers={roomPlayers} />
+          </Column>
+          <Column width={6}><Controls switchBackground={switchBackground} setPlayerCoord={setPlayerCoord} playerCoord={playerCoord} /></Column>
+        </Row>
+      </Container>
 
       <audio ref={audioRef} src={Arrival} loop={true} />
-    </>
+    </Theme>
   )
 }
 
