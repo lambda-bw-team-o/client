@@ -17,6 +17,10 @@ const GridSquare = styled.div`
   'padding: 3px;' : ''}
   ${props => props.heading ? '' :
   'box-shadow: 0 0 8px blue;'}
+  ${props => props.isHere ? 
+  'background-color: gold;' : ''}
+  ${props => props.isHere ?
+  'color: black;' : ''}
 `
 
 export default GridSquare;

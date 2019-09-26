@@ -81,11 +81,23 @@ function Map(props) {
             if (j === 0) {
               columns.push(<Column key={`${i}-${j}`} width={0.5}><GridSquare heading={true}>{String.fromCodePoint(65 + i - 1)}</GridSquare></Column>)
             } else {
-              columns.push(
-                <Column key={`${i}-${j}`} width={0.5}>
-                  <GridSquare>{room_matrix[i-1][j-1] ? room_matrix[i-1][j-1].id : ''}</GridSquare>
-                </Column>
-              )
+              /**
+               * Display user's current location
+               */
+
+              if (room_matrix[i-1][j-1] && room_matrix[i-1][j-1].id === 1) { // TODO update check to use player reference
+                columns.push(
+                  <Column key={`${i}-${j}`} width={0.5}>
+                    <GridSquare isHere={true}>{room_matrix[i - 1][j - 1] ? room_matrix[i - 1][j - 1].id : ''}</GridSquare>
+                  </Column>
+                )
+              } else {
+                columns.push(
+                  <Column key={`${i}-${j}`} width={0.5}>
+                    <GridSquare>{room_matrix[i - 1][j - 1] ? room_matrix[i - 1][j - 1].id : ''}</GridSquare>
+                  </Column>
+                )
+              }
             }
           }
 
