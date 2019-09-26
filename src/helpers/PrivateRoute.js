@@ -2,8 +2,8 @@
  * Dependencies
  */
 
-import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
 
 /**
  * Define route component
@@ -27,4 +27,4 @@ const PrivateRoute = ({ component: Component, exact: is_exact, path }) => {
  * Export route component
  */
 
-export default PrivateRoute
+export default PrivateRoute;
