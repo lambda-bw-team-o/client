@@ -51,7 +51,6 @@ const NavBar = () => {
      
       {(loggedIn) ?
         <ul className="nav-block">
-
           <NavLink activeClassName="activeNavButton" className="nav-link" to="/game">Game</NavLink>
           <NavLink  activeClassName="activeNavButton" className="nav-link" to="/about">About</NavLink>
           <NavLink className="nav-link"  onClick={logOut} to="/">Logout</NavLink>

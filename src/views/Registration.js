@@ -14,6 +14,11 @@ const Form = styled.div`
     font-size: 10px;
     text-align:center;
   }
+  h1{
+    font-weight: bold;
+    font-family: monospace;
+    text-align:center;
+  }
   .control {
     margin: 0 0 24px;
     input {
@@ -201,8 +206,8 @@ const Registration = (props) => {
        
   return (
     <>
-        <NavBar />
-          <Form  >
+      <NavBar />
+        <Form  >
           <div className='control'>
             <h1 style={{color:"white"}}>
               Register
@@ -276,8 +281,8 @@ const Registration = (props) => {
             </div>
           </div>
           
-          </Form>
-      </>
+      </Form>
+    </>
   )
 }
   

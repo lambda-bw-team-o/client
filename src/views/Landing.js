@@ -9,26 +9,19 @@ const Landing = () => {
     <>
       <div className="body">
 
-      {/* <div className="leftHalf" ></div>
+        <NavBar />
 
-      <div className="rightHalf"></div> */}
-          
-          
-            <NavBar />
+        <div style={{display:"flex",flexDirection:"column", alignItems:"center",justifyContent:"center",height:"80vh"}}>
+              
+          <Link className="go" to="/login">
+              EXPLORE
+          </Link>
 
-            <div style={{display:"flex",flexDirection:"column", alignItems:"center",justifyContent:"center",height:"80vh"}}>
-             
-              <Link className="go" to="/login">
-                          EXPLORE
-                  </Link>
+        </div> 
 
-            </div> 
-
-          </div>
+      </div>
      
-
-
-</>
+    </>
   )
 }
 

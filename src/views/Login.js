@@ -14,6 +14,12 @@ const Form = styled.form`
     font-size: 10px;
     text-align:center;
   }
+  h1{
+    font-weight: bold;
+    font-family: monospace;
+    text-align:center;
+  }
+  }
   
   .control {
     margin: 0 0 24px;
@@ -170,15 +176,14 @@ function Login(props) {
         props.history.push('/game')
       })
       .catch(error => {
-       setPasswordParams({userOrPassWrong:"User-name or password not found."})
+       setPasswordParams({userOrPassWrong:"User-Name or password not found."})
       })
   }
 
   return (
-    
     <>
-        <NavBar/>
-          <Form  autocomplete="off" >
+      <NavBar/>
+      <Form  autocomplete="off" >
           <div className='control'>
             <h1 style={{color:"white"}}>
               Sign In
@@ -210,8 +215,6 @@ function Login(props) {
             </div>
           </div>
 
-          
-
           <div style={{display:"flex",flexDirection:"column",textAlign:"center"}}>
           <button  onClick={handleSubmit} className='btn block-cube block-cube-hover' type='button' style={{ cursor: "pointer"}}>
             <div className='bg-top'>
@@ -237,9 +240,9 @@ function Login(props) {
             </div>
 
             </div>
-          </Form>
+      </Form>
 
-  </>
+    </>
   )
 }
 
