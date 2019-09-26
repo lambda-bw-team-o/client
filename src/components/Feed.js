@@ -37,17 +37,20 @@ function Feed() {
     // });
   }, [])
 
-  function addInitData(name, title, description, players) {
-    addData(`All systems ready captain <b>${name}</b>!`)
-    addData(`Our current location is <b>${title}</b>.`)
-    addData(`${description}.`)
+  const addInitData = (name, title, description, players) => {
+    const init = []
+    
+    init.push(<p key='init-0'>All systems ready captain <b>{name}</b>!</p>)
+    init.push(<p key='init-1'>Our current location is <b>{title}</b>.</p>)
+    init.push(<p key='init-2'>{description}</p>)
     if (players && players.length > 0) {
-      addData(`We've detected ${players.length} other ships in this area. Their call signs are: <b>${players.join(', ')}</b>`)
+      init.push(<p key='init-3'>We've detected {players.length} other ships in this area. Their call signs are: <b>{players.join(', ')}</b></p>)
     }
+    addData(init)
   }
-
-  function addData(message) {
-    setData(data.concat(<p key={data.length}>{message}</p>))
+  
+  const addData = (message) => {
+    setData(data.concat(message))
   }
   
   return (
