@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from "styled-components";
 import NavBar from '../components/NavBar';
-
-
+import Row from '../styles/Row';
+import Column from '../styles/Column';
 
 const Block = styled.div`
-  max-width: 350px;
+  max-width: 550px;
   /* padding: 64px 15px 24px; */
   margin: 0 auto;
 
-  .checker{
+  .checker {
     font-weight: bold;
     font-family: monospace;
     font-size: 10px;
@@ -17,9 +17,8 @@ const Block = styled.div`
   }
   .control {
     margin: 0 0 24px;
-    a{
+    a {
         margin-left:40%;
-       
     }
     .outer {
       height:150px;
@@ -29,13 +28,14 @@ const Block = styled.div`
       color: #fff;
       font-family: monospace, serif;
       letter-spacing: 0.05em;
-      font-size: 16px;
-      
+      font-size: 16px;      
     }
   }
   
-  .block-cube {
+.block-cube {
   position: relative;
+  margin: 20px;
+
   .bg-top {
     position: absolute;
     height: 10px;
@@ -104,125 +104,135 @@ const Block = styled.div`
     z-index: 2;
   }  
     
-    .bg-top,
-    .bg-right,
-    .bg {
-      background: rgba(255, 255, 255, 0.5);
-    }
-    
+  .bg-top,
+  .bg-right,
+  .bg {
+    background: rgba(255, 255, 255, 0.5);
+  }    
 }
 `;
 
-
-
-const About = () => {
+const About = (props) => {
+  useEffect(() => {
+    let token = localStorage.getItem('token');
+    if (token) props.history.push('/game');
+  }, [props.history])
   
   return (
-      <>
+    <Row>
+      <Column>
         <NavBar/>
+
         <h1 style={{textAlign:"center",color:"white"}}>About</h1>
-        <div style={{textAlign:"center",color:"white",margin:"0 auto",width:"80%",maxWidth:"700px"}} >
-        <div style={{}}>
-        <h2 style={{textAlign:"center",color:"white"}}>How To Play</h2>
-        <p style={{textAlign:"center",color:"white"}}> LoremLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-        Why do we use it
-        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-        </p>
-        </div>
-    </div>
-      <Block>
-       
-    <div>
-    <h2 style={{textAlign:"center",color:"white"}}>Developers</h2>
-        <div className='control block-cube block-input'>
-            <div className="outer"></div>
-          
-            <div className='bg-top'>
-              <div className='bg-inner'></div>
-            </div>
-            <div className='bg-right'>
-              <div className='bg-inner'>  </div>
-            </div>
-            <div className='bg'>
-              <div className='bg-inner'>
-              
-              <h3>Andy Bettisworth</h3>
-              <h4>Github<a href="google.com"> >></a></h4>
-              
-              </div>
 
-            </div>
-        </div>
-    
-        <div className='control block-cube block-input'>
-            <div className="outer" ></div>
-            <div className='bg-top'>
-              <div className='bg-inner'></div>
-            </div>
-            <div className='bg-right'>
-              <div className='bg-inner'></div>
-            </div>
-            <div className='bg'>
-              <div className='bg-inner'>
-              
-              <h3>Arron Marshall</h3>
-              <h4>Github<a href="google.com"> >></a></h4>
+        <div style={{textAlign:"center",color:"white",margin:"0 auto",width:"80%",maxWidth:"700px"}}>
+          <p style={{textAlign:"center",color:"white"}}>
+            This is a celebration of space exploration. We salute explorers who dream of the final frontier.
+          </p>
 
-              </div>
-            </div>
-          </div>
-
-          </div>
-
-        <div>
-
-        <div className='control block-cube block-input'>
-            <div className="outer" ></div>
-            <div className='bg-top'>
-              <div className='bg-inner'></div>
-            </div>
-            <div className='bg-right'>
-              <div className='bg-inner'></div>
-            </div>
-            <div className='bg'>
-              <div className='bg-inner'>
-              
-              <h3>Josh Timmons</h3>
-              <h4>Github<a href="google.com"> >></a></h4>
-              
-              </div>
-            </div>
+          <p style={{ textAlign: "center", color: "white" }}>
+            As a player you navigate around an expansive procedurally generated map. Each map can have hundreds of locations. Images within the game are real photos from NASA.
+          </p>
         </div>
 
-        <div className='control block-cube block-input'>
-            <div className="outer" ></div>
-            <div className='bg-top'>
-              <div className='bg-inner'></div>
-            </div>
-            <div className='bg-right'>
-              <div className='bg-inner'></div>
-            </div>
-            <div className='bg'>
-              <div className='bg-inner'>
+        <Block> 
+          <Row>
+            <Column>
+              <h2 style={{textAlign:"center",color:"white"}}>Developers</h2>
+            </Column>
+          </Row>
+
+          <Row>
+            <Column width={6}>
+              <div className='control block-cube block-input'>
+                <div className="outer"></div>
               
-              <h3>Rogelio Caballero </h3>
-              <h4>Github<a  href="google.com"> >></a></h4>
+                <div className='bg-top'>
+                  <div className='bg-inner'></div>
+                </div>
+                <div className='bg-right'>
+                  <div className='bg-inner'>  </div>
+                </div>
+                <div className='bg'>
+                  <div className='bg-inner'>
+                    <h3>Andy Bettisworth</h3>
+                    <h4>Github<a href="google.com"> >></a></h4>
+                  </div>
+                </div>
               </div>
-            </div>
-        </div>
+            </Column>
+      
+            <Column width={6}>
+              <div className='control block-cube block-input'>
+                <div className="outer" ></div>
 
-      </div>
-    </Block>
+                <div className='bg-top'>
+                  <div className='bg-inner'></div>
+                </div>
+                <div className='bg-right'>
+                  <div className='bg-inner'></div>
+                </div>
 
+                <div className='bg'>
+                  <div className='bg-inner'>
+                    <h3>Arron Marshall</h3>
+                    <h4>Github<a href="google.com"> >></a></h4>
+                  </div>
+                </div>
+              </div>
+            </Column>
+          </Row>
+
+          <Row>
+            <Column width={6}>
+              <div className='control block-cube block-input'>
+                <div className="outer" ></div>
+
+                <div className='bg-top'>
+                  <div className='bg-inner'></div>
+                </div>
+                <div className='bg-right'>
+                  <div className='bg-inner'></div>
+                </div>
+
+                <div className='bg'>
+                  <div className='bg-inner'>
+                    <h3>Josh Timmons</h3>
+                    <h4>Github<a href="google.com"> >></a></h4>                    
+                  </div>
+                </div>
+              </div>
+            </Column>
+
+            <Column width={6}>
+              <div className='control block-cube block-input'>
+                <div className="outer" ></div>
+
+                <div className='bg-top'>
+                  <div className='bg-inner'></div>
+                </div>
+                <div className='bg-right'>
+                  <div className='bg-inner'></div>
+                </div>
+
+                <div className='bg'>
+                  <div className='bg-inner'>
+                    <h3>Rogelio Caballero </h3>
+                    <h4>Github<a  href="google.com"> >></a></h4>
+                  </div>
+                </div>
+              </div>
+            </Column>
+          </Row>
+        </Block>
    
-         <p style={{textAlign:"center"}}>
-         <a style={{textDecoration:"none",color:"white"}}href="https://github.com/lambda-bw-team-o"><img src="https://image.flaticon.com/icons/png/512/25/25231.png" width="60px" height="60px" alt="GitHub Logo"/></a>
-         <h4><a style={{textDecoration:"none",color:"white"}}href="https://github.com/lambda-bw-team-o">Open Source on GitHub</a></h4>
-         </p> 
+        <p style={{textAlign:"center"}}>
+          <a style={{textDecoration:"none",color:"white"}}href="https://github.com/lambda-bw-team-o"><img src="https://image.flaticon.com/icons/png/512/25/25231.png" width="60px" height="60px" alt="GitHub Logo"/></a>
+          <h4><a style={{textDecoration:"none",color:"white"}}href="https://github.com/lambda-bw-team-o">Open Source on GitHub</a></h4>
+        </p>
+      </Column>
+    </Row>
+  )
+}
   
-   </>
-            
-    )
-  }
-  
-  export default About;
+export default About;
