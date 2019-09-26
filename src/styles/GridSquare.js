@@ -6,9 +6,9 @@ const GridSquare = styled.div`
   align-items: center;
   margin-left: -3px;
   margin-top: -3px;
-  min-width: 40px;
-  min-height: 40px;
-  font-size: 24px;
+  min-width: 25px;
+  min-height: 25px;
+  font-size: 14px;
   background-color: rgba(0, 0, 0, .5);
 
   ${props => props.heading ? '' : 

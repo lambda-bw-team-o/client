@@ -11,7 +11,7 @@ import NavBar from '../components/NavBar';
 import Arrival from '../assets/audio/arrival-audio.mp3';
 import axios from 'axios';
 
-const Game = () => {
+const Game = (props) => {
   const [backgroundIndex, setBackgroundIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const [playerName, setPlayerName] = useState(null)
@@ -54,12 +54,20 @@ const Game = () => {
     }
   }
 
+  function handleSignout() {
+    const yes = window.confirm('Are you sure you want to resign?')
+    if (yes) {
+      localStorage.removeItem("token")
+      props.history.push('/login')
+    }
+  }
+
   return (
     <>
       <Theme>
         <Container>
           <Row>
-            <Column><InfoBar toggleMusic={toggleMusic} isPlaying={isPlaying} /></Column>
+            <Column><InfoBar toggleMusic={toggleMusic} isPlaying={isPlaying} handleSignout={handleSignout} /></Column>
           </Row>
 
           <Row>
