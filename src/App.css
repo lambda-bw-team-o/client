@@ -31,45 +31,26 @@
     transform: rotate(360deg);
   }
 }
-/* .body{
-  background-image: url("./assets/landing-pic.jpg");
-  background-color:#212121;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  background-size: cover;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  display: block;
-  height:100vh;
-  z-index:1;
-} */
-
-
-.leftHalf {
-  background: url("./assets/landing-pic.jpg");
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  height: 50%;
-  position: absolute;
-  top: 0px;
-  width: 100%;
-  z-index: -1;
-}
-
-.rightHalf {
+.body{
   background: url("./assets/landing-pic.jpg");
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position:  center;
   background-size: cover;
-  height: 50%;
+  height: 100vh;
   position: absolute;
   bottom: 0px;
   width: 100%;
   z-index: 0;
+}
+
+
+.leftHalf {
+  
+}
+
+.rightHalf {
+ 
 }
 /* .rightHalf:hover {
   background: url("./assets/spaceship.jpg");
@@ -96,7 +77,7 @@
   font-size:20px;
   z-index:500;
   border: 3px solid white;
-  /* margin: 0px auto 0px auto; */
+  
 }
 .go:hover{
   color:gold;
