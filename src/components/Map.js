@@ -14,7 +14,15 @@ function Map(props) {
 
     if (storedData) {
       const data = JSON.parse(storedData)
-      console.log('data', data)
+
+      const room_matrix = []
+      for (let i = 0; i < data.grid.height; i++) {
+        room_matrix.push(new Array(data.grid.width))
+      }
+      const rooms = data.rooms
+      for (let i = 0; i < rooms.length; i++) {
+        room_matrix[rooms[i].x][rooms[i].y] = rooms[i]
+      }
 
       let rows = []
       for (let i = 0; i < data.grid.height + 1; i++) {
@@ -27,9 +35,9 @@ function Map(props) {
           
           for (let j = 0; j < data.grid.width + 1; j++) {
             if (j === 0) {
-              columns.push(<Column width={0.5}><BlankSquare blank={true}></BlankSquare></Column>)
+              columns.push(<Column key={`${i}-${j}`} width={0.5}><BlankSquare blank={true}></BlankSquare></Column>)
             } else {
-              columns.push(<Column width={0.5}><GridSquare heading={true}>{j}</GridSquare></Column>)
+              columns.push(<Column key={`${i}-${j}`} width={0.5}><GridSquare heading={true}>{j}</GridSquare></Column>)
             }
           }
           
@@ -47,9 +55,14 @@ function Map(props) {
           
           for (let j = 0; j < data.grid.width + 1; j++) {
             if (j === 0) {
-              columns.push(<Column width={0.5}><GridSquare heading={true}>{String.fromCodePoint(65 + i - 1)}</GridSquare></Column>)
+              columns.push(<Column key={`${i}-${j}`} width={0.5}><GridSquare heading={true}>{String.fromCodePoint(65 + i - 1)}</GridSquare></Column>)
             } else {
-              columns.push(<Column width={0.5}><GridSquare></GridSquare></Column>)
+              console.log(`${i}-${j}`)
+              columns.push(
+                <Column key={`${i}-${j}`} width={0.5}>
+                  <GridSquare>{room_matrix[i-1][j-1] ? room_matrix[i-1][j-1].id : ''}</GridSquare>
+                </Column>
+              )
             }
           }
           
@@ -62,14 +75,19 @@ function Map(props) {
           /**
            * Build middle rows
            */
-
+          
           let columns = []
           
           for (let j = 0; j < data.grid.width + 1; j++) {
             if (j === 0) {
-              columns.push(<Column width={0.5}><GridSquare heading={true}>{String.fromCodePoint(65 + i - 1)}</GridSquare></Column>)
+              columns.push(<Column key={`${i}-${j}`} width={0.5}><GridSquare heading={true}>{String.fromCodePoint(65 + i - 1)}</GridSquare></Column>)
             } else {
-              columns.push(<Column width={0.5}><GridSquare></GridSquare></Column>)
+              console.log(`${i}-${j}`)
+              columns.push(
+                <Column key={`${i}-${j}`} width={0.5}>
+                  <GridSquare>{room_matrix[i-1][j-1] ? room_matrix[i-1][j-1].id : ''}</GridSquare>
+                </Column>
+              )
             }
           }
 
@@ -81,17 +99,6 @@ function Map(props) {
         }        
       }
       setGrid(rows)
-
-      // TODO loop over rooms
-        // TODO assign room to it's matrix address x,y
-
-      // for (let i = 0; i < 10; i++) {
-      //   images[i] = []
-      //   for (let j = 0; j < 10; j++) {
-      //     images[i].push(<img src={FloorTile} width="25px" height="25px" alt="Game Tile" style={{ margin: '10px' }}></img>)
-      //   }
-      //   images[i].push(<br/>)
-      // }
     } else {
       axios.get('https://team-o.herokuapp.com/api/adv/rooms', { headers: { "Authorization": `Bearer ${token}` } })
         .then(res => {
