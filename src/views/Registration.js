@@ -14,6 +14,11 @@ const FormStyle = styled.div`
     font-size: 10px;
     text-align:center;
   }
+  h1{
+    font-weight: bold;
+    font-family: monospace;
+    text-align:center;
+  }
   .control {
     margin: 0 0 24px;
     input {
@@ -131,6 +136,7 @@ const FormStyle = styled.div`
         .bg-right,
         .bg {
           background: rgba(255, 255, 255, 0.8);
+         
           }
     }
   }
@@ -140,6 +146,8 @@ const FormStyle = styled.div`
     .bg {
       .bg-inner {
         top: 100%;
+       
+
       }
     }
   }
@@ -190,9 +198,10 @@ const Registration = (props) => {
         })
     } else if (parcel.password1.length < 8 || parcel.password2.length < 8) {
       setPasswordParams({
-        passwordTooShort:"Err password too short! needs to be at least 8 characters",
-      })
-    } else if (parcel.password1 !== parcel.password2) {
+        passwordTooShort:"Error password too short! Needs to be at least 8 characters.",
+    })
+    }
+    else if (parcel.password1 !== parcel.password2){
       setPasswordParams({
         passwordsDontMatch:"Passwords Dont Match",
       })
@@ -202,7 +211,6 @@ const Registration = (props) => {
   return (
     <>
       <NavBar />
-
       <FormStyle>
         <form onSubmit={handleSubmit}>
           <div className='control'>
@@ -253,6 +261,7 @@ const Registration = (props) => {
           <div  style={{marginBottom:"20px"}} >
             {(credentials.password1.length >= 8) ? "":<p className="checker" style={{color:"white"}}>{passwordParams.passwordTooShort}</p>}
           </div>
+         
 
           <div className='control block-cube block-input'>
             <input autoComplete="off" name='password2'  placeholder="password-verification" required id="password2"  value={credentials.password2} onChange={handleChange("password2")} type='password' />
@@ -267,7 +276,7 @@ const Registration = (props) => {
             </div>
           </div>
 
-          <div style={{marginBottom: "20px"}} >
+          <div style={{marginBottom:"20px"}} >
             {(credentials.password2.length >= 8) ? "":<p className="checker" style={{color: "white"}}>{passwordParams.passwordTooShort}</p>}
           </div>
 
@@ -293,10 +302,12 @@ const Registration = (props) => {
           <p className="checker" style={{color:"white"}}>{passwordParams.passwordNotUnique}</p>
           <Link  to="/login" style={{color:"white",textDecoration:"none",padding:"30px"}} className='btn block-cube block-cube-hover' type='button'>
             <div className='text'>
-              Already have an account? Login
+               Have an account? Login
             </div>
           </Link>
+
         </form>
+       
       </FormStyle>
     </>
   )
