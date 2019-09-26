@@ -150,6 +150,7 @@ const FormStyle = styled.div`
 const Registration = (props) => {
   const [credentials, setCredentials] = useState({    
     username: '',
+    email: '',
     password1: '',
     password2: '',
   })
@@ -212,7 +213,7 @@ const Registration = (props) => {
           </div>
 
           <div className='control block-cube block-input'>
-            <input autocomplete="off" name='username'  placeholder="username" required id="username" value={credentials.username} onChange={handleChange("username")} type="text"/>
+            <input autoComplete="off" name='username'  placeholder="username" required id="username" value={credentials.username} onChange={handleChange("username")} type="text"/>
             <div className='bg-top'>
               <div className='bg-inner'></div>
             </div>
@@ -225,7 +226,20 @@ const Registration = (props) => {
           </div>
 
           <div className='control block-cube block-input'>
-            <input  autocomplete="off" name='password1'  placeholder="password" required id="password1"  value={credentials.password1} onChange={handleChange("password1")} type='password'/>
+            <input autoComplete="off" name='email'  placeholder="email" required id="email" value={credentials.email} onChange={handleChange("email")} type="email"/>
+            <div className='bg-top'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg-right'>
+              <div className='bg-inner'></div>
+            </div>
+            <div className='bg'>
+              <div className='bg-inner'></div>
+            </div>
+          </div>
+
+          <div className='control block-cube block-input'>
+            <input  autoComplete="off" name='password1'  placeholder="password" required id="password1"  value={credentials.password1} onChange={handleChange("password1")} type='password'/>
             <div className='bg-top'>
               <div className='bg-inner'></div>
             </div>
@@ -242,7 +256,7 @@ const Registration = (props) => {
           </div>
 
           <div className='control block-cube block-input'>
-            <input autocomplete="off" name='password2'  placeholder="password-verification" required id="password2"  value={credentials.password2} onChange={handleChange("password2")} type='password' />
+            <input autoComplete="off" name='password2'  placeholder="password-verification" required id="password2"  value={credentials.password2} onChange={handleChange("password2")} type='password' />
             <div className='bg-top'>
               <div className='bg-inner'></div>
             </div>
@@ -278,7 +292,7 @@ const Registration = (props) => {
 
           {(credentials.password1 !== credentials.password2) ? <p className="checker" style={{color:"white"}}>{passwordParams.passwordsDontMatch}</p>: ""}
           <p className="checker" style={{color:"white"}}>{passwordParams.passwordNotUnique}</p>
-          <Link  to="/login" style={{color:"white",textDecoration:"none",padding:"30px"}} lassName='btn block-cube block-cube-hover' type='button'>
+          <Link  to="/login" style={{color:"white",textDecoration:"none",padding:"30px"}} className='btn block-cube block-cube-hover' type='button'>
             <div className='text'>
               Already have an account? Login
             </div>

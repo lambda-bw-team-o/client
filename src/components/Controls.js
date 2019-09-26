@@ -44,45 +44,45 @@ function Controls(props) {
       if (key === 37) {
         // Move Left
         setPressLeft(false)
-        // axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 'w' }, { headers: { "Authorization": `Bearer ${token}` } })
-        //   .then((res) => {
-        //     console.log('res', res)
-        //   }).catch((err) => {
-        //     console.error(err)
-        //   })
+        axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 'w' }, { headers: { "Authorization": `Bearer ${token}` } })
+          .then((res) => {
+            console.log('res', res)
+          }).catch((err) => {
+            console.error(err)
+          })
         switchBackground()
         props.setPlayerCoord([props.playerCoord[0] - 1, props.playerCoord[1]])
       } else if (key === 38) {
         // Move Up
         setPressUp(false)
-        // axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 'n' }, { headers: { "Authorization": `Bearer ${token}` } })
-        //   .then((res) => {
-        //     console.log('res', res)
-        //   }).catch((err) => {
-        //     console.error(err)
-        //   })
+        axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 'n' }, { headers: { "Authorization": `Bearer ${token}` } })
+          .then((res) => {
+            console.log('res', res)
+          }).catch((err) => {
+            console.error(err)
+          })
         switchBackground()
         props.setPlayerCoord([props.playerCoord[0], props.playerCoord[1] - 1])
       } else if (key === 39) {
         // Move Right
         setPressRight(false)
-        // axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 'e' }, { headers: { "Authorization": `Bearer ${token}` } })
-        //   .then((res) => {
-        //     console.log('res', res)
-        //   }).catch((err) => {
-        //     console.error(err)
-        //   })
+        axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 'e' }, { headers: { "Authorization": `Bearer ${token}` } })
+          .then((res) => {
+            console.log('res', res)
+          }).catch((err) => {
+            console.error(err)
+          })
         switchBackground()
         props.setPlayerCoord([props.playerCoord[0] + 1, props.playerCoord[1]])
       } else if (key === 40) {
         // Move Down
         setPressDown(false)
-        // axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 's' }, { headers: { "Authorization": `Bearer ${token}` } })
-        //   .then((res) => {
-        //     console.log('res', res)
-        //   }).catch((err) => {
-        //     console.error(err)
-        //   })
+        axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 's' }, { headers: { "Authorization": `Bearer ${token}` } })
+          .then((res) => {
+            console.log('res', res)
+          }).catch((err) => {
+            console.error(err)
+          })
         switchBackground()
         props.setPlayerCoord([props.playerCoord[0], props.playerCoord[1] + 1])
       }
@@ -91,28 +91,26 @@ function Controls(props) {
 
   const handleLeftArrow = () => {
     setPressLeft(true)
-    // axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 'w' }, { headers: { "Authorization": `Bearer ${token}` } })
-    //   .then((res) => {
-    //     console.log('res', res)
-    //   }).catch((err) => {
-    //     console.error(err)
-    //   })
+    axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 'w' }, { headers: { "Authorization": `Bearer ${token}` } })
+      .then((res) => {
+        console.log('res', res)
+      }).catch((err) => {
+        console.error(err)
+      })
     props.switchBackground()
     props.setPlayerCoord([props.playerCoord[0] - 1, props.playerCoord[1]])
     setTimeout(() => {
       setPressLeft(false)
     }, 100)
   }
-  // Access to XMLHttpRequest at 'https://team-o.herokuapp.com/api/adv/move' from origin 'http://localhost:3000' has been blocked by CORS policy: 
-  // No 'Access-Control-Allow-Origin' header is present on the requested resource.
   const handleUpArrow = () => {
     setPressUp(true)
-    // axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 'n' }, { headers: { "Authorization": `Bearer ${token}` } })
-    //   .then((res) => {
-    //     console.log('res', res)
-    //   }).catch((err) => {
-    //     console.error(err)
-    //   })
+    axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 'n' }, { headers: { "Authorization": `Bearer ${token}` } })
+      .then((res) => {
+        console.log('res', res)
+      }).catch((err) => {
+        console.error(err)
+      })
     props.switchBackground()
     props.setPlayerCoord([props.playerCoord[0], props.playerCoord[1] - 1])
     setTimeout(() => {
@@ -121,12 +119,12 @@ function Controls(props) {
   }
   const handleRightArrow = () => {
     setPressRight(true)
-    // axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 'e' }, { headers: { "Authorization": `Bearer ${token}` } })
-    //   .then((res) => {
-    //     console.log('res', res)
-    //   }).catch((err) => {
-    //     console.error(err)
-    //   })
+    axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 'e' }, { headers: { "Authorization": `Bearer ${token}` } })
+      .then((res) => {
+        console.log('res', res)
+      }).catch((err) => {
+        console.error(err)
+      })
     props.switchBackground()
     props.setPlayerCoord([props.playerCoord[0] + 1, props.playerCoord[1]])
     setTimeout(() => {
@@ -135,12 +133,12 @@ function Controls(props) {
   }
   const handleDownArrow = () => {
     setPressDown(true)
-    // axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 's' }, { headers: { "Authorization": `Bearer ${token}` } })
-    //   .then((res) => {
-    //     console.log('res', res)
-    //   }).catch((err) => {
-    //     console.error(err)
-    //   })
+    axios.post("https://team-o.herokuapp.com/api/adv/move", { direction: 's' }, { headers: { "Authorization": `Bearer ${token}` } })
+      .then((res) => {
+        console.log('res', res)
+      }).catch((err) => {
+        console.error(err)
+      })
     props.switchBackground()
     props.setPlayerCoord([props.playerCoord[0], props.playerCoord[1] + 1])
     setTimeout(() => {
