@@ -131,6 +131,7 @@ const Form = styled.div`
         .bg-right,
         .bg {
           background: rgba(255, 255, 255, 0.8);
+         
           }
     }
   }
@@ -140,6 +141,8 @@ const Form = styled.div`
     .bg {
       .bg-inner {
         top: 100%;
+       
+
       }
     }
   }
@@ -185,7 +188,7 @@ const Registration = (props) => {
       })
     }else if (parcel.password1.length < 8 || parcel.password2.length < 8){
       setPasswordParams({
-        passwordTooShort:"Err password too short! needs to be at least 8 characters",
+        passwordTooShort:"Error password too short! Needs to be at least 8 characters.",
     })
     }
     else if (parcel.password1 !== parcel.password2){
@@ -247,8 +250,8 @@ const Registration = (props) => {
           <div  style={{marginBottom:"20px"}} >
           {(credentials.password2.length >= 8) ? "":<p className="checker" style={{color:"white"}}>{passwordParams.passwordTooShort}</p>}
           </div>
-          <div style={{display:"flex",flexDirection:"column",textAlign:"center"}}>
-          <button  onClick={handleSubmit} className='btn block-cube block-cube-hover' type='button'>
+          <div style={{display:"flex",flexDirection:"column",textAlign:"center", cursor: "pointer"}}>
+          <button  onClick={handleSubmit} className='btn block-cube block-cube-hover' type='button' style={{ cursor: "pointer"}}>
             <div className='bg-top'>
               <div className='bg-inner'></div>
             </div>

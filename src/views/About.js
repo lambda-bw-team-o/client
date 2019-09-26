@@ -216,7 +216,7 @@ const About = () => {
 
    
          <p style={{textAlign:"center"}}>
-         <a style={{textDecoration:"none",color:"white"}}href="https://github.com/lambda-bw-team-o"><img src="https://image.flaticon.com/icons/png/512/25/25231.png" width="60px" height="60px" alt="GitHub Logo"/></a>
+         <a style={{textDecoration:"none",color:"gold"}}href="https://github.com/lambda-bw-team-o"><img src="https://image.flaticon.com/icons/png/512/25/25231.png" width="60px" height="60px" alt="GitHub Logo"/></a>
          <h4><a style={{textDecoration:"none",color:"white"}}href="https://github.com/lambda-bw-team-o">Open Source on GitHub</a></h4>
          </p> 
   

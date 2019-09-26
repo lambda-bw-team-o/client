@@ -50,7 +50,7 @@
   background: url("./assets/landing-pic.jpg");
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-position: bottom left;
+  background-position: center;
   background-size: cover;
   height: 50%;
   position: absolute;
@@ -63,7 +63,7 @@
   background: url("./assets/landing-pic.jpg");
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-position: bottom left;
+  background-position:  center;
   background-size: cover;
   height: 50%;
   position: absolute;
@@ -71,7 +71,7 @@
   width: 100%;
   z-index: 0;
 }
-.rightHalf:hover {
+/* .rightHalf:hover {
   background: url("./assets/spaceship.jpg");
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -82,7 +82,7 @@
   bottom: 0px;
   width: 100%;
   z-index: 5;
-}
+} */
 
 .go{
   font-weight:bold;
@@ -96,6 +96,7 @@
   font-size:20px;
   z-index:500;
   border: 3px solid white;
+  /* margin: 0px auto 0px auto; */
 }
 .go:hover{
   color:gold;

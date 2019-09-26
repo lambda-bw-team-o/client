@@ -8,6 +8,12 @@ const Form = styled.form`
  width: 300px;
   padding: 64px 15px 24px;
   margin: 0 auto;
+  .checker{
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 10px;
+    text-align:center;
+  }
   
   .control {
     margin: 0 0 24px;
@@ -147,6 +153,10 @@ function Login(props) {
     password: '',
   })
   
+  const[passwordParams, setPasswordParams]= useState({
+   userOrPassWrong:""
+  })
+
   const handleChange = name => event => {
     setCredentials({ ...credentials, [name]: event.target.value });
   };
@@ -160,7 +170,7 @@ function Login(props) {
         props.history.push('/game')
       })
       .catch(error => {
-        console.error(error);
+       setPasswordParams({userOrPassWrong:"User-name or password not found."})
       })
   }
 
@@ -200,8 +210,10 @@ function Login(props) {
             </div>
           </div>
 
+          
+
           <div style={{display:"flex",flexDirection:"column",textAlign:"center"}}>
-          <button  onClick={handleSubmit} className='btn block-cube block-cube-hover' type='button'>
+          <button  onClick={handleSubmit} className='btn block-cube block-cube-hover' type='button' style={{ cursor: "pointer"}}>
             <div className='bg-top'>
               <div className='bg-inner'></div>
             </div>
@@ -216,6 +228,7 @@ function Login(props) {
             </div>
             </button>
             <div>
+            <p className="checker" style={{color:"white"}}>{passwordParams.userOrPassWrong}</p>
             <Link  to="/register" style={{color:"white",textDecoration:"none",padding:"30px"}} lassName='btn block-cube block-cube-hover' type='button'>
             <div className='text'>
               Don't have Account? Register
