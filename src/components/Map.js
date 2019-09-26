@@ -20,8 +20,6 @@ function Map(props) {
         .then(res => {
           localStorage.setItem('rooms', JSON.stringify(res.data));
           window.location.reload();
-          // const data = JSON.parse(res.data)
-          // buildGrid(data)
         })
         .catch(error => {
           console.error(error);
