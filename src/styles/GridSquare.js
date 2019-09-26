@@ -6,13 +6,13 @@ const GridSquare = styled.div`
   align-items: center;
   margin-left: -3px;
   margin-top: -3px;
-  min-width: 25px;
+  min-width: 20px;
   min-height: 25px;
   font-size: 14px;
   background-color: rgba(0, 0, 0, .5);
 
   ${props => props.heading ? '' : 
-  'border: 3px solid blue;' }
+  'border: 2px solid blue;' }
   ${props => props.heading ? 
   'padding: 3px;' : ''}
   ${props => props.heading ? '' :
