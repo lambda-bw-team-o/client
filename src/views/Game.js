@@ -69,13 +69,16 @@ const Game = (props) => {
       <Container>
         <Row>
           <Column>
-            <InfoBar toggleMusic={toggleMusic} isPlaying={isPlaying} handleSignout={handleSignout} />
+            <InfoBar toggleMusic={toggleMusic} 
+                     isPlaying={isPlaying}
+                     handleSignout={handleSignout} />
           </Column>
         </Row>
 
         <Row>
           <Column>
-            <Map backgroundIndex={backgroundIndex} playerCoord={playerCoord} />
+            <Map backgroundIndex={backgroundIndex} 
+                 playerCoord={playerCoord} />
           </Column>
         </Row>
 
@@ -87,7 +90,9 @@ const Game = (props) => {
                   roomPlayers={roomPlayers} />
           </Column>
           <Column width={6}>
-            <Controls switchBackground={switchBackground} setPlayerCoord={setPlayerCoord} playerCoord={playerCoord} />
+            <Controls switchBackground={switchBackground} 
+                      setPlayerCoord={setPlayerCoord} 
+                      playerCoord={playerCoord} />
           </Column>
         </Row>
       </Container>
