@@ -13,6 +13,15 @@ function Feed(props) {
   const roomPlayers = props.roomPlayers
   
   useEffect(() => {
+    if (props.channel) {
+      props.channel.bind('message', data => {
+        // FIX push message into Feed
+        addData(data)
+      });
+    }
+  }, [])
+
+  useEffect(() => {
     const initData = []
 
     if (playerName) {
@@ -31,11 +40,14 @@ function Feed(props) {
     setData(initData)
   }, [playerName])
 
-  // setData(data.concat(<p>Test {data.length + 1}</p>))
+  function addData(message) {
+    setData(data.concat(message))
+  }
   
   return (
     <Row>
       <Column style={{ backgroundColor: '#333', height: '200px' }}>
+        <button onClick={() => addData("Hello")}>Hello</button>
         <DataFeed>
           {data}
           <Type strings={data} speed={40} />

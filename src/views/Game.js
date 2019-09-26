@@ -95,7 +95,8 @@ const Game = (props) => {
             <Feed playerName={playerName} 
                   playerRoomTitle={playerRoomTitle}
                   playerRoomDescription={playerRoomDescription} 
-                  roomPlayers={roomPlayers} />
+                  roomPlayers={roomPlayers}
+                  channel={channel} />
           </Column>
           <Column width={6}>
             <Controls switchBackground={switchBackground} 
