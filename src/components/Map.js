@@ -57,7 +57,6 @@ function Map(props) {
             if (j === 0) {
               columns.push(<Column key={`${i}-${j}`} width={0.5}><GridSquare heading={true}>{String.fromCodePoint(65 + i - 1)}</GridSquare></Column>)
             } else {
-              console.log(`${i}-${j}`)
               columns.push(
                 <Column key={`${i}-${j}`} width={0.5}>
                   <GridSquare>{room_matrix[i-1][j-1] ? room_matrix[i-1][j-1].id : ''}</GridSquare>
@@ -82,7 +81,6 @@ function Map(props) {
             if (j === 0) {
               columns.push(<Column key={`${i}-${j}`} width={0.5}><GridSquare heading={true}>{String.fromCodePoint(65 + i - 1)}</GridSquare></Column>)
             } else {
-              console.log(`${i}-${j}`)
               columns.push(
                 <Column key={`${i}-${j}`} width={0.5}>
                   <GridSquare>{room_matrix[i-1][j-1] ? room_matrix[i-1][j-1].id : ''}</GridSquare>
