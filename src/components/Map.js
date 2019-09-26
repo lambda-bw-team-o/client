@@ -120,6 +120,10 @@ function Map(props) {
     }
   }, [])
 
+  useEffect(() => {
+    console.log(`Move to ${props.playerCoord}`)
+  }, [props.playerCoord])
+
   // <div style = {{ backgroundImage: `url(${require(`../assets/images/backgrounds/${props.backgroundIndex}.jpg`)})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }
   return (
     <div>

@@ -51,6 +51,7 @@ function Controls(props) {
         //     console.error(err)
         //   })
         switchBackground()
+        props.setPlayerCoord([props.playerCoord[0] - 1, props.playerCoord[1]])
       } else if (key === 38) {
         // Move Up
         setPressUp(false)
@@ -61,6 +62,7 @@ function Controls(props) {
         //     console.error(err)
         //   })
         switchBackground()
+        props.setPlayerCoord([props.playerCoord[0], props.playerCoord[1] - 1])
       } else if (key === 39) {
         // Move Right
         setPressRight(false)
@@ -71,6 +73,7 @@ function Controls(props) {
         //     console.error(err)
         //   })
         switchBackground()
+        props.setPlayerCoord([props.playerCoord[0] + 1, props.playerCoord[1]])
       } else if (key === 40) {
         // Move Down
         setPressDown(false)
@@ -81,6 +84,7 @@ function Controls(props) {
         //     console.error(err)
         //   })
         switchBackground()
+        props.setPlayerCoord([props.playerCoord[0], props.playerCoord[1] + 1])
       }
     }
   }, [switchBackground])
@@ -94,6 +98,7 @@ function Controls(props) {
     //     console.error(err)
     //   })
     props.switchBackground()
+    props.setPlayerCoord([props.playerCoord[0] - 1, props.playerCoord[1]])
     setTimeout(() => {
       setPressLeft(false)
     }, 100)
@@ -109,6 +114,7 @@ function Controls(props) {
     //     console.error(err)
     //   })
     props.switchBackground()
+    props.setPlayerCoord([props.playerCoord[0], props.playerCoord[1] - 1])
     setTimeout(() => {
       setPressUp(false)
     }, 100)
@@ -122,6 +128,7 @@ function Controls(props) {
     //     console.error(err)
     //   })
     props.switchBackground()
+    props.setPlayerCoord([props.playerCoord[0] + 1, props.playerCoord[1]])
     setTimeout(() => {
       setPressRight(false)
     }, 100)
@@ -135,6 +142,7 @@ function Controls(props) {
     //     console.error(err)
     //   })
     props.switchBackground()
+    props.setPlayerCoord([props.playerCoord[0], props.playerCoord[1] + 1])
     setTimeout(() => {
       setPressDown(false)
     }, 100)

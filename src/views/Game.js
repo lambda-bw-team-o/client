@@ -18,6 +18,7 @@ const Game = (props) => {
   const [playerRoomTitle, setPlayerRoomTitle] = useState(null)
   const [playerRoomDescription, setPlayerRoomDescription] = useState(null)
   const [roomPlayers, setRoomPlayers] = useState(null)
+  const [playerCoord, setPlayerCoord] = useState([11,11])
   const audioRef = useRef(null)
 
   useEffect(() => {
@@ -73,7 +74,7 @@ const Game = (props) => {
 
           <Row>
             <Column>
-              <Map backgroundIndex={backgroundIndex} />
+              <Map backgroundIndex={backgroundIndex} playerCoord={playerCoord} />
             </Column>
           </Row>
 
@@ -84,7 +85,7 @@ const Game = (props) => {
                     playerRoomDescription={playerRoomDescription} 
                     roomPlayers={roomPlayers} />
             </Column>
-            <Column width={6}><Controls switchBackground={switchBackground} /></Column>
+            <Column width={6}><Controls switchBackground={switchBackground} setPlayerCoord={setPlayerCoord} playerCoord={playerCoord} /></Column>
           </Row>
         </Container>
       </Theme>
