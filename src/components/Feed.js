@@ -43,6 +43,10 @@ function Feed(props) {
     if (props.playerData && oldRoomTitle !== props.playerData.title) {
       messages.push(<p key={`messages-${data.length + 1}`}>Our current location is <b>{props.playerData.title}</b>.</p>)
       messages.push(<p key={`messages-${data.length + 2}`}>{props.playerData.description}</p>)
+      if (props.playerData.players && props.playerData.players.length > 0) {
+        let players = props.playerData.players.map(p => p.name)
+        messages.push(<p key={`messages-${data.length + 3}`}>We've detected {players.length} other ships in this area. Their call signs are: <b>{players.join(', ')}</b></p>)
+      }
       setOldRoomTitle(props.playerData.title)
     }
     
