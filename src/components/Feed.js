@@ -64,5 +64,4 @@ function Feed() {
     </Row>
   )
 }
-
 export default Feed;
