@@ -85,26 +85,18 @@ function Controls(props) {
   function moveNorth() {
     axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'n' })
     .then((res) => {
-      // TODO Set setPlayerData
-      // 
-      // playerData =
-      //   combat: { protected: true, health: 5, cloaked: false }
-      //   description: "Iobo is a hyperborean super planet, with drifting snowstorms"
-      //   name: "test5"
-      //   players: []
-      //   position: (2)[12, 10]
-      //   title: "Iobo"
-      //   uuid: "97316957-dc29-4359-a405-09803e7d26d3"
-      // 
-      // res = 
-      //   combat: { protected: true, health: 5, cloaked: false }
-      //   description: "Iobo is a hyperborean super planet, with drifting snowstorms"
-      //   error_msg: "You cannot move that way."
-      //   name: "test5"
-      //   players: []
-      //   position: (2)[12, 10]
-      //   title: "Iobo"
-
+      console.log('MoveNorth', res)
+      props.setPlayerData({...props.playerData,
+        position: res.data.position,
+        title: res.data.title,
+        description: res.data.description,
+        players: res.data.players,
+        combat: res.data.combat,
+      })
+      
+      // TODO handle res.error_msg
+      // Maybe show in Feed and flash controls red.
+      
       // TODO pass index of image to switchBackground to dynamically pull image.
       props.switchBackground()
     }).catch((err) => {
@@ -115,6 +107,17 @@ function Controls(props) {
   function moveEast() {
     axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'e' })
     .then((res) => {
+      console.log('MoveEast', res)
+      props.setPlayerData({
+        ...props.playerData,
+        position: [res.data.position[0] + 1, res.data.position[1]],
+        position: res.data.position,
+        title: res.data.title,
+        description: res.data.description,
+        players: res.data.players,
+        combat: res.data.combat,
+      })
+
       // TODO pass index of image to switchBackground to dynamically pull image.
       props.switchBackground()
     }).catch((err) => {
@@ -125,6 +128,16 @@ function Controls(props) {
   function moveSouth() {
     axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 's' })
     .then((res) => {
+      console.log('MoveSouth', res)
+      props.setPlayerData({
+        ...props.playerData,
+        position: res.data.position,
+        title: res.data.title,
+        description: res.data.description,
+        players: res.data.players,
+        combat: res.data.combat,
+      })
+
       // TODO pass index of image to switchBackground to dynamically pull image.
       props.switchBackground()
     }).catch((err) => {
@@ -135,6 +148,16 @@ function Controls(props) {
   function moveWest() {
     axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'w' })
     .then((res) => {
+      console.log('MoveWest', res)
+      props.setPlayerData({
+        ...props.playerData,
+        position: res.data.position,
+        title: res.data.title,
+        description: res.data.description,
+        players: res.data.players,
+        combat: res.data.combat,
+      })
+
       // TODO pass index of image to switchBackground to dynamically pull image.
       props.switchBackground()
     }).catch((err) => {
