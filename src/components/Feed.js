@@ -3,27 +3,46 @@ import Row from '../styles/Row';
 import Column from '../styles/Column';
 import DataFeed from '../styles/DataFeed';
 import Type from './Type';
-import subsbcribeToChannel from '../helpers/Pusher';
+// import subsbcribeToChannel from '../helpers/Pusher';
+import Pusher from 'pusher-js';
+import axios from '../helpers/axiosWithAuth';
 
 function Feed(props) {
   const [data, setData] = useState([""])
+  const [uuid, setUuid] = useState('')
+  console.log('feed props:', props)
   
   // console.log('Feed.playerData', props.playerData)
 
-  // useEffect(() => {
-  //   addInitData(
-  //     props.playerData.name,
-  //     props.playerData.title,
-  //     props.playerData.description,
-  //     props.playerData.players,
-  //   )
+  useEffect(() => {
+    const pusher = new Pusher('6d34b01fb0271f6ffac1', {
+      cluster: 'us3',
+    });
+    
+    if (props.playerData) {
+      setUuid(props.playerData.uuid);
+      addInitData(
+        props.playerData.name,
+        props.playerData.title,
+        props.playerData.description,
+        props.playerData.players,
+      )
 
-  //   const channel = subsbcribeToChannel(`p-channel-${props.playerData.uuid}`)
-  //   channel.bind('message', data => {
-  //     addData(data)
-  //   });
-  //   // TODO listen for combat,..
-  // }, [])
+      const channel = pusher.subscribe(`p-channel-${props.playerData.uuid}`)
+      channel.bind('broadcast', data => {
+        addData(data.message)
+      });
+      pusher.connection.bind( 'error', function( err ) {
+        if( err.error.data.code === 4004 ) {
+          console.log('>>> detected limit error');
+        }
+      });
+      // TODO listen for combat,..
+    }
+    return () => {
+      pusher.unsubscribe(`p-channel-${uuid}`)
+    }
+  }, [props.playerData])
 
   const addInitData = (name, title, description, players) => {
     const init = []
@@ -39,7 +58,16 @@ function Feed(props) {
   }
   
   const addData = (message) => {
-    setData(data.concat(message))
+    setData(oldData => oldData.concat(message))
+  }
+
+  const handleSay = async () => {
+    try {
+      const message = await axios().post('https://team-o.herokuapp.com/api/adv/say', { 'message': 'Hu.. hullo?' });
+      console.log(message)
+    } catch (error) {
+      console.log(error)
+    }
   }
   
   return (
@@ -50,6 +78,7 @@ function Feed(props) {
           <Type strings={data} speed={40} />
         </DataFeed>
       </Column>
+      <button onClick={handleSay}>Test</button>
     </Row>
   )
 }

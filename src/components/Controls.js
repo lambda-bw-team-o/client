@@ -172,7 +172,7 @@ function Controls(props) {
         <Column width={4}>
           <img src={pressUp ? UpArrowKeyClicked : UpArrowKey} width="80px" height="80px" alt="Game Tile"
                onClick={handleUpArrow}
-               style={{ margin: '10px' }}></img>
+               style={{ margin: '10px', borderRadius: '12px', background: 'white' }}></img>
         </Column>
         <Column width={4}></Column>
       </Row>
@@ -180,17 +180,17 @@ function Controls(props) {
         <Column width={4}>
           <img src={pressLeft ? LeftArrowKeyClicked : LeftArrowKey} width="80px" height="80px" alt="Game Tile" 
                onClick={handleLeftArrow}
-               style={{ margin: '10px' }}></img>
+               style={{ margin: '10px', borderRadius: '12px', background: 'white' }}></img>
         </Column>
         <Column width={4}>
           <img src={pressDown ? DownArrowKeyClicked : DownArrowKey} width="80px" height="80px" alt="Game Tile"
                onClick={handleDownArrow}
-               style={{ margin: '10px' }}></img>
+               style={{ margin: '10px', borderRadius: '12px', background: 'white' }}></img>
         </Column>
         <Column width={4}>
           <img src={pressRight ? RightArrowKeyClicked : RightArrowKey} width="80px" height="80px" alt="Game Tile" 
                onClick={handleRightArrow}
-               style={{ margin: '10px' }}></img>
+               style={{ margin: '10px', borderRadius: '12px', background: 'white' }}></img>
         </Column>
       </Row>
     </>
