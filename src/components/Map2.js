@@ -58,7 +58,7 @@ const Map = ({ playerData }) => {
     room_matrix.forEach((row) => {
       let cols = row.map(room => <span style={{
         // border: "1px solid red",
-        backgroundColor: room.here ? "rgba(255, 255, 255, 1)" : "rgba(0, 0, 0, 0.4)",
+        backgroundColor: room.here ? "rgba(255, 255, 255, 1)" : (room.safe ? "rgba(144, 238, 144, 0.4)" : "rgba(0, 0, 0, 0.4)"),
         color: room.here ? "black" : "white",
         width: "40px",
         height: "40px",
@@ -67,7 +67,8 @@ const Map = ({ playerData }) => {
         justifyContent: "center",
         alignItems: "center",
         margin: "0 3px",
-        position: "relative"
+        position: "relative",
+        border: room.safe ? "2px solid lightgreen" : "0"
       }}>
         <span style={{
           display: room.n_to > 0 ? "inline" : "none",
@@ -98,7 +99,7 @@ const Map = ({ playerData }) => {
   }, [rooms, playerData]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center"}} className="matrix">
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginBottom: '20px' }} className="matrix">
       {
         matrix
       }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Row from '../styles/Row';
 import Column from '../styles/Column';
 import Heart from '../assets/images/interface/health.png';
@@ -7,8 +7,12 @@ import PauseBtn from '../assets/images/interface/pause-btn.png';
 import SignoutBtn from '../assets/images/interface/signout.png';
 
 function InfoBar(props) {
-  const [health, setHealth] = useState(5)
+  const [health, setHealth] = useState(0)
   let healthIndicator = []
+
+  useEffect(() => {
+    setHealth(props.health);
+  }, [props.health])
 
   for (let i = 0; i < health; i++) {
     healthIndicator.push(<img key={i} src={Heart} width="30px" height="30px" alt="Health" style={{ margin: '10px' }}></img>)

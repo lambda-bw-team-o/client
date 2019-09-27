@@ -11,14 +11,20 @@ import Row from '../styles/Row';
 import Column from '../styles/Column';
 import Arrival from '../assets/audio/arrival-audio.mp3';
 import axios from '../helpers/axiosWithAuth';
-import Chat from '../components/Chat';
+import Score from '../components/Score';
+import CombatButton from '../components/CombatButton';
+import Players from '../components/Players';
+// import Chat from '../components/Chat';
 
 const Game = (props) => {
   const [backgroundIndex, setBackgroundIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const [playerData, setPlayerData] = useState(null)
   const [uuid, setUuid] = useState('')
-  const [messages, setMessages] = useState([])
+  const [score, setScore] = useState(0)
+  const [health, setHealth] = useState(1)
+  const [target, setTarget] = useState({ id: 0, name: ''})
+  const [cloaked, setCloaked] = useState(null)
   const audioRef = useRef(null)
 
   useEffect(() => {
@@ -34,6 +40,15 @@ const Game = (props) => {
   useEffect(() => {
     if (playerData && playerData.uuid) {
       setUuid(playerData.uuid);
+    }
+    if (playerData && playerData.combat.score) {
+      setScore(playerData.combat.score)
+    }
+    if (playerData && playerData.combat.cloaked !== undefined) {
+      setCloaked(playerData.combat.cloaked);
+    }
+    if (playerData && playerData.combat.health !== undefined) {
+      setHealth(playerData.combat.health)
     }
   }, [playerData]);
 
@@ -62,31 +77,40 @@ const Game = (props) => {
     }
   }
 
-  const handleMessage = (data) => {
-    console.log(data.message);
-    setMessages(oldMessages => [
-      ...oldMessages,
-      data.message.message,
-    ]);
+  const handleCloak = (data, error=false) => {
+    console.log(data);
+
+    if (!error) {
+      setCloaked(!cloaked)
+    }
+  }
+
+  const handleTarget = (id, name) => {
+    setTarget({id, name});
   }
 
   return (
     <Theme>
-      <Messages uuid={uuid} handleMessage={handleMessage} handleCombat={handleMessage} />
-      <Chat messages={messages} />
       <Container>
         <Row>
           <Column>
-            <InfoBar toggleMusic={toggleMusic} 
-                     isPlaying={isPlaying}
-                     handleSignout={handleSignout} />
+            <InfoBar
+              toggleMusic={toggleMusic} 
+              isPlaying={isPlaying}
+              handleSignout={handleSignout}
+              health={health}
+            />
           </Column>
         </Row>
 
         <Row>
-          <Column>
+          <Column width={10}>
             <Map2 backgroundIndex={backgroundIndex} 
                  playerData={playerData} />
+          </Column>
+          <Column width={2}>
+            <Score score={score} />
+            <Players playerData={playerData} handleTarget={handleTarget} />
           </Column>
         </Row>
 
@@ -94,10 +118,15 @@ const Game = (props) => {
           <Column width={6}>
             <Feed playerData={playerData} />
           </Column>
-          <Column width={6}>
+          <Column width={4}>
             <Controls switchBackground={switchBackground}
                       setPlayerData={setPlayerData}
                       playerData={playerData} />
+          </Column>
+          <Column width={2}>
+            { health <= 0 && <CombatButton action="respawn" name="Respawn" callback={(data) => console.log(data)} />}
+            { target.id > 0 && <CombatButton action="attack" target={target.id} name={`Attack: ${target.name}`} callback={(data) => console.log(data)} />}
+            { cloaked !== null && <CombatButton action="cloak" name={cloaked ? "Decloak" : "Cloak"} callback={handleCloak} /> }
           </Column>
         </Row>
       </Container>
