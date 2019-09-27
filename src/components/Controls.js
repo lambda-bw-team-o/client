@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Row from '../styles/Row';
 import Column from '../styles/Column';
-import UpArrowKey from '../assets/images/interface/up-arrow-key.png';
-import DownArrowKey from '../assets/images/interface/down-arrow-key.png';
-import LeftArrowKey from '../assets/images/interface/left-arrow-key.png';
-import RightArrowKey from '../assets/images/interface/right-arrow-key.png';
-import UpArrowKeyClicked from '../assets/images/interface/up-arrow-key-clicked.png';
-import DownArrowKeyClicked from '../assets/images/interface/down-arrow-key-clicked.png';
-import LeftArrowKeyClicked from '../assets/images/interface/left-arrow-key-clicked.png';
-import RightArrowKeyClicked from '../assets/images/interface/right-arrow-key-clicked.png';
+import UpArrowKey from '../assets/images/interface/up-arrow-key-white.png';
+import DownArrowKey from '../assets/images/interface/down-arrow-key-white.png';
+import LeftArrowKey from '../assets/images/interface/left-arrow-key-white.png';
+import RightArrowKey from '../assets/images/interface/right-arrow-key-white.png';
+import UpArrowKeyClicked from '../assets/images/interface/up-arrow-key-white-clicked.png';
+import DownArrowKeyClicked from '../assets/images/interface/down-arrow-key-white-clicked.png';
+import LeftArrowKeyClicked from '../assets/images/interface/left-arrow-key-white-clicked.png';
+import RightArrowKeyClicked from '../assets/images/interface/right-arrow-key-white-clicked.png';
 import axios from '../helpers/axiosWithAuth';
 
 function Controls(props) {
