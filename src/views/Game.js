@@ -3,11 +3,13 @@ import InfoBar from '../components/InfoBar';
 import Map from '../components/Map';
 import Feed from '../components/Feed';
 import Controls from '../components/Controls';
+import ChatModal from '../components/ChatModal'
 import Container from '../styles/Container';
 import Theme from '../styles/Theme';
 import Row from '../styles/Row';
 import Column from '../styles/Column';
 import Arrival from '../assets/audio/arrival-audio.mp3';
+
 
 const Game = (props) => {
   const [backgroundIndex, setBackgroundIndex] = useState(0)
@@ -60,6 +62,7 @@ const Game = (props) => {
 
         <Row>
           <Column width={6}>
+          <ChatModal/>
             <Feed />
           </Column>
           <Column width={6}>
