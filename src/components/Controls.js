@@ -22,7 +22,7 @@ function Controls(props) {
   useEffect(() => {
     window.onkeydown = (e) => {
       const key = e.keyCode ? e.keyCode : e.which;
-      
+
       if (key === 37) {
         setPressLeft(true)
       } else if (key === 38) {
@@ -33,10 +33,10 @@ function Controls(props) {
         setPressDown(true)
       }
     }
-    
+
     window.onkeyup = (e) => {
       const key = e.keyCode ? e.keyCode : e.which;
-      
+
       if (key === 37) {
         setPressLeft(false)
         moveWest()
@@ -51,145 +51,157 @@ function Controls(props) {
         moveSouth()
       }
     }
-  }, [])
 
-  const handleLeftArrow = () => {
-    setPressLeft(true)
-    moveWest()
-    setTimeout(() => {
-      setPressLeft(false)
-    }, 100)
-  }
-  const handleUpArrow = () => {
-    setPressUp(true)
-    moveNorth()
-    setTimeout(() => {
-      setPressUp(false)
-    }, 100)
-  }
-  const handleRightArrow = () => {
-    setPressRight(true)
-    moveEast()
-    setTimeout(() => {
-      setPressRight(false)
-    }, 100)
-  }
-  const handleDownArrow = () => {
-    setPressDown(true)
-    moveSouth()
-    setTimeout(() => {
-      setPressDown(false)
-    }, 100)
-  }
+    const handleLeftArrow = () => {
+      setPressLeft(true)
+      moveWest()
+      setTimeout(() => {
+        setPressLeft(false)
+      }, 100)
+    }
+    const handleUpArrow = () => {
+      setPressUp(true)
+      moveNorth()
+      setTimeout(() => {
+        setPressUp(false)
+      }, 100)
+    }
+    const handleRightArrow = () => {
+      setPressRight(true)
+      moveEast()
+      setTimeout(() => {
+        setPressRight(false)
+      }, 100)
+    }
+    const handleDownArrow = () => {
+      setPressDown(true)
+      moveSouth()
+      setTimeout(() => {
+        setPressDown(false)
+      }, 100)
+    }
 
-  function moveNorth() {
-    axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'n' })
-    .then((res) => {
-      console.log('MoveNorth', res)
-      props.setPlayerData({...props.playerData,
-        position: res.data.position,
-        title: res.data.title,
-        description: res.data.description,
-        players: res.data.players,
-        combat: res.data.combat,
+    function moveNorth() {
+      axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'n' })
+      .then((res) => {
+        if (res.error_msg) {
+          // TODO handle res.error_msg
+          // Maybe show in Feed and flash controls red.
+          console.log('MoveNorth', res.error_msg)
+        } else {
+          console.log('MoveNorth', `${props.playerData.position} to ${res.data.position}`)
+          axios().get('https://team-o.herokuapp.com/api/adv/init/')
+            .then(res => {
+              console.log('init', res)
+              props.setPlayerData(res.data)
+            }).catch(error => {
+              console.error(error);
+            })
+        }
+
+        // TODO pass index of image to switchBackground to dynamically pull image.
+        props.switchBackground()
+      }).catch((err) => {
+        console.error(err)
       })
-      
-      // TODO handle res.error_msg
-      // Maybe show in Feed and flash controls red.
-      
-      // TODO pass index of image to switchBackground to dynamically pull image.
-      props.switchBackground()
-    }).catch((err) => {
-      console.error(err)
-    })
-  }
-  
-  function moveEast() {
-    axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'e' })
-    .then((res) => {
-      console.log('MoveEast', res)
-      props.setPlayerData({
-        ...props.playerData,
-        position: [res.data.position[0] + 1, res.data.position[1]],
-        position: res.data.position,
-        title: res.data.title,
-        description: res.data.description,
-        players: res.data.players,
-        combat: res.data.combat,
+    }
+    
+    function moveEast() {
+      axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'e' })
+      .then((res) => {
+        if (res.error_msg) {
+          console.log('MoveEast', res.error_msg)
+        } else {
+          console.log('MoveEast', `${props.playerData.position} to ${res.data.position}`)
+          axios().get('https://team-o.herokuapp.com/api/adv/init/')
+            .then(res => {
+              console.log('init', res)
+              props.setPlayerData(res.data)
+            }).catch(error => {
+              console.error(error);
+            })
+        }
+        
+        // TODO pass index of image to switchBackground to dynamically pull image.
+        props.switchBackground()
+      }).catch((err) => {
+        console.error(err)
       })
-
-      // TODO pass index of image to switchBackground to dynamically pull image.
-      props.switchBackground()
-    }).catch((err) => {
-      console.error(err)
-    })
-  }
-  
-  function moveSouth() {
-    axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 's' })
-    .then((res) => {
-      console.log('MoveSouth', res)
-      props.setPlayerData({
-        ...props.playerData,
-        position: res.data.position,
-        title: res.data.title,
-        description: res.data.description,
-        players: res.data.players,
-        combat: res.data.combat,
+    }
+    
+    function moveSouth() {
+      axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 's' })
+      .then((res) => {
+        if (res.error_msg) {
+          console.log('MoveSouth', res.error_msg)
+        } else {
+          console.log('MoveSouth', `${props.playerData.position} to ${res.data.position}`)
+          axios().get('https://team-o.herokuapp.com/api/adv/init/')
+            .then(res => {
+              console.log('init', res)
+              props.setPlayerData(res.data)
+            }).catch(error => {
+              console.error(error);
+            })
+        }
+        
+        // TODO pass index of image to switchBackground to dynamically pull image.
+        props.switchBackground()
+      }).catch((err) => {
+        console.error(err)
       })
+    }
+    
+    function moveWest() {
+      axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'w' })
+      .then((res) => {
+        if (res.error_msg) {
+          console.log('MoveWest', res.error_msg)
+        } else {
+          console.log('MoveWest', `${props.playerData.position} to ${res.data.position}`)
+          axios().get('https://team-o.herokuapp.com/api/adv/init/')
+            .then(res => {
+              console.log('init', res)
+              props.setPlayerData(res.data)
+            }).catch(error => {
+              console.error(error);
+            })
+        }
 
-      // TODO pass index of image to switchBackground to dynamically pull image.
-      props.switchBackground()
-    }).catch((err) => {
-      console.error(err)
-    })
-  }
-  
-  function moveWest() {
-    axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'w' })
-    .then((res) => {
-      console.log('MoveWest', res)
-      props.setPlayerData({
-        ...props.playerData,
-        position: res.data.position,
-        title: res.data.title,
-        description: res.data.description,
-        players: res.data.players,
-        combat: res.data.combat,
+        // TODO pass index of image to switchBackground to dynamically pull image.
+        props.switchBackground()
+      }).catch((err) => {
+        console.error(err)
       })
+    }  
+  }, [props.playerData])
 
-      // TODO pass index of image to switchBackground to dynamically pull image.
-      props.switchBackground()
-    }).catch((err) => {
-      console.error(err)
-    })
-  }  
-
+  // onClick={handleUpArrow}
+  // onClick={handleLeftArrow}
+  // onClick={handleDownArrow}
+  // onClick={handleRightArrow}
   return (
     <>
       <Row>
         <Column width={4}></Column>
         <Column width={4}>
           <img src={pressUp ? UpArrowKeyClicked : UpArrowKey} width="80px" height="80px" alt="Game Control"
-               onClick={handleUpArrow}
                style={{ margin: '10px' }}></img>
         </Column>
         <Column width={4}></Column>
       </Row>
+
       <Row>
         <Column width={4}>
           <img src={pressLeft ? LeftArrowKeyClicked : LeftArrowKey} width="80px" height="80px" alt="Game Control" 
-               onClick={handleLeftArrow}
                style={{ margin: '10px' }}></img>
         </Column>
         <Column width={4}>
           <img src={pressDown ? DownArrowKeyClicked : DownArrowKey} width="80px" height="80px" alt="Game Control"
-               onClick={handleDownArrow}
                style={{ margin: '10px' }}></img>
         </Column>
         <Column width={4}>
           <img src={pressRight ? RightArrowKeyClicked : RightArrowKey} width="80px" height="80px" alt="Game Control" 
-               onClick={handleRightArrow}
                style={{ margin: '10px' }}></img>
         </Column>
       </Row>
