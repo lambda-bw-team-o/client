@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import Row from '../styles/Row';
 import Column from '../styles/Column';
 import Heart from '../assets/images/interface/health.png';
-import PlayBtn from '../assets/images/interface/play-btn.png';
-import PauseBtn from '../assets/images/interface/pause-btn.png';
-import SignoutBtn from '../assets/images/interface/signout.png';
+import PlayBtn from '../assets/images/interface/play-btn-white.png';
+import PauseBtn from '../assets/images/interface/pause-btn-white.png';
+import SignoutBtn from '../assets/images/interface/signout-white.png';
 
 function InfoBar(props) {
   const [health, setHealth] = useState(5)

@@ -1,64 +1,64 @@
-import React, { useState, useEffect }from 'react';
+import React, { useState, useEffect } from 'react';
 import Row from '../styles/Row';
 import Column from '../styles/Column';
 import DataFeed from '../styles/DataFeed';
 import Type from './Type';
+import subsbcribeToChannel from '../helpers/Pusher';
 import axios from '../helpers/axiosWithAuth';
-// import subsbcribeToChannel from '../helpers/Pusher';
 
-function Feed() {
+function Feed(props) {
   const [data, setData] = useState([""])
-  
+  const [oldRoomTitle, setOldRoomTitle] = useState('')
+
   useEffect(() => {
     axios().get('https://team-o.herokuapp.com/api/adv/init/')
-      .then(res => {
-        console.log('init', res)
-        addInitData(
-          res.data.name,
-          res.data.title,
-          res.data.description,
-          res.data.players,
-        )
-      }).catch(error => {
-        console.error(error);
-        const fakeInitData = JSON.parse('{"uuid": "649a2994-b84c-4ad0-95f6-92fb0d04634e", "name": "fooosicle", "title": "Stiy", "description": "Stiy is an irradiated planet, with roaring nuclear wind", "players": ["testuser", "wurde", "test1", "arronm", "test2", "test22", "test24", "test26", "test23", "test30", "test50", "joe", "carol", "bob", "jac", "rogeret", "rogino", "foosicle", "dgdfgdfg", "test12345", "sdgsc", "rogerno", "sdfcsedfgwe", "gdsgvcxs", "sdagegxvedr", "Taz"]}')
-        addInitData(
-          fakeInitData.name,
-          fakeInitData.title,
-          fakeInitData.description,
-          fakeInitData.players,
-        )
-      })
-
-    // const channel = subsbcribeToChannel(`p-channel-${fakeInitData.uuid}`)
-    // channel.bind('message', data => {
-    //   addData(data)
-    // });
-  }, [])
-
-  const addInitData = (name, title, description, players) => {
-    const init = []
+    .then(res => {
+      const messages = []
+      
+      setOldRoomTitle(res.data.title)
+      
+      messages.push(<p key='messages-0'>All systems ready captain <b>{res.data.name}</b>!</p>)
+      messages.push(<p key='messages-1'>Our current location is <b>{res.data.title}</b>.</p>)
+      messages.push(<p key='messages-2'>{res.data.description}</p>)
+      if (res.data.players && res.data.players.length > 0) {
+        let players = res.data.players.map(p => p.name)
+        messages.push(<p key='messages-3'>We've detected {players.length} other ships in this area. Their call signs are: <b>{players.join(', ')}</b></p>)
+      }
+      
+      setData(messages)
+    }).catch(error => {
+      console.error(error);
+    })
     
-    init.push(<p key='init-0'>All systems ready captain <b>{name}</b>!</p>)
-    init.push(<p key='init-1'>Our current location is <b>{title}</b>.</p>)
-    init.push(<p key='init-2'>{description}</p>)
-    if (players && players.length > 0) {
-      players = players.map(p => p.name)
-      init.push(<p key='init-3'>We've detected {players.length} other ships in this area. Their call signs are: <b>{players.join(', ')}</b></p>)
+    // TODO listen for messages
+    // const channel = subsbcribeToChannel(`p-channel-${props.playerData.uuid}`)
+    // channel.bind('message', data => {
+      //   addData(data)
+      // });
+    }, [])
+    
+    useEffect(() => {
+    const messages = []
+
+    if (props.playerData && oldRoomTitle !== props.playerData.title) {
+      messages.push(<p key={`messages-${data.length + 1}`}>Our current location is <b>{props.playerData.title}</b>.</p>)
+      messages.push(<p key={`messages-${data.length + 2}`}>{props.playerData.description}</p>)
+      if (props.playerData.players && props.playerData.players.length > 0) {
+        let players = props.playerData.players.map(p => p.name)
+        messages.push(<p key={`messages-${data.length + 3}`}>We've detected {players.length} other ships in this area. Their call signs are: <b>{players.join(', ')}</b></p>)
+      }
+      setOldRoomTitle(props.playerData.title)
     }
-    addData(init)
-  }
-  
-  const addData = (message) => {
-    setData(data.concat(message))
-  }
-  
+    
+    setData(data.concat(messages))
+  }, [props.playerData])
+
+  // <Type strings={data} speed={40} />
   return (
     <Row>
       <Column style={{ backgroundColor: '#333', height: '200px' }}>
         <DataFeed>
           {data}
-          <Type strings={data} speed={40} />
         </DataFeed>
       </Column>
     </Row>

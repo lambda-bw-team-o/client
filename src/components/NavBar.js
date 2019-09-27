@@ -43,7 +43,6 @@ const NavBar = () => {
 
   return (
     <Nav>
-
      
       {(loggedIn) ?
         <ul className="nav-block">
