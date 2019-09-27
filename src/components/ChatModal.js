@@ -3,48 +3,60 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
 import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
     paper: {
-      position: 'relative',
+      position: 'absolute',
       width: 200,
       height: 200,
-      backgroundColor: "black",
+      top:"35%",
+      backgroundColor: "grey",
       border: '2px solid #000',
       boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
+      padding: theme.spacing(2,2,4,7),
     },
     textField: {
-    //   marginLeft: theme.spacing(1),
-    //   marginRight: theme.spacing(1),
-      color:"white"
+      fontColor:"white"
     },
     button:{
-    marginTop:"15px"
+    marginTop:"15px",
+    marginLeft:"42px",
+    color:"white"
+    },
+    button1:{
+        color:"black",
+        },
+    multilineColor:{
+        color:'white'
     }
   }));
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
 
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const styles = theme => ({
+    
+});
+// function rand() {
+//   return Math.round(Math.random() * 20) - 10;
+// }
 
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
+// function getModalStyle() {
+//   const top = 50 + rand();
+//   const left = 50 + rand();
+
+//   return {
+//     top: `${top}%`,
+//     left: `${left}%`,
+//     transform: `translate(-${top}%, -${left}%)`,
+//   };
+
 
 
 
 export default function ChatModal() {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = React.useState(getModalStyle);
+//   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -82,22 +94,23 @@ export default function ChatModal() {
      
 
       <Button
-        size="small"
-        color="primary"
-        className={classes.button}
+        size="large"
+        // color="primary"
+        className={classes.button1}
         onClick={onSubmitHandler}
-        variant="outlined"
+        variant="contained"
         onClick={handleOpen}>
         chat
         </Button>
-
+       
+    
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
         open={open}
         onClose={handleClose}
       >
-        <div style={modalStyle} className={classes.paper}>
+        <div  className={classes.paper}>
         <TextField
         style={{margin: '0 -20px'}}
         id="filled-multiline-static"
@@ -107,6 +120,9 @@ export default function ChatModal() {
         className={classes.textField}
         margin="none"
         variant="filled"
+        InputProps={{
+            className: classes.multilineColor
+          }}
       /><br/>
         <Button
         size="small"
@@ -119,6 +135,7 @@ export default function ChatModal() {
         </div>
       
       </Modal>
+     
     </div>
   );
 }
