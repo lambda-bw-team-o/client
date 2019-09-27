@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from '../helpers/axiosWithAuth';
 
-const Score = (props) => {
+const Score = ({ score }) => {
   const [scores, setScores] = useState([])
 
   useEffect(() => {
@@ -20,12 +20,12 @@ const Score = (props) => {
 
   return (
     <div className="score-wrapper">
-      <div className="personal-score">Score: {props.score}</div>
+      <div className="personal-score">Score: {score}</div>
         {
-          scores.map(score => (
-            <div className={`score ${score.name}`} key={score.name}>
-              <span>{score.score}</span>
-              <span>{score.name}</span>
+          scores.map(player => (
+            <div className={`score ${player.name}`} key={player.name}>
+              <span>{player.score}</span>
+              <span>{player.name}</span>
             </div>
           ))
         }
