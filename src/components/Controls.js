@@ -17,8 +17,6 @@ function Controls(props) {
   const [pressRight, setPressRight] = useState(false)
   const [pressDown, setPressDown] = useState(false)
 
-  // console.log('Controls.playerData', props.playerData)
-
   useEffect(() => {
     window.onkeydown = (e) => {
       const key = e.keyCode ? e.keyCode : e.which;
@@ -51,38 +49,10 @@ function Controls(props) {
         moveSouth()
       }
     }
+  }, [props.playerData])
 
-    const handleLeftArrow = () => {
-      setPressLeft(true)
-      moveWest()
-      setTimeout(() => {
-        setPressLeft(false)
-      }, 100)
-    }
-    const handleUpArrow = () => {
-      setPressUp(true)
-      moveNorth()
-      setTimeout(() => {
-        setPressUp(false)
-      }, 100)
-    }
-    const handleRightArrow = () => {
-      setPressRight(true)
-      moveEast()
-      setTimeout(() => {
-        setPressRight(false)
-      }, 100)
-    }
-    const handleDownArrow = () => {
-      setPressDown(true)
-      moveSouth()
-      setTimeout(() => {
-        setPressDown(false)
-      }, 100)
-    }
-
-    function moveNorth() {
-      axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'n' })
+  function moveNorth() {
+    axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'n' })
       .then((res) => {
         if (res.error_msg) {
           console.log('MoveNorth', res.error_msg)
@@ -101,10 +71,10 @@ function Controls(props) {
       }).catch((err) => {
         console.error(err)
       })
-    }
-    
-    function moveEast() {
-      axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'e' })
+  }
+
+  function moveEast() {
+    axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'e' })
       .then((res) => {
         if (res.error_msg) {
           console.log('MoveEast', res.error_msg)
@@ -123,10 +93,10 @@ function Controls(props) {
       }).catch((err) => {
         console.error(err)
       })
-    }
-    
-    function moveSouth() {
-      axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 's' })
+  }
+
+  function moveSouth() {
+    axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 's' })
       .then((res) => {
         if (res.error_msg) {
           console.log('MoveSouth', res.error_msg)
@@ -145,10 +115,10 @@ function Controls(props) {
       }).catch((err) => {
         console.error(err)
       })
-    }
-    
-    function moveWest() {
-      axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'w' })
+  }
+
+  function moveWest() {
+    axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'w' })
       .then((res) => {
         if (res.error_msg) {
           console.log('MoveWest', res.error_msg)
@@ -167,20 +137,45 @@ function Controls(props) {
       }).catch((err) => {
         console.error(err)
       })
-    }  
-  }, [props.playerData])
+  }  
 
-  // onClick={handleUpArrow}
-  // onClick={handleLeftArrow}
-  // onClick={handleDownArrow}
-  // onClick={handleRightArrow}
+  const handleLeftArrow = () => {
+    setPressLeft(true)
+    moveWest()
+    setTimeout(() => {
+      setPressLeft(false)
+    }, 100)
+  }
+  const handleUpArrow = () => {
+    setPressUp(true)
+    moveNorth()
+    setTimeout(() => {
+      setPressUp(false)
+    }, 100)
+  }
+  const handleRightArrow = () => {
+    setPressRight(true)
+    moveEast()
+    setTimeout(() => {
+      setPressRight(false)
+    }, 100)
+  }
+  const handleDownArrow = () => {
+    setPressDown(true)
+    moveSouth()
+    setTimeout(() => {
+      setPressDown(false)
+    }, 100)
+  }
+
   return (
     <>
       <Row>
         <Column width={4}></Column>
         <Column width={4}>
           <img src={pressUp ? UpArrowKeyClicked : UpArrowKey} width="80px" height="80px" alt="Game Control"
-               style={{ margin: '10px' }}></img>
+               onClick={handleUpArrow}
+               style={{ margin: '10px', cursor: 'pointer' }}></img>
         </Column>
         <Column width={4}></Column>
       </Row>
@@ -188,15 +183,18 @@ function Controls(props) {
       <Row>
         <Column width={4}>
           <img src={pressLeft ? LeftArrowKeyClicked : LeftArrowKey} width="80px" height="80px" alt="Game Control" 
-               style={{ margin: '10px' }}></img>
+               onClick={handleLeftArrow}
+               style={{ margin: '10px', cursor: 'pointer' }}></img>
         </Column>
         <Column width={4}>
           <img src={pressDown ? DownArrowKeyClicked : DownArrowKey} width="80px" height="80px" alt="Game Control"
-               style={{ margin: '10px' }}></img>
+               onClick={handleDownArrow}
+               style={{ margin: '10px', cursor: 'pointer' }}></img>
         </Column>
         <Column width={4}>
           <img src={pressRight ? RightArrowKeyClicked : RightArrowKey} width="80px" height="80px" alt="Game Control" 
-               style={{ margin: '10px' }}></img>
+               onClick={handleRightArrow}
+               style={{ margin: '10px', cursor: 'pointer' }}></img>
         </Column>
       </Row>
     </>
