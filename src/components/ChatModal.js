@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import axios from 'axios';
+import { StepContent } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -36,28 +37,17 @@ const useStyles = makeStyles(theme => ({
   const styles = theme => ({
     
 });
-// function rand() {
-//   return Math.round(Math.random() * 20) - 10;
-// }
 
-// function getModalStyle() {
-//   const top = 50 + rand();
-//   const left = 50 + rand();
-
-//   return {
-//     top: `${top}%`,
-//     left: `${left}%`,
-//     transform: `translate(-${top}%, -${left}%)`,
-//   };
 
 
 
 
 export default function ChatModal() {
   const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
-//   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
+  const [message, setMessage] = React.useState({
+      message:""
+  })
 
   const handleOpen = () => {
     setOpen(true);
@@ -69,25 +59,36 @@ export default function ChatModal() {
 
 
 
-  const onSubmitHandler = async e => {
-    // e.preventDefault();
 
-    // let posted = await axios
-    //     .post(`/invoices/case/${props.caseId}`, form)
-    //     .then(res => {
-    //         console.log("create invoice: ", res.data);
-    //         if (process.env.NODE_ENV === "production") {
-    //             mixpanel.track("Create invoice", {
-    //                 distinct_id: localStorage.getItem("id")
-    //             });
-    //         }
-    //         handleOpen();
-    //     })
-    //     .catch(err => {
-    //         console.error(err.response);
-    //         handleErrorOpen();
-    //     });
+
+
+
+// say = message => {
+//     const { currentRoom, messageFeed, player } = this.state;
+
+//     return axios
+//       .post("https://team-o.herokuapp.com/api/adv/say/",
+//         { message, room: currentRoom.id.toString() },
+//         this.props.content
+//       )
+//       .then(data => {
+//         messageFeed.push({ message, player });
+//         return true;
+//       })
+//       .catch(err => {
+//         throw err;
+//       });
+//   };
+
+
+
+  const handleChange = name => event => {
+      
+    setMessage({ ...message, [name]: event.target.value });
+    console.log(message)
 };
+
+
 
   return (
     <div>
@@ -97,7 +98,6 @@ export default function ChatModal() {
         size="large"
         // color="primary"
         className={classes.button1}
-        onClick={onSubmitHandler}
         variant="contained"
         onClick={handleOpen}>
         chat
@@ -119,7 +119,10 @@ export default function ChatModal() {
         rows="7"
         className={classes.textField}
         margin="none"
+        value={message.message}
         variant="filled"
+        name="message"
+        onChange={handleChange("message")}
         InputProps={{
             className: classes.multilineColor
           }}
@@ -128,7 +131,7 @@ export default function ChatModal() {
         size="small"
         color="primary"
         className={classes.button}
-        onClick={onSubmitHandler}
+        // onClick={onSubmitHandler}
         variant="outlined">
         submit
         </Button>

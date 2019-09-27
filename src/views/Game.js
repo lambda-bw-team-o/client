@@ -62,7 +62,7 @@ const Game = (props) => {
 
         <Row>
           <Column width={6}>
-          <ChatModal/>
+          <ChatModal />
             <Feed />
           </Column>
           <Column width={6}>
