@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import InfoBar from '../components/InfoBar';
 import Map from '../components/Map';
 import Feed from '../components/Feed';
@@ -8,12 +8,23 @@ import Theme from '../styles/Theme';
 import Row from '../styles/Row';
 import Column from '../styles/Column';
 import Arrival from '../assets/audio/arrival-audio.mp3';
+import axios from '../helpers/axiosWithAuth';
 
 const Game = (props) => {
   const [backgroundIndex, setBackgroundIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [playerCoord, setPlayerCoord] = useState([11,11])
+  const [playerData, setPlayerData] = useState(null)
   const audioRef = useRef(null)
+
+  useEffect(() => {
+    axios().get('https://team-o.herokuapp.com/api/adv/init/')
+      .then(res => {
+        console.log('init', res)
+        setPlayerData(res.data)
+      }).catch(error => {
+        console.error(error);
+      })
+  }, [])
 
   function switchBackground() {
     let index =  backgroundIndex + 1
@@ -54,18 +65,18 @@ const Game = (props) => {
         <Row>
           <Column>
             <Map backgroundIndex={backgroundIndex} 
-                 playerCoord={playerCoord} />
+                 playerData={playerData} />
           </Column>
         </Row>
 
         <Row>
           <Column width={6}>
-            <Feed />
+            <Feed playerData={playerData} />
           </Column>
           <Column width={6}>
-            <Controls switchBackground={switchBackground} 
-                      setPlayerCoord={setPlayerCoord} 
-                      playerCoord={playerCoord} />
+            <Controls switchBackground={switchBackground}
+                      setPlayerData={setPlayerData}
+                      playerData={playerData} />
           </Column>
         </Row>
       </Container>

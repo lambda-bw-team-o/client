@@ -1,40 +1,29 @@
-import React, { useState, useEffect }from 'react';
+import React, { useState, useEffect } from 'react';
 import Row from '../styles/Row';
 import Column from '../styles/Column';
 import DataFeed from '../styles/DataFeed';
 import Type from './Type';
-import axios from '../helpers/axiosWithAuth';
-// import subsbcribeToChannel from '../helpers/Pusher';
+import subsbcribeToChannel from '../helpers/Pusher';
 
-function Feed() {
+function Feed(props) {
   const [data, setData] = useState([""])
   
-  useEffect(() => {
-    axios().get('https://team-o.herokuapp.com/api/adv/init/')
-      .then(res => {
-        console.log('init', res)
-        addInitData(
-          res.data.name,
-          res.data.title,
-          res.data.description,
-          res.data.players,
-        )
-      }).catch(error => {
-        console.error(error);
-        const fakeInitData = JSON.parse('{"uuid": "649a2994-b84c-4ad0-95f6-92fb0d04634e", "name": "fooosicle", "title": "Stiy", "description": "Stiy is an irradiated planet, with roaring nuclear wind", "players": ["testuser", "wurde", "test1", "arronm", "test2", "test22", "test24", "test26", "test23", "test30", "test50", "joe", "carol", "bob", "jac", "rogeret", "rogino", "foosicle", "dgdfgdfg", "test12345", "sdgsc", "rogerno", "sdfcsedfgwe", "gdsgvcxs", "sdagegxvedr", "Taz"]}')
-        addInitData(
-          fakeInitData.name,
-          fakeInitData.title,
-          fakeInitData.description,
-          fakeInitData.players,
-        )
-      })
+  // console.log('Feed.playerData', props.playerData)
 
-    // const channel = subsbcribeToChannel(`p-channel-${fakeInitData.uuid}`)
-    // channel.bind('message', data => {
-    //   addData(data)
-    // });
-  }, [])
+  // useEffect(() => {
+  //   addInitData(
+  //     props.playerData.name,
+  //     props.playerData.title,
+  //     props.playerData.description,
+  //     props.playerData.players,
+  //   )
+
+  //   const channel = subsbcribeToChannel(`p-channel-${props.playerData.uuid}`)
+  //   channel.bind('message', data => {
+  //     addData(data)
+  //   });
+  //   // TODO listen for combat,..
+  // }, [])
 
   const addInitData = (name, title, description, players) => {
     const init = []

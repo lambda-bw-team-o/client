@@ -25,11 +25,7 @@ function Map(props) {
           console.error(error);
         })
     }
-  }, [])
-
-  useEffect(() => {
-    console.log(`Move to ${props.playerCoord}`)
-  }, [props.playerCoord])
+  }, [props.playerData])
 
   function buildGrid(data) {
     const room_matrix = []
@@ -101,8 +97,10 @@ function Map(props) {
             /**
              * Display user's current location
              */
-
-            if (room_matrix[i - 1][j - 1] && room_matrix[i - 1][j - 1].id === 1) { // TODO update check to use player reference
+            
+            if (props.playerData && 
+                props.playerData.position[0] == i &&
+                props.playerData.position[1] == j) {
               columns.push(
                 <Column key={`${i}-${j}`} width={0.5}>
                   <GridSquare isHere={true}>{room_matrix[i - 1][j - 1] ? room_matrix[i - 1][j - 1].id : ''}</GridSquare>

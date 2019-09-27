@@ -16,23 +16,20 @@ function Controls(props) {
   const [pressUp, setPressUp] = useState(false)
   const [pressRight, setPressRight] = useState(false)
   const [pressDown, setPressDown] = useState(false)
-  const switchBackground = props.switchBackground
+
+  // console.log('Controls.playerData', props.playerData)
 
   useEffect(() => {
     window.onkeydown = (e) => {
       const key = e.keyCode ? e.keyCode : e.which;
       
       if (key === 37) {
-        // Move Left
         setPressLeft(true)
       } else if (key === 38) {
-        // Move Up
         setPressUp(true)
       } else if (key === 39) {
-        // Move Right
         setPressRight(true)
       } else if (key === 40) {
-        // Move Down
         setPressDown(true)
       }
     }
@@ -41,110 +38,110 @@ function Controls(props) {
       const key = e.keyCode ? e.keyCode : e.which;
       
       if (key === 37) {
-        // Move Left
         setPressLeft(false)
-        axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'w' })
-          .then((res) => {
-            console.log('res', res)
-          }).catch((err) => {
-            console.error(err)
-          })
-        switchBackground()
-        props.setPlayerCoord([props.playerCoord[0] - 1, props.playerCoord[1]])
+        moveWest()
       } else if (key === 38) {
-        // Move Up
         setPressUp(false)
-        axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'n' })
-          .then((res) => {
-            console.log('res', res)
-          }).catch((err) => {
-            console.error(err)
-          })
-        switchBackground()
-        props.setPlayerCoord([props.playerCoord[0], props.playerCoord[1] - 1])
+        moveNorth()
       } else if (key === 39) {
-        // Move Right
         setPressRight(false)
-        axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'e' })
-          .then((res) => {
-            console.log('res', res)
-          }).catch((err) => {
-            console.error(err)
-          })
-        switchBackground()
-        props.setPlayerCoord([props.playerCoord[0] + 1, props.playerCoord[1]])
+        moveEast()
       } else if (key === 40) {
-        // Move Down
         setPressDown(false)
-        axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 's' })
-          .then((res) => {
-            console.log('res', res)
-          }).catch((err) => {
-            console.error(err)
-          })
-        switchBackground()
-        props.setPlayerCoord([props.playerCoord[0], props.playerCoord[1] + 1])
+        moveSouth()
       }
     }
-  }, [switchBackground])
+  }, [])
 
   const handleLeftArrow = () => {
     setPressLeft(true)
-    axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'w' })
-      .then((res) => {
-        console.log('res', res)
-      }).catch((err) => {
-        console.error(err)
-      })
-    props.switchBackground()
-    props.setPlayerCoord([props.playerCoord[0] - 1, props.playerCoord[1]])
+    moveWest()
     setTimeout(() => {
       setPressLeft(false)
     }, 100)
   }
   const handleUpArrow = () => {
     setPressUp(true)
-    axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'n' })
-      .then((res) => {
-        console.log('res', res)
-      }).catch((err) => {
-        console.error(err)
-      })
-    props.switchBackground()
-    props.setPlayerCoord([props.playerCoord[0], props.playerCoord[1] - 1])
+    moveNorth()
     setTimeout(() => {
       setPressUp(false)
     }, 100)
   }
   const handleRightArrow = () => {
     setPressRight(true)
-    axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'e' })
-      .then((res) => {
-        console.log('res', res)
-      }).catch((err) => {
-        console.error(err)
-      })
-    props.switchBackground()
-    props.setPlayerCoord([props.playerCoord[0] + 1, props.playerCoord[1]])
+    moveEast()
     setTimeout(() => {
       setPressRight(false)
     }, 100)
   }
   const handleDownArrow = () => {
     setPressDown(true)
-    axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 's' })
-      .then((res) => {
-        console.log('res', res)
-      }).catch((err) => {
-        console.error(err)
-      })
-    props.switchBackground()
-    props.setPlayerCoord([props.playerCoord[0], props.playerCoord[1] + 1])
+    moveSouth()
     setTimeout(() => {
       setPressDown(false)
     }, 100)
   }
+
+  function moveNorth() {
+    axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'n' })
+    .then((res) => {
+      // TODO Set setPlayerData
+      // 
+      // playerData =
+      //   combat: { protected: true, health: 5, cloaked: false }
+      //   description: "Iobo is a hyperborean super planet, with drifting snowstorms"
+      //   name: "test5"
+      //   players: []
+      //   position: (2)[12, 10]
+      //   title: "Iobo"
+      //   uuid: "97316957-dc29-4359-a405-09803e7d26d3"
+      // 
+      // res = 
+      //   combat: { protected: true, health: 5, cloaked: false }
+      //   description: "Iobo is a hyperborean super planet, with drifting snowstorms"
+      //   error_msg: "You cannot move that way."
+      //   name: "test5"
+      //   players: []
+      //   position: (2)[12, 10]
+      //   title: "Iobo"
+
+      // TODO pass index of image to switchBackground to dynamically pull image.
+      props.switchBackground()
+    }).catch((err) => {
+      console.error(err)
+    })
+  }
   
+  function moveEast() {
+    axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'e' })
+    .then((res) => {
+      // TODO pass index of image to switchBackground to dynamically pull image.
+      props.switchBackground()
+    }).catch((err) => {
+      console.error(err)
+    })
+  }
+  
+  function moveSouth() {
+    axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 's' })
+    .then((res) => {
+      // TODO pass index of image to switchBackground to dynamically pull image.
+      props.switchBackground()
+    }).catch((err) => {
+      console.error(err)
+    })
+  }
+  
+  function moveWest() {
+    axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'w' })
+    .then((res) => {
+      // TODO pass index of image to switchBackground to dynamically pull image.
+      props.switchBackground()
+    }).catch((err) => {
+      console.error(err)
+    })
+  }  
+
   return (
     <>
       <Row>
