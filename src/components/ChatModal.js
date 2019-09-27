@@ -6,13 +6,13 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import axios from 'axios';
 import { StepContent } from '@material-ui/core';
-
+import axiosWithAuth from '../helpers/axiosWithAuth'
 const useStyles = makeStyles(theme => ({
     paper: {
       position: 'absolute',
       width: 200,
       height: 200,
-      top:"35%",
+      margin: '0 auto',
       backgroundColor: "grey",
       border: '2px solid #000',
       boxShadow: theme.shadows[5],
@@ -40,8 +40,6 @@ const useStyles = makeStyles(theme => ({
 
 
 
-
-
 export default function ChatModal() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -61,11 +59,11 @@ export default function ChatModal() {
 
   const onSubmitHandler = async e => {
     e.preventDefault();
-    let posted = await axios
+    let posted = await axiosWithAuth()
         .post('https://team-o.herokuapp.com/api/adv/say/', {message})
-        console.log(message,"message")
         .then(res => {
-            console.log(res)
+           
+            handleClose()
         })
         .catch(err => {
             console.log(err);

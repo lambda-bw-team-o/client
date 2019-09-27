@@ -6,15 +6,8 @@ import Type from './Type';
 import axios from '../helpers/axiosWithAuth';
 // import subsbcribeToChannel from '../helpers/Pusher';
 
-import Pusher from 'pusher-js';
-
-
-
-function Feed(props) {
+function Feed() {
   const [data, setData] = useState([""])
-  const [message,setMessages] = useState("")
-  const [messageFeed,setMessageFeed] =useState([])
-  const [player,setPlayer] = useState("")
   
   useEffect(() => {
     axios().get('https://team-o.herokuapp.com/api/adv/init/')
@@ -25,49 +18,23 @@ function Feed(props) {
           res.data.title,
           res.data.description,
           res.data.players,
-          )
-
-          const socket = new Pusher('6d34b01fb0271f6ffac1', {
-            cluster: 'us3',
-            });
-  
-          if(res.data.players.length > 0){
-          setMessages(
-             `${res.data.name} has entered the game`
-          )
-          }
-         
-          const channel = socket.subscribe(`p-channel${res.data.uuid}`)
-          channel.bind('message', data => {
-            
-        })
+        )
       }).catch(error => {
         console.error(error);
+        const fakeInitData = JSON.parse('{"uuid": "649a2994-b84c-4ad0-95f6-92fb0d04634e", "name": "fooosicle", "title": "Stiy", "description": "Stiy is an irradiated planet, with roaring nuclear wind", "players": ["testuser", "wurde", "test1", "arronm", "test2", "test22", "test24", "test26", "test23", "test30", "test50", "joe", "carol", "bob", "jac", "rogeret", "rogino", "foosicle", "dgdfgdfg", "test12345", "sdgsc", "rogerno", "sdfcsedfgwe", "gdsgvcxs", "sdagegxvedr", "Taz"]}')
+        addInitData(
+          fakeInitData.name,
+          fakeInitData.title,
+          fakeInitData.description,
+          fakeInitData.players,
+        )
       })
 
-    
+    // const channel = subsbcribeToChannel(`p-channel-${fakeInitData.uuid}`)
+    // channel.bind('message', data => {
+    //   addData(data)
+    // });
   }, [])
-
-
-
-  // say = message => {
-    
-
-  //   return axios
-  //     .post(
-  //       mudAddress + "https://team-o.herokuapp.com/api/adv/say/",
-  //       { message, room: currentRoom.id.toString() },
-  //     )
-  //     .then(data => {
-  //       messageFeed.push({ message, player });
-  //       return true;
-  //     })
-  //     .catch(err => {
-  //       throw err;
-  //     });
-  // };
-
-
 
   const addInitData = (name, title, description, players) => {
     const init = []
@@ -91,12 +58,10 @@ function Feed(props) {
       <Column style={{ backgroundColor: '#333', height: '200px' }}>
         <DataFeed>
           {data}
-          {message}
           <Type strings={data} speed={40} />
         </DataFeed>
       </Column>
     </Row>
   )
 }
-
 export default Feed;
