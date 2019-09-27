@@ -22,8 +22,11 @@ function Map(props) {
         }
         const rooms = data.rooms
         for (let i = 0; i < rooms.length; i++) {
-          room_matrix[rooms[i].x][rooms[i].y] = rooms[i]
+          room_matrix[rooms[i].y][rooms[i].x] = rooms[i]
         }
+
+        // reverse our matrix so it prints correctly
+        room_matrix.reverse();
 
         let rows = []
         for (let i = 0; i < data.grid.height + 1; i++) {
@@ -58,10 +61,10 @@ function Map(props) {
               if (j === 0) {
                 columns.push(<Column key={`${j},${i}`} width={0.5}><GridSquare heading={true}>{String.fromCodePoint(65 + i - 1)}</GridSquare></Column>)
               } else {
-                // <GridSquare>{room_matrix[j-1][i-1] ? `${j},${i} = ${room_matrix[j - 1][i - 1].x + 1},${room_matrix[j - 1][i - 1].y + 1}` : ''}</GridSquare>
+                // <GridSquare>{room_matrix[j-1][i-1] ? `${j},${i} = ${room_matrix[i - 1][j - 1].x + 1},${room_matrix[i - 1][j - 1].y + 1}` : ''}</GridSquare>
                 columns.push(
                   <Column key={`${j},${i}`} width={0.5}>
-                    <GridSquare>{room_matrix[j - 1][i - 1] ? room_matrix[j - 1][i - 1].id : ''}</GridSquare>
+                    <GridSquare>{room_matrix[i - 1][j - 1] ? room_matrix[i - 1][j - 1].id : ''}</GridSquare>
                   </Column>
                 )
               }
@@ -92,16 +95,16 @@ function Map(props) {
                   props.playerData.position[1] === i) {
                   columns.push(
                     <Column key={`${j},${i}`} width={0.5}>
-                      <GridSquare isHere={true}>{room_matrix[j - 1][i - 1] ? room_matrix[j - 1][i - 1].id : ''}</GridSquare>
+                      <GridSquare isHere={true}>{room_matrix[i - 1][j - 1] ? room_matrix[i - 1][j - 1].id : ''}</GridSquare>
                     </Column>
                   )
                 } else {
                   // <GridSquare>{`${j},${i}`}</GridSquare>
-                  // <GridSquare>{room_matrix[j - 1][i - 1] ? `${room_matrix[j - 1][i - 1].x + 1},${room_matrix[j - 1][i - 1].y + 1}` : ''}</GridSquare>
+                  // <GridSquare>{room_matrix[i - 1][j - 1] ? `${room_matrix[i - 1][j - 1].x + 1},${room_matrix[i - 1][j - 1].y + 1}` : ''}</GridSquare>
 
                   columns.push(
                     <Column key={`${j},${i}`} width={0.5}>
-                      <GridSquare>{room_matrix[j - 1][i - 1] ? room_matrix[j - 1][i - 1].id : ''}</GridSquare>
+                      <GridSquare>{room_matrix[i - 1][j - 1] ? room_matrix[i - 1][j - 1].id : ''}</GridSquare>
                     </Column>
                   )
                 }
