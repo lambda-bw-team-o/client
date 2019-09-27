@@ -24,6 +24,7 @@ function Map(props) {
         for (let i = 0; i < rooms.length; i++) {
           room_matrix[rooms[i].x][rooms[i].y] = rooms[i]
         }
+        props.setRoomMatrix(room_matrix)
 
         let rows = []
         for (let i = 0; i < data.grid.height + 1; i++) {

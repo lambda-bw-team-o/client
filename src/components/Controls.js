@@ -85,22 +85,19 @@ function Controls(props) {
       axios().post("https://team-o.herokuapp.com/api/adv/move", { direction: 'n' })
       .then((res) => {
         if (res.error_msg) {
-          // TODO handle res.error_msg
-          // Maybe show in Feed and flash controls red.
           console.log('MoveNorth', res.error_msg)
         } else {
           console.log('MoveNorth', `${props.playerData.position} to ${res.data.position}`)
           axios().get('https://team-o.herokuapp.com/api/adv/init/')
             .then(res => {
-              console.log('init', res)
+              let room = props.roomMatrix[res.data.position[0]][res.data.position[1]]
+              console.log('init', res, room)
               props.setPlayerData(res.data)
+              props.switchBackground(room.id)
             }).catch(error => {
               console.error(error);
             })
         }
-
-        // TODO pass index of image to switchBackground to dynamically pull image.
-        props.switchBackground()
       }).catch((err) => {
         console.error(err)
       })
@@ -115,15 +112,14 @@ function Controls(props) {
           console.log('MoveEast', `${props.playerData.position} to ${res.data.position}`)
           axios().get('https://team-o.herokuapp.com/api/adv/init/')
             .then(res => {
-              console.log('init', res)
+              let room = props.roomMatrix[res.data.position[0]][res.data.position[1]]
+              console.log('init', res, room)
               props.setPlayerData(res.data)
+              props.switchBackground(room.id)
             }).catch(error => {
               console.error(error);
             })
         }
-        
-        // TODO pass index of image to switchBackground to dynamically pull image.
-        props.switchBackground()
       }).catch((err) => {
         console.error(err)
       })
@@ -138,15 +134,14 @@ function Controls(props) {
           console.log('MoveSouth', `${props.playerData.position} to ${res.data.position}`)
           axios().get('https://team-o.herokuapp.com/api/adv/init/')
             .then(res => {
-              console.log('init', res)
+              let room = props.roomMatrix[res.data.position[0]][res.data.position[1]]
+              console.log('init', res, room)
               props.setPlayerData(res.data)
+              props.switchBackground(room.id)
             }).catch(error => {
               console.error(error);
             })
         }
-        
-        // TODO pass index of image to switchBackground to dynamically pull image.
-        props.switchBackground()
       }).catch((err) => {
         console.error(err)
       })
@@ -161,15 +156,14 @@ function Controls(props) {
           console.log('MoveWest', `${props.playerData.position} to ${res.data.position}`)
           axios().get('https://team-o.herokuapp.com/api/adv/init/')
             .then(res => {
-              console.log('init', res)
+              let room = props.roomMatrix[res.data.position[0]][res.data.position[1]]
+              console.log('init', res, room)
               props.setPlayerData(res.data)
+              props.switchBackground(room.id)
             }).catch(error => {
               console.error(error);
             })
         }
-
-        // TODO pass index of image to switchBackground to dynamically pull image.
-        props.switchBackground()
       }).catch((err) => {
         console.error(err)
       })

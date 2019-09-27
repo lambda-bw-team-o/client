@@ -12,6 +12,7 @@ import axios from '../helpers/axiosWithAuth';
 
 const Game = (props) => {
   const [backgroundIndex, setBackgroundIndex] = useState(0)
+  const [roomMatrix, setRoomMatrix] = useState([])
   const [isPlaying, setIsPlaying] = useState(false)
   const [playerData, setPlayerData] = useState(null)
   const audioRef = useRef(null)
@@ -26,10 +27,10 @@ const Game = (props) => {
       })
   }, [])
 
-  function switchBackground() {
-    let index =  backgroundIndex + 1
+  function switchBackground(index = backgroundIndex + 1) {
     if (index > 114) index = 0
     if (index < 0) index = 114
+    console.log(`BackgroundImage: ${index}`)
     setBackgroundIndex(index)
   }
 
@@ -52,7 +53,7 @@ const Game = (props) => {
   }
 
   return (
-    <Theme>
+    <Theme backgroundIndex={backgroundIndex}>
       <Container>
         <Row>
           <Column>
@@ -65,7 +66,8 @@ const Game = (props) => {
         <Row>
           <Column>
             <Map backgroundIndex={backgroundIndex} 
-                 playerData={playerData} />
+                 playerData={playerData} 
+                 setRoomMatrix={setRoomMatrix} />
           </Column>
         </Row>
 
@@ -76,7 +78,8 @@ const Game = (props) => {
           <Column width={6}>
             <Controls switchBackground={switchBackground}
                       setPlayerData={setPlayerData}
-                      playerData={playerData} />
+                      playerData={playerData} 
+                      roomMatrix={roomMatrix} />
           </Column>
         </Row>
       </Container>
